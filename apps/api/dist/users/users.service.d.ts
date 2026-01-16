@@ -1,9 +1,17 @@
 import { OnModuleInit } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { User } from '@prisma/client';
 export declare class UsersService implements OnModuleInit {
     private prisma;
     constructor(prisma: PrismaService);
     onModuleInit(): Promise<void>;
-    findByEmail(email: string): Promise<User | null>;
+    findByEmail(email: string): Promise<{
+        id: string;
+        email: string;
+        password: string;
+        name: string;
+        role: string;
+        createdAt: Date;
+        updatedAt: Date;
+        clientId: string | null;
+    }>;
 }
