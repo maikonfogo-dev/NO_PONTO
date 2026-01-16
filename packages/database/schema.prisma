@@ -1,0 +1,422 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// --------------------------------------
+// ENUMS (Commented out for SQLite compatibility)
+// --------------------------------------
+
+// enum Role {
+//   ADMIN_TERCEIRIZADA
+//   GESTOR_CLIENTE
+//   SUPERVISOR
+//   COLABORADOR
+// }
+
+// enum ContractType {
+//   CLT
+//   PJ
+//   TEMPORARIO
+//   ESTAGIO
+// }
+
+// enum EmployeeStatus {
+//   ATIVO
+//   AFASTADO
+//   DESLIGADO
+// }
+
+// enum ScheduleType {
+//   ESCALA_12X36
+//   ESCALA_6X1
+//   ESCALA_5X2
+//   PERSONALIZADA
+// }
+
+// enum TimeRecordStatus {
+//   PENDENTE
+//   APROVADO
+//   REJEITADO
+// }
+
+// enum RecordType {
+//   ENTRADA
+//   SAIDA_ALMOCO
+//   VOLTA_ALMOCO
+//   SAIDA
+// }
+
+// --------------------------------------
+// MODELS
+// --------------------------------------
+
+// Usuários do Sistema (Login)
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("COLABORADOR") // Role
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Se o usuário for um colaborador, vincula aqui
+  employee   Employee?
+  
+  // Se for supervisor, gerencia colaboradores
+  supervisedEmployees Employee[] @relation("SupervisorEmployees")
+
+  // Se for Gestor de Cliente
+  clientId    String?
+  client      Client?   @relation(fields: [clientId], references: [id])
+
+  // Aprovações de Espelho
+  approvedMirrors     PointMirror[] @relation("ApprovedMirrors")
+
+  auditLogs           AuditLog[]
+
+  @@map("users")
+}
+
+// Espelho de Ponto (Timesheet Report)
+model PointMirror {
+  id            String    @id @default(uuid())
+  
+  employeeId    String
+  employee      Employee  @relation(fields: [employeeId], references: [id])
+  
+  contractId    String
+  contract      Contract  @relation(fields: [contractId], references: [id])
+  
+  startDate     DateTime
+  endDate       DateTime
+  
+  expectedHours Decimal   @default(0)
+  workedHours   Decimal   @default(0)
+  overtimeHours Decimal   @default(0)
+  absenceHours  Decimal   @default(0)
+  lateHours     Decimal   @default(0)
+  
+  status        String    @default("EM_CONFERENCIA") // EM_CONFERENCIA, PENDENTE_AJUSTE, APROVADO, REPROVADO
+  
+  approvedById  String?
+  approvedBy    User?     @relation("ApprovedMirrors", fields: [approvedById], references: [id])
+  
+  approvalDate  DateTime?
+  
+  observation   String?
+  
+  integrityHash String?
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  downloadLogs  DownloadLog[]
+
+  @@map("point_mirrors")
+}
+
+model DownloadLog {
+  id        String   @id @default(uuid())
+  mirrorId  String?
+  mirror    PointMirror? @relation(fields: [mirrorId], references: [id])
+  
+  userId    String?
+  ip        String?
+  userAgent String?
+  fileType  String   // PDF, EXCEL
+  
+  createdAt DateTime @default(now())
+
+  @@map("download_logs")
+}
+
+
+
+model Client {
+  id        String   @id @default(uuid())
+  name      String   // Razão Social
+  tradeName String?  // Nome Fantasia
+  cnpj      String   @unique
+  address   String?
+  status    String   @default("ATIVO") // ATIVO, SUSPENSO, INADIMPLENTE
+  
+  stateRegistration String? // Inscrição Estadual
+  financialContact  String?
+  operationalContact String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  contracts Contract[]
+  users     User[]
+  workLocations WorkLocation[]
+  
+  subscription SaaSContract?
+  invoices     Invoice[]
+  documents    ClientDocument[]
+
+  @@map("clients")
+}
+
+model SaaSContract {
+  id             String   @id @default(uuid())
+  clientId       String   @unique
+  client         Client   @relation(fields: [clientId], references: [id])
+  
+  plan           String   // BASIC, PRO, ENTERPRISE
+  price          Decimal  // Valor unitário
+  quantity       Int      // Qtd contratada
+  billingCycle   String   // MENSAL, ANUAL
+  startDate      DateTime
+  endDate        DateTime?
+  status         String   // ATIVO, CANCELADO, INADIMPLENTE
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("saas_contracts")
+}
+
+// Contrato de Prestação de Serviço
+model Contract {
+  id          String   @id @default(uuid())
+  name        String   // Ex: "Contrato Limpeza - Sede"
+  code        String?  // Código interno
+  startDate   DateTime
+  endDate     DateTime?
+  active      Boolean  @default(true)
+  
+  clientId    String
+  client      Client   @relation(fields: [clientId], references: [id])
+  
+  workLocations WorkLocation[]
+  employees     Employee[]
+  pointMirrors  PointMirror[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("contracts")
+}
+
+// Posto de Trabalho (Local físico)
+model WorkLocation {
+  id          String   @id @default(uuid())
+  name        String   // Ex: "Portaria 1"
+  address     String
+  latitude    Float
+  longitude   Float
+  radius      Int      @default(50) // Raio de tolerância em metros
+
+  clientId    String?
+  client      Client?  @relation(fields: [clientId], references: [id])
+
+  contractId  String
+  contract    Contract @relation(fields: [contractId], references: [id])
+  
+  employees   Employee[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("work_locations")
+}
+
+// Escala de Trabalho
+model WorkSchedule {
+  id          String       @id @default(uuid())
+  name        String       // Ex: "Administrativo 08-17"
+  type        String       @default("ESCALA_5X2") // ScheduleType
+  
+  // Parâmetros
+  startTime   String       // "08:00"
+  endTime     String       // "17:00"
+  lunchStart  String?      // "12:00"
+  lunchEnd    String?      // "13:00"
+  
+  tolerance   Int          @default(10) // Minutos
+  allowOvertime Boolean    @default(false)
+  
+  employees   Employee[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("work_schedules")
+}
+
+// Colaborador (O centro do módulo)
+model Employee {
+  id              String         @id @default(uuid())
+  name            String
+  cpf             String         @unique
+  matricula       String?        @unique
+  position        String         // Cargo/Função
+  contractType    String         // ContractType
+  admissionDate   DateTime
+  status          String         @default("ATIVO") // EmployeeStatus
+  
+  // Vínculos
+  userId          String?        @unique // Login opcional
+  user            User?          @relation(fields: [userId], references: [id])
+  
+  contractId      String?
+  contract        Contract?      @relation(fields: [contractId], references: [id])
+  
+  workLocationId  String?
+  workLocation    WorkLocation?  @relation(fields: [workLocationId], references: [id])
+  
+  scheduleId      String?
+  schedule        WorkSchedule?  @relation(fields: [scheduleId], references: [id])
+  
+  supervisorId    String?
+  supervisor      User?          @relation("SupervisorEmployees", fields: [supervisorId], references: [id])
+
+  // Dados Pessoais Extras
+  photoUrl        String?
+  rg              String?
+  birthDate       DateTime?
+  phone           String?
+  email           String?
+  address         String?
+  
+  // Dados Profissionais Extras
+  department      String?
+  function        String?
+
+  // Regras de Ponto
+  requirePhoto      Boolean @default(true)
+  requireGPS        Boolean @default(true)
+  allowManualEntry  Boolean @default(false)
+
+  // Relacionamentos
+  documents       EmployeeDocument[]
+  timeRecords     TimeRecord[]
+  pointMirrors    PointMirror[]
+
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  @@map("employees")
+}
+
+model EmployeeDocument {
+  id          String   @id @default(uuid())
+  
+  employeeId  String
+  employee    Employee @relation(fields: [employeeId], references: [id])
+  
+  type        String   // Contrato, Termo, Atestado, Outros
+  name        String   // Nome do arquivo ou título
+  url         String   // URL do arquivo
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("employee_documents")
+}
+
+// Registro de Ponto
+model TimeRecord {
+  id          String           @id @default(uuid())
+  timestamp   DateTime
+  type        String           // RecordType
+  
+  latitude    Float?
+  longitude   Float?
+  accuracy    Float?           // Precisão em metros
+  address     String?          // Endereço resolvido
+  photoUrl    String?
+  deviceId    String?
+  ip          String?
+  integrityHash String?
+  
+  isGeofenceViolation Boolean @default(false)
+
+  isManual      Boolean          @default(false)
+  justification String?
+  originalTimestamp DateTime?
+  editedById    String?
+  
+  status      String           @default("PENDENTE") // TimeRecordStatus
+  
+  employeeId  String
+  employee    Employee         @relation(fields: [employeeId], references: [id])
+
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@map("time_records")
+}
+
+model AuditLog {
+  id          String   @id @default(uuid())
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id])
+  entity      String   // 'colaborador', 'contrato', 'ponto', etc.
+  entityId    String?  // ID da entidade afetada
+  action      String   // 'CRIACAO', 'ATUALIZACAO', 'EXCLUSAO', 'LOGIN', etc.
+  details     String?  // JSON string ou texto livre
+  ip          String?
+  userAgent   String?
+  createdAt   DateTime @default(now())
+
+  @@map("audit_logs")
+}
+
+model ClientDocument {
+  id        String   @id @default(uuid())
+  clientId  String
+  client    Client   @relation(fields: [clientId], references: [id])
+  name      String
+  type      String   // Contract, Aditivo, Outros
+  url       String
+  fileKey   String?  // S3 key
+  createdAt DateTime @default(now())
+  
+  @@map("client_documents")
+}
+
+model Invoice {
+  id            String   @id @default(uuid())
+  clientId      String
+  client        Client   @relation(fields: [clientId], references: [id])
+  amount        Decimal
+  status        String   // PENDENTE, PAGO, VENCIDO, CANCELADO
+  dueDate       DateTime
+  paidAt        DateTime?
+  method        String?  // PIX, CARTAO, BOLETO
+  reference     String?  // "Mensalidade Abril"
+  transactionId String?  // ID do gateway
+  url           String?  // Link do boleto/fatura
+  qrCode        String?  // PIX QR Code payload
+  qrCodeBase64  String?  // PIX QR Code image base64
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("invoices")
+}
+
+model DemoRequest {
+  id          String   @id @default(uuid())
+  name        String
+  email       String
+  phone       String
+  companyName String
+  employees   String
+  status      String   @default("PENDENTE") // PENDENTE, CONTATADO, CONVERTIDO
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("demo_requests")
+}

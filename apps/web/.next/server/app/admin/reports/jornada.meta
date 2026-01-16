@@ -1,0 +1,17 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/admin/layout,_N_T_/admin/reports/layout,_N_T_/admin/reports/jornada/layout,_N_T_/admin/reports/jornada/page,_N_T_/admin/reports/jornada"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/admin/reports/jornada/__PAGE__",
+    "/admin/reports/jornada",
+    "/admin/reports",
+    "/admin",
+    "/_index",
+    "/_head"
+  ]
+}

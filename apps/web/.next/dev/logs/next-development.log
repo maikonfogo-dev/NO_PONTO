@@ -1,0 +1,51 @@
+[00:00:01.557] Server  WARN    ⚠ "Found lockfile missing swc dependencies," "patching..."
+[00:00:02.425] Server  WARN    ⚠ Lockfile was successfully patched, please run "npm install" to ensure @next/swc dependencies are downloaded
+[00:00:02.844] Server  LOG     ✓ Ready in 2.2s
+[00:00:49.616] Server  LOG     ○ Compiling / ...
+[00:00:57.616] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:23.230] Browser ERROR   Erro de autenticação: {}
+[00:02:20.883] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:54.383] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:06:44.496] Server  LOG     ✓ Compiled in 269ms
+[00:06:55.668] Server  LOG     ✓ Compiled in 67ms
+[00:08:32.911] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:08:43.026] Browser WARN    High accuracy GPS failed, trying low accuracy... Timeout expired
+[00:08:44.942] Browser WARN    High accuracy GPS failed, trying low accuracy... Timeout expired
+[00:08:58.027] Browser WARN    Erro ao obter localização inicial: Timeout expired
+[00:10:31.207] Browser WARN    High accuracy GPS failed, trying low accuracy... Timeout expired
+[00:30:17.836] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:30:27.956] Browser WARN    High accuracy GPS failed, trying low accuracy... Timeout expired
+[00:30:40.836] Browser WARN    High accuracy GPS failed, trying low accuracy... Timeout expired
+[00:30:42.957] Browser WARN    Erro ao obter localização inicial: Timeout expired
+[00:32:09.999] Server  LOG     ✓ Compiled in 72ms
+[00:32:53.510] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:33:03.617] Browser WARN    High accuracy GPS failed, trying low accuracy... Timeout expired
+[00:33:09.855] Browser WARN    High accuracy GPS failed, trying low accuracy... Timeout expired
+[00:33:18.618] Browser WARN    Erro ao obter localização inicial: Timeout expired
+[00:36:09.196] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:36:09.940] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:36:10.214] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:36:10.411] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:36:20.517] Browser WARN    High accuracy GPS failed, trying low accuracy... Timeout expired
+[00:36:22.628] Browser WARN    High accuracy GPS failed, trying low accuracy... Timeout expired
+[00:36:35.599] Browser WARN    Erro ao obter localização inicial: Timeout expired
+[01:18:07.282] Server  LOG     ✓ Compiled in 130ms
+[01:19:27.306] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:22:03.119] Browser WARN    Erro ao acessar câmera frontal, tentando câmera padrão... {}
+[01:22:03.119] Browser ERROR   Erro ao acessar câmera (fallback): {}
+[01:22:50.073] Server  LOG     ✓ Compiled in 64ms
+[01:23:19.365] Server  LOG     ✓ Compiled in 80ms
+[01:23:42.777] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:24:16.092] Browser WARN    Erro ao acessar câmera frontal, tentando câmera padrão... {}
+[01:26:12.641] Browser ERROR   {"code":"ERR_BAD_RESPONSE","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://localhost:4000","data":{},"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/x-www-form-urlencoded"},"maxBodyLength":-1,"maxContentLength":-1,"method":"post","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/ponto/registrar","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 500","name":"AxiosError","stack":"AxiosError: Request failed with status code 500\n    at settle (http://localhost:3000/_next/static/chunks/45a75_15b511cd._.js:12247:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/45a75_15b511cd._.js:12762:217)\n    at Axios.request (http://localhost:3000/_next/static/chunks/45a75_15b511cd._.js:13566:49)\n    at async handleRegister (http://localhost:3000/_next/static/chunks/Documents_trae_projects_NO%20PONTO_apps_web_src_52f64967._.js:683:25)","status":500}
+[01:26:14.260] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:26:16.017] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:26:43.155] Browser WARN    Erro ao acessar câmera frontal, tentando câmera padrão... {}
+[01:28:01.051] Browser WARN    Erro ao acessar câmera frontal, tentando câmera padrão... {}
+[02:46:14.809] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:46:46.597] Browser WARN    Erro ao acessar câmera frontal, tentando câmera padrão... {}
+[02:47:22.392] Browser WARN    Erro ao acessar câmera frontal, tentando câmera padrão... {}
+[02:48:23.159] Browser WARN    Erro ao acessar câmera frontal, tentando câmera padrão... {}
+[02:49:13.531] Browser WARN    Erro ao acessar câmera frontal, tentando câmera padrão... {}
+[02:51:00.833] Browser WARN    Erro ao acessar câmera frontal, tentando câmera padrão... {}
+[03:23:03.620] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

@@ -1,0 +1,199 @@
+{
+  "version": 3,
+  "pages404": true,
+  "appType": "app",
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "priority": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/admin/clients/[id]",
+      "regex": "^/admin/clients/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/admin/clients/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/admin/colaboradores/[id]",
+      "regex": "^/admin/colaboradores/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/admin/colaboradores/(?<nxtPid>[^/]+?)(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_global-error",
+      "regex": "^/_global\\-error(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_global\\-error(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/admin",
+      "regex": "^/admin(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin(?:/)?$"
+    },
+    {
+      "page": "/admin/clients",
+      "regex": "^/admin/clients(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/clients(?:/)?$"
+    },
+    {
+      "page": "/admin/clients/new",
+      "regex": "^/admin/clients/new(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/clients/new(?:/)?$"
+    },
+    {
+      "page": "/admin/colaboradores",
+      "regex": "^/admin/colaboradores(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/colaboradores(?:/)?$"
+    },
+    {
+      "page": "/admin/colaboradores/importar",
+      "regex": "^/admin/colaboradores/importar(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/colaboradores/importar(?:/)?$"
+    },
+    {
+      "page": "/admin/colaboradores/novo",
+      "regex": "^/admin/colaboradores/novo(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/colaboradores/novo(?:/)?$"
+    },
+    {
+      "page": "/admin/demo-requests",
+      "regex": "^/admin/demo\\-requests(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/demo\\-requests(?:/)?$"
+    },
+    {
+      "page": "/admin/espelho-ponto",
+      "regex": "^/admin/espelho\\-ponto(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/espelho\\-ponto(?:/)?$"
+    },
+    {
+      "page": "/admin/reports",
+      "regex": "^/admin/reports(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/reports(?:/)?$"
+    },
+    {
+      "page": "/admin/reports/auditoria",
+      "regex": "^/admin/reports/auditoria(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/reports/auditoria(?:/)?$"
+    },
+    {
+      "page": "/admin/reports/banco-horas",
+      "regex": "^/admin/reports/banco\\-horas(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/reports/banco\\-horas(?:/)?$"
+    },
+    {
+      "page": "/admin/reports/escalas",
+      "regex": "^/admin/reports/escalas(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/reports/escalas(?:/)?$"
+    },
+    {
+      "page": "/admin/reports/espelho",
+      "regex": "^/admin/reports/espelho(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/reports/espelho(?:/)?$"
+    },
+    {
+      "page": "/admin/reports/exportacoes",
+      "regex": "^/admin/reports/exportacoes(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/reports/exportacoes(?:/)?$"
+    },
+    {
+      "page": "/admin/reports/faltas",
+      "regex": "^/admin/reports/faltas(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/reports/faltas(?:/)?$"
+    },
+    {
+      "page": "/admin/reports/financeiro",
+      "regex": "^/admin/reports/financeiro(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/reports/financeiro(?:/)?$"
+    },
+    {
+      "page": "/admin/reports/jornada",
+      "regex": "^/admin/reports/jornada(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/reports/jornada(?:/)?$"
+    },
+    {
+      "page": "/admin/reports/localizacao",
+      "regex": "^/admin/reports/localizacao(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/reports/localizacao(?:/)?$"
+    },
+    {
+      "page": "/login",
+      "regex": "^/login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/login(?:/)?$"
+    },
+    {
+      "page": "/mobile",
+      "regex": "^/mobile(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/mobile(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments",
+    "clientParamParsing": false,
+    "dynamicRSCPrerender": false
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

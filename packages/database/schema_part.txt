@@ -1,0 +1,12 @@
+
+model ContractHistory {
+  id          String    @id @default(uuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  contractId  String
+  contract    Contract  @relation(fields: [contractId], references: [id])
+  startDate   DateTime
+  endDate     DateTime?
+  
+  createdAt   DateTime  @default(now())
+}

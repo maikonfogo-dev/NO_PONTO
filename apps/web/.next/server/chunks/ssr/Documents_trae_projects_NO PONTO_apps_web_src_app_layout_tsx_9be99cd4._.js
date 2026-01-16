@@ -1,0 +1,3 @@
+module.exports=[10799,a=>{"use strict";var b=a.i(17124);function c({children:a}){return(0,b.jsx)("html",{lang:"pt-BR",children:(0,b.jsx)("body",{children:a})})}a.s(["default",()=>c,"metadata",0,{title:"NO PONTO — Controle de jornada por contrato",description:"O NO PONTO é um sistema de ponto eletrônico feito para empresas terceirizadas que precisam de controle, transparência e segurança jurídica."}])}];
+
+//# sourceMappingURL=Documents_trae_projects_NO%20PONTO_apps_web_src_app_layout_tsx_9be99cd4._.js.map

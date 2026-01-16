@@ -1,0 +1,27 @@
+{
+  "name": "no-ponto-saas",
+  "version": "0.0.1",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.14",
+    "eslint": "^8.57.0",
+    "fdir": "^6.5.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.2.4",
+    "ee-first": "^1.1.1"
+  },
+  "overrides": {
+    "glob": "^10.4.5"
+  }
+}
