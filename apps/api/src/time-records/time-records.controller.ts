@@ -1,9 +1,12 @@
-import { Controller, Post, Body, Req, Get, Param, Query, UseInterceptors, UploadedFile, BadRequestException } from '@nestjs/common';
+import { Controller, Post, Body, Req, Get, Param, Query, UseInterceptors, UploadedFile, BadRequestException, UseGuards } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiTags, ApiOperation, ApiConsumes } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiConsumes, ApiBody, ApiOkResponse } from '@nestjs/swagger';
 import { TimeRecordsService } from './time-records.service';
+import { AuthGuard } from '../auth/auth.guard';
+import { CompanyActiveGuard } from '../auth/company-active.guard';
 
 @ApiTags('Ponto')
+@UseGuards(AuthGuard, CompanyActiveGuard)
 @Controller('ponto')
 export class TimeRecordsController {
   constructor(private readonly timeRecordsService: TimeRecordsService) {}
@@ -38,6 +41,23 @@ export class TimeRecordsController {
   @Post('registrar')
   @ApiOperation({ summary: 'Registrar batida de ponto' })
   @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        employeeId: { type: 'string', description: 'ID do colaborador' },
+        type: { type: 'string', description: 'Tipo de batida (ENTRADA, SAIDA, etc.)' },
+        latitude: { type: 'number' },
+        longitude: { type: 'number' },
+        accuracy: { type: 'number', nullable: true },
+        address: { type: 'string', nullable: true },
+        deviceId: { type: 'string', nullable: true },
+        file: { type: 'string', format: 'binary', description: 'Foto do colaborador' },
+      },
+      required: ['employeeId', 'type'],
+    },
+  })
+  @ApiOkResponse({ description: 'Batida registrada com sucesso.' })
   @UseInterceptors(FileInterceptor('file'))
   async registrar(
     @Body() body: any,

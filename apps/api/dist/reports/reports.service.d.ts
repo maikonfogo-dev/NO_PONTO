@@ -4,6 +4,20 @@ export declare class ReportsService {
     private prisma;
     private timeRecordsService;
     constructor(prisma: PrismaService, timeRecordsService: TimeRecordsService);
+    getSaaSDashboard(): Promise<{
+        kpis: {
+            totalCompanies: number;
+            activeCompanies: number;
+            blockedCompanies: number;
+            totalEmployees: number;
+            monthlyRevenue: number;
+            newCompaniesThisMonth: number;
+        };
+        companiesByStatus: {
+            name: string;
+            value: number;
+        }[];
+    }>;
     generateEspelhoPdf(employeeId: string, month: number, year: number): Promise<Buffer>;
     getEmployees(): Promise<{
         id: string;
@@ -87,7 +101,7 @@ export declare class ReportsService {
             status: string;
         }[];
     }>;
-    getDashboardData(month: number, year: number): Promise<{
+    getDashboardData(month: number, year: number, clientId?: string): Promise<{
         kpis: {
             activeEmployees: number;
             totalEmployees: number;
@@ -126,7 +140,7 @@ export declare class ReportsService {
         ip: string;
         type: string;
     }[]>;
-    getFinancialReport(): Promise<{
+    getFinancialReport(clientId?: string): Promise<{
         kpis: {
             activeClients: number;
             billableEmployees: number;
@@ -172,6 +186,7 @@ export declare class ReportsService {
         longitude: number;
         timestamp: string;
         type: string;
+        distanceFromLocationMeters: number;
         employee: {
             name: string;
             cpf: string;
@@ -192,5 +207,21 @@ export declare class ReportsService {
         userAgent: string | null;
         mirrorId: string | null;
         fileType: string;
+    }>;
+    getSaasOverview(): Promise<{
+        kpis: {
+            totalClients: number;
+            activeClients: number;
+            blockedClients: number;
+            totalEmployees: number;
+        };
+        companies: {
+            id: string;
+            name: string;
+            status: string;
+            plan: string;
+            employees: number;
+            overdueInvoices: number;
+        }[];
     }>;
 }

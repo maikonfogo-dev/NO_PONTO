@@ -9,11 +9,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 interface PriceSimulatorProps {
   onRequestDemo?: () => void;
+  planPrice: number;
+  onPlanPriceChange: (price: number) => void;
 }
 
-export function PriceSimulator({ onRequestDemo }: PriceSimulatorProps) {
+export function PriceSimulator({ onRequestDemo, planPrice, onPlanPriceChange }: PriceSimulatorProps) {
   const [employees, setEmployees] = useState<number>(50)
-  const [planPrice, setPlanPrice] = useState<number>(3.90) // Default to Basic
 
   const calculatePrice = (count: number, price: number) => {
     return count * price
@@ -48,14 +49,14 @@ export function PriceSimulator({ onRequestDemo }: PriceSimulatorProps) {
             <Label htmlFor="plan">Escolha o Plano</Label>
             <Select 
               value={planPrice.toString()} 
-              onValueChange={(value) => setPlanPrice(Number(value))}
+              onValueChange={(value) => onPlanPriceChange(Number(value))}
             >
               <SelectTrigger id="plan" className="text-lg">
                 <SelectValue placeholder="Selecione o plano" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="3.90">Básico (R$ 3,90/colab)</SelectItem>
-                <SelectItem value="6.90">Profissional (R$ 6,90/colab)</SelectItem>
+                <SelectItem value="3.9">Básico (R$ 3,90/colab)</SelectItem>
+                <SelectItem value="6.9">Profissional (R$ 6,90/colab)</SelectItem>
               </SelectContent>
             </Select>
           </div>

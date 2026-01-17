@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, Clock, AlertCircle, TrendingUp } from "lucide-react";
+import { Users, Clock, AlertCircle, TrendingUp, Building2, DollarSign, Activity } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { pontoStorage } from "@/lib/storage";
+import { api } from "@/lib/api";
 
 interface DashboardRecord {
   name: string;
@@ -14,18 +15,50 @@ interface DashboardRecord {
   status: string;
 }
 
+interface SaaSKPIs {
+  totalCompanies: number;
+  activeCompanies: number;
+  blockedCompanies: number;
+  totalEmployees: number;
+  monthlyRevenue: number;
+  newCompaniesThisMonth: number;
+}
+
 export default function AdminDashboard() {
   const [recentRecords, setRecentRecords] = useState<DashboardRecord[]>([]);
+  const [saasData, setSaasData] = useState<SaaSKPIs | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Carrega registros e inicializa se vazio
+    const loadData = async () => {
+      try {
+        // Tenta buscar dados do SaaS (Dono do Sistema)
+        const saasResponse = await api.get('/reports/saas-dashboard').catch(() => null);
+        
+        if (saasResponse?.data) {
+          setSaasData(saasResponse.data.kpis);
+        } else {
+          // Se falhar (não é super admin), carrega dashboard operacional
+          // TODO: Conectar com /reports/dashboard real
+          loadMockData();
+        }
+      } catch (error) {
+        console.error("Erro ao carregar dashboard", error);
+        loadMockData();
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, []);
+
+  const loadMockData = () => {
     let records = pontoStorage.getAll();
     if (records.length === 0) {
       pontoStorage.seed();
       records = pontoStorage.getAll();
     }
-
-    // Formata para a tabela
     const formatted = records.map(r => ({
       name: r.userName,
       client: r.client,
@@ -33,24 +66,68 @@ export default function AdminDashboard() {
       type: r.type,
       status: r.status
     }));
-
     setRecentRecords(formatted);
+  };
 
-    // Polling para atualizar a cada 2s
-    const interval = setInterval(() => {
-      const updated = pontoStorage.getAll().map(r => ({
-        name: r.userName,
-        client: r.client,
-        time: new Date(r.timestamp).toLocaleTimeString("pt-BR", { hour: '2-digit', minute: '2-digit' }),
-        type: r.type,
-        status: r.status
-      }));
-      setRecentRecords(updated);
-    }, 2000);
+  if (loading) {
+    return <div className="p-8">Carregando dashboard...</div>;
+  }
 
-    return () => clearInterval(interval);
-  }, []);
+  // Visualização "Dono do Sistema" (SaaS)
+  if (saasData) {
+    return (
+      <div className="space-y-8">
+        <div className="flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight text-slate-900">Visão Geral SaaS</h1>
+            <p className="text-muted-foreground mt-1">Métricas de desempenho do negócio.</p>
+          </div>
+          <div className="flex items-center gap-2 bg-blue-50 px-4 py-2 rounded-lg border border-blue-100 shadow-sm">
+            <Building2 className="w-4 h-4 text-blue-600" />
+            <span className="text-sm font-medium text-blue-900">Modo Super Admin</span>
+          </div>
+        </div>
 
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <KPICard 
+            title="Faturamento Mensal" 
+            value={new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(saasData.monthlyRevenue)} 
+            change="Receita Recorrente" 
+            icon={DollarSign}
+            trend="up"
+            positive
+          />
+          <KPICard 
+            title="Total Empresas" 
+            value={saasData.totalCompanies} 
+            change={`${saasData.newCompaniesThisMonth} novas este mês`} 
+            icon={Building2}
+            trend="up"
+            positive
+          />
+          <KPICard 
+            title="Empresas Ativas" 
+            value={saasData.activeCompanies} 
+            change={`${saasData.blockedCompanies} bloqueadas/inadimpl.`}
+            icon={Activity}
+            trend={saasData.blockedCompanies > 0 ? "down" : "neutral"}
+            alert={saasData.blockedCompanies > 0}
+          />
+          <KPICard 
+            title="Total Colaboradores" 
+            value={saasData.totalEmployees} 
+            change="Em toda a base" 
+            icon={Users}
+            trend="neutral"
+          />
+        </div>
+
+        {/* Aqui poderiam entrar gráficos de crescimento, etc */}
+      </div>
+    );
+  }
+
+  // Visualização "Gestor da Empresa" (Operacional)
   return (
     <div className="space-y-8">
       {/* Header */}

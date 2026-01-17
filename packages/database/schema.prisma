@@ -167,12 +167,30 @@ model Client {
   @@map("clients")
 }
 
+model Plan {
+  id                  String   @id @default(uuid())
+  name                String
+  basePrice           Decimal  // valor_base
+  pricePerEmployee    Decimal  // valor_por_funcionario
+  active              Boolean  @default(true)
+  
+  contracts           SaaSContract[]
+
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@map("plans")
+}
+
 model SaaSContract {
   id             String   @id @default(uuid())
   clientId       String   @unique
   client         Client   @relation(fields: [clientId], references: [id])
   
-  plan           String   // BASIC, PRO, ENTERPRISE
+  planId         String?
+  planRelation   Plan?    @relation(fields: [planId], references: [id])
+  
+  plan           String   // BASIC, PRO, ENTERPRISE (Legacy/Fallback)
   price          Decimal  // Valor unitário
   quantity       Int      // Qtd contratada
   billingCycle   String   // MENSAL, ANUAL

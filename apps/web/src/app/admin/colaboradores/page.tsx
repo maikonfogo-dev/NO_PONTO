@@ -9,6 +9,7 @@ import { Edit, Eye, MoreHorizontal, UserX, FileDown, Ban, Plus, Upload, Download
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Link from "next/link";
 import Image from "next/image";
+import { api } from "@/lib/api";
 
 // Types based on API response
 interface Employee {
@@ -33,16 +34,13 @@ export default function EmployeesPage() {
   const fetchEmployees = useCallback(async () => {
     setLoading(true);
     try {
-      const params = new URLSearchParams();
-      if (search) params.append("search", search);
-      if (statusFilter !== "TODOS") params.append("status", statusFilter);
-      if (missingPointFilter) params.append("missingPoint", "true");
-      
-      // Use environment variable in real app
-      const res = await fetch(`http://localhost:4000/colaboradores?${params.toString()}`);
-      if (!res.ok) throw new Error("Falha ao buscar colaboradores");
-      const data = await res.json();
-      setEmployees(data);
+      const params: any = {};
+      if (search) params.search = search;
+      if (statusFilter !== "TODOS") params.status = statusFilter;
+      if (missingPointFilter) params.missingPoint = "true";
+
+      const res = await api.get("/colaboradores", { params });
+      setEmployees(res.data);
     } catch (error) {
       console.error("Failed to fetch employees", error);
     } finally {
@@ -59,9 +57,6 @@ export default function EmployeesPage() {
   }, [fetchEmployees]);
 
   const handleExport = () => {
-    // Implement export logic (e.g., download CSV)
-    console.log("Exporting data...");
-    // Mock export
     alert("Exportação iniciada! O arquivo será baixado em breve.");
   };
 

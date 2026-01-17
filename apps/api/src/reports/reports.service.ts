@@ -12,6 +12,48 @@ export class ReportsService {
     private timeRecordsService: TimeRecordsService
   ) {}
 
+  async getSaaSDashboard() {
+    const totalCompanies = await this.prisma.client.count();
+    const activeCompanies = await this.prisma.client.count({ where: { status: 'ATIVO' } });
+    const blockedCompanies = await this.prisma.client.count({ where: { status: { in: ['SUSPENSO', 'BLOQUEADO', 'INADIMPLENTE'] } } });
+    const totalEmployees = await this.prisma.employee.count();
+
+    // Calculate Revenue
+    const activeContracts = await this.prisma.saaSContract.findMany({
+        where: { status: 'ATIVO' }
+    });
+    
+    const monthlyRevenue = activeContracts.reduce((acc, contract) => {
+        return acc + (Number(contract.price) * contract.quantity);
+    }, 0);
+
+    // Growth
+    const startOfCurrentMonth = startOfMonth(new Date());
+    const newCompaniesThisMonth = await this.prisma.client.count({
+        where: { createdAt: { gte: startOfCurrentMonth } }
+    });
+
+    // Companies by Status
+    const companiesByStatus = await this.prisma.client.groupBy({
+        by: ['status'],
+        _count: {
+            status: true
+        }
+    });
+
+    return {
+        kpis: {
+            totalCompanies,
+            activeCompanies,
+            blockedCompanies,
+            totalEmployees,
+            monthlyRevenue,
+            newCompaniesThisMonth
+        },
+        companiesByStatus: companiesByStatus.map(g => ({ name: g.status, value: g._count.status }))
+    };
+  }
+
   async generateEspelhoPdf(employeeId: string, month: number, year: number): Promise<Buffer> {
       const data = await this.timeRecordsService.getMirror(employeeId, month, year);
       
@@ -133,15 +175,29 @@ export class ReportsService {
     return this.timeRecordsService.getMirror(employeeId, month, year);
   }
 
-  async getDashboardData(month: number, year: number) {
-    // 1. Fetch Employees with WorkLocation
+  async getDashboardData(month: number, year: number, clientId?: string) {
+    const whereEmployees: any = { status: 'ATIVO' };
+
+    if (clientId) {
+      whereEmployees.contract = { clientId };
+    }
+
     const employees = await this.prisma.employee.findMany({
-      where: { status: 'ATIVO' },
-      include: { workLocation: true }
+      where: whereEmployees,
+      include: { workLocation: true, contract: true },
     });
 
     const activeEmployees = employees.length;
-    const totalEmployees = await this.prisma.employee.count();
+    const totalEmployees = await this.prisma.employee.count(
+      clientId
+        ? {
+            where: {
+              status: 'ATIVO',
+              contract: { clientId },
+            },
+          }
+        : undefined,
+    );
 
     // 2. Aggregate Data
     let totalWorkedHours = 0;
@@ -314,17 +370,25 @@ export class ReportsService {
     return normalizedLogs.sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());
   }
 
-  async getFinancialReport() {
-    // Active Clients
-    const activeClientsCount = await this.prisma.client.count({ where: { status: 'ATIVO' } });
+  async getFinancialReport(clientId?: string) {
+    const clientFilter = clientId ? { id: clientId } : {};
 
-    // Billable Employees (Total active employees across all active clients)
-    // Assuming billing is per employee, or based on SaaS Contract quantity
-    const activeEmployeesCount = await this.prisma.employee.count({ where: { status: 'ATIVO' } });
+    const activeClientsCount = await this.prisma.client.count({
+      where: { status: 'ATIVO', ...clientFilter },
+    });
 
-    // MRR (Monthly Recurring Revenue)
+    const activeEmployeesCount = await this.prisma.employee.count({
+      where: {
+        status: 'ATIVO',
+        contract: clientId ? { clientId } : undefined,
+      },
+    });
+
     const activeContracts = await this.prisma.saaSContract.findMany({
-        where: { status: 'ATIVO' }
+      where: {
+        status: 'ATIVO',
+        ...(clientId ? { clientId } : {}),
+      },
     });
 
     let mrr = 0;
@@ -339,17 +403,26 @@ export class ReportsService {
 
     // Inadimplência (Overdue Invoices)
     const overdueInvoices = await this.prisma.invoice.findMany({
-        where: { status: 'VENCIDO' }
+      where: {
+        status: 'VENCIDO',
+        ...(clientId ? { clientId } : {}),
+      },
     });
     const overdueAmount = overdueInvoices.reduce((acc, inv) => acc + Number(inv.amount), 0);
     const overdueCount = overdueInvoices.length;
 
     // Detailed Client List for Table
     const clients = await this.prisma.client.findMany({
-        include: {
-            subscription: true,
-            _count: { select: { users: true, invoices: { where: { status: 'VENCIDO' } } } }
-        }
+      where: clientId ? { id: clientId } : undefined,
+      include: {
+        subscription: true,
+        _count: {
+          select: {
+            users: true,
+            invoices: { where: { status: 'VENCIDO' } },
+          },
+        },
+      },
     });
 
     return {
@@ -445,9 +518,17 @@ export class ReportsService {
         include: {
             employee: {
                 select: {
+                    id: true,
                     name: true,
                     cpf: true,
-                    position: true
+                    position: true,
+                    workLocation: {
+                      select: {
+                        latitude: true,
+                        longitude: true,
+                        radius: true,
+                      }
+                    }
                 }
             }
         },
@@ -456,18 +537,56 @@ export class ReportsService {
         }
     });
 
-    return records.map(record => ({
+    const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
+      const R = 6371e3;
+      const φ1 = (lat1 * Math.PI) / 180;
+      const φ2 = (lat2 * Math.PI) / 180;
+      const Δφ = ((lat2 - lat1) * Math.PI) / 180;
+      const Δλ = ((lon2 - lon1) * Math.PI) / 180;
+
+      const a =
+        Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+        Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+      return R * c;
+    };
+
+    return records.map(record => {
+      let distanceFromLocationMeters: number | null = null;
+
+      if (
+        record.employee.workLocation &&
+        typeof record.employee.workLocation.latitude === 'number' &&
+        typeof record.employee.workLocation.longitude === 'number' &&
+        typeof record.latitude === 'number' &&
+        typeof record.longitude === 'number'
+      ) {
+        distanceFromLocationMeters = Math.round(
+          calculateDistance(
+            record.latitude,
+            record.longitude,
+            record.employee.workLocation.latitude,
+            record.employee.workLocation.longitude
+          )
+        );
+      }
+
+      return {
         id: record.id,
         latitude: record.latitude,
         longitude: record.longitude,
         timestamp: record.timestamp.toISOString(),
         type: record.type,
+        distanceFromLocationMeters,
         employee: {
             name: record.employee.name,
             cpf: record.employee.cpf,
             position: record.employee.position
         }
-    }));
+      };
+    });
   }
 
   async logDownload(data: { mirrorId?: string, userId?: string, fileType: string, ip?: string, userAgent?: string }) {
@@ -480,5 +599,60 @@ export class ReportsService {
         userAgent: data.userAgent
       }
     });
+  }
+
+  async getSaasOverview() {
+    const [totalClients, activeClients, blockedClients, totalEmployees] =
+      await Promise.all([
+        this.prisma.client.count(),
+        this.prisma.client.count({
+          where: { status: 'ATIVO' },
+        }),
+        this.prisma.client.count({
+          where: { status: { in: ['SUSPENSO', 'INADIMPLENTE'] } },
+        }),
+        this.prisma.employee.count(),
+      ]);
+
+    const clients = await this.prisma.client.findMany({
+      include: {
+        contracts: {
+          select: {
+            _count: { select: { employees: true } },
+          },
+        },
+        subscription: true,
+        invoices: {
+          where: { status: 'VENCIDO' },
+          select: { id: true },
+        },
+      },
+    });
+
+    const companies = clients.map((client) => {
+      const employees = client.contracts.reduce(
+        (total, contract) => total + contract._count.employees,
+        0,
+      );
+
+      return {
+        id: client.id,
+        name: client.name,
+        status: client.status,
+        plan: client.subscription?.plan || 'Sem Plano',
+        employees,
+        overdueInvoices: client.invoices.length,
+      };
+    });
+
+    return {
+      kpis: {
+        totalClients,
+        activeClients,
+        blockedClients,
+        totalEmployees,
+      },
+      companies,
+    };
   }
 }

@@ -6,7 +6,7 @@ export declare class WebhooksController {
     handleStripe(body: any): Promise<{
         received: boolean;
     }>;
-    handleMercadoPago(body: any, query: any): Promise<{
+    handleMercadoPago(body: any): Promise<{
         status: string;
     }>;
 }

@@ -1,0 +1,1611 @@
+"openapi": "3.0.0"
+"paths":
+    "/":
+          "get":
+                  "operationId": "AppController_getHello"
+                  "parameters": []
+                  "responses":
+                            "200":
+                                        "description": ""
+    "/auth/login":
+          "post":
+                  "operationId": "AuthController_signIn"
+                  "summary": "Login de usuário"
+                  "parameters": []
+                  "requestBody":
+                            "required": true
+                            "content":
+                                        "application/json":
+                                                      "schema":
+                                                                      "$ref": "#/components/schemas/SignInDto"
+                  "responses":
+                            "200":
+                                        "description": "Login realizado com sucesso."
+                  "tags":         - "Auth"
+    "/colaboradores":
+          "post":
+                  "operationId": "EmployeesController_create"
+                  "summary": "Criar colaborador"
+                  "parameters": []
+                  "requestBody":
+                            "required": true
+                            "content":
+                                        "application/json":
+                                                      "schema":
+                                                                      "$ref": "#/components/schemas/CreateEmployeeDto"
+                  "responses":
+                            "201":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+          "get":
+                  "operationId": "EmployeesController_findAll"
+                  "summary": "Listar colaboradores da empresa"
+                  "parameters":         -           "name": "contractId"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "clientId"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "status"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "search"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "position"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "workLocationId"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "scheduleId"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "missingPoint"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+    "/funcionarios":
+          "post":
+                  "operationId": "EmployeesController_create"
+                  "summary": "Criar colaborador"
+                  "parameters": []
+                  "requestBody":
+                            "required": true
+                            "content":
+                                        "application/json":
+                                                      "schema":
+                                                                      "$ref": "#/components/schemas/CreateEmployeeDto"
+                  "responses":
+                            "201":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+          "get":
+                  "operationId": "EmployeesController_findAll"
+                  "summary": "Listar colaboradores da empresa"
+                  "parameters":         -           "name": "contractId"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "clientId"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "status"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "search"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "position"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "workLocationId"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "scheduleId"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "missingPoint"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+    "/colaboradores/importar":
+          "post":
+                  "operationId": "EmployeesController_importEmployees"
+                  "summary": "Importar colaboradores via planilha"
+                  "parameters": []
+                  "responses":
+                            "201":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+    "/funcionarios/importar":
+          "post":
+                  "operationId": "EmployeesController_importEmployees"
+                  "summary": "Importar colaboradores via planilha"
+                  "parameters": []
+                  "responses":
+                            "201":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+    "/colaboradores/jornadas/listar":
+          "get":
+                  "operationId": "EmployeesController_getSchedules"
+                  "summary": "Listar jornadas de trabalho disponíveis"
+                  "parameters": []
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+    "/funcionarios/jornadas/listar":
+          "get":
+                  "operationId": "EmployeesController_getSchedules"
+                  "summary": "Listar jornadas de trabalho disponíveis"
+                  "parameters": []
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+    "/colaboradores/{id}":
+          "get":
+                  "operationId": "EmployeesController_findOne"
+                  "summary": "Obter detalhes do colaborador"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+          "put":
+                  "operationId": "EmployeesController_update"
+                  "summary": "Atualizar dados do colaborador"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "requestBody":
+                            "required": true
+                            "content":
+                                        "application/json":
+                                                      "schema":
+                                                                      "$ref": "#/components/schemas/UpdateEmployeeDto"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+          "delete":
+                  "operationId": "EmployeesController_remove"
+                  "summary": "Remover colaborador"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+    "/funcionarios/{id}":
+          "get":
+                  "operationId": "EmployeesController_findOne"
+                  "summary": "Obter detalhes do colaborador"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+          "put":
+                  "operationId": "EmployeesController_update"
+                  "summary": "Atualizar dados do colaborador"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "requestBody":
+                            "required": true
+                            "content":
+                                        "application/json":
+                                                      "schema":
+                                                                      "$ref": "#/components/schemas/UpdateEmployeeDto"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+          "delete":
+                  "operationId": "EmployeesController_remove"
+                  "summary": "Remover colaborador"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+    "/colaboradores/{id}/transferir":
+          "post":
+                  "operationId": "EmployeesController_transfer"
+                  "summary": "Transferir colaborador entre contratos/unidades"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "requestBody":
+                            "required": true
+                            "content":
+                                        "application/json":
+                                                      "schema":
+                                                                      "$ref": "#/components/schemas/TransferEmployeeDto"
+                  "responses":
+                            "201":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+    "/funcionarios/{id}/transferir":
+          "post":
+                  "operationId": "EmployeesController_transfer"
+                  "summary": "Transferir colaborador entre contratos/unidades"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "requestBody":
+                            "required": true
+                            "content":
+                                        "application/json":
+                                                      "schema":
+                                                                      "$ref": "#/components/schemas/TransferEmployeeDto"
+                  "responses":
+                            "201":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+    "/colaboradores/{id}/dashboard":
+          "get":
+                  "operationId": "EmployeesController_getDashboard"
+                  "summary": "Dashboard resumido do colaborador"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+    "/funcionarios/{id}/dashboard":
+          "get":
+                  "operationId": "EmployeesController_getDashboard"
+                  "summary": "Dashboard resumido do colaborador"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+    "/colaboradores/{id}/status":
+          "patch":
+                  "operationId": "EmployeesController_updateStatus"
+                  "summary": "Atualizar status do colaborador"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+    "/funcionarios/{id}/status":
+          "patch":
+                  "operationId": "EmployeesController_updateStatus"
+                  "summary": "Atualizar status do colaborador"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+    "/colaboradores/{id}/jornada":
+          "post":
+                  "operationId": "EmployeesController_linkSchedule"
+                  "summary": "Vincular jornada de trabalho ao colaborador"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "201":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+    "/funcionarios/{id}/jornada":
+          "post":
+                  "operationId": "EmployeesController_linkSchedule"
+                  "summary": "Vincular jornada de trabalho ao colaborador"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "201":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+    "/colaboradores/{id}/clt/resumo":
+          "get":
+                  "operationId": "EmployeesController_getCltSummary"
+                  "summary": "Resumo CLT do colaborador"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+    "/funcionarios/{id}/clt/resumo":
+          "get":
+                  "operationId": "EmployeesController_getCltSummary"
+                  "summary": "Resumo CLT do colaborador"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+    "/colaboradores/{id}/pontos":
+          "get":
+                  "operationId": "EmployeesController_getPoints"
+                  "summary": "Listar registros de ponto do colaborador"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+    "/funcionarios/{id}/pontos":
+          "get":
+                  "operationId": "EmployeesController_getPoints"
+                  "summary": "Listar registros de ponto do colaborador"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+    "/colaboradores/{id}/documentos":
+          "post":
+                  "operationId": "EmployeesController_uploadDocument"
+                  "summary": "Enviar documento do colaborador"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "201":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+    "/funcionarios/{id}/documentos":
+          "post":
+                  "operationId": "EmployeesController_uploadDocument"
+                  "summary": "Enviar documento do colaborador"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "201":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+    "/colaboradores/{id}/auditoria":
+          "get":
+                  "operationId": "EmployeesController_getAuditLogs"
+                  "summary": "Listar logs de auditoria do colaborador"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+    "/funcionarios/{id}/auditoria":
+          "get":
+                  "operationId": "EmployeesController_getAuditLogs"
+                  "summary": "Listar logs de auditoria do colaborador"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Funcionários"
+                    - "Colaboradores"
+                  "security":         -           "bearer": []
+    "/contratos":
+          "post":
+                  "operationId": "ContractsController_create"
+                  "parameters": []
+                  "responses":
+                            "201":
+                                        "description": ""
+          "get":
+                  "operationId": "ContractsController_findAll"
+                  "parameters":         -           "name": "clientId"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+    "/contratos/{id}":
+          "get":
+                  "operationId": "ContractsController_findOne"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+          "put":
+                  "operationId": "ContractsController_update"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+          "delete":
+                  "operationId": "ContractsController_remove"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+    "/contratos/{id}/postos":
+          "get":
+                  "operationId": "ContractsController_getWorkLocations"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+    "/reports/dashboard":
+          "get":
+                  "operationId": "ReportsController_getDashboardData"
+                  "summary": "Get Dashboard KPIs and Chart Data"
+                  "parameters":         -           "name": "month"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "year"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "clientId"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Reports"
+    "/reports/saas-dashboard":
+          "get":
+                  "operationId": "ReportsController_getSaaSDashboard"
+                  "summary": "Get SaaS Dashboard KPIs (Super Admin)"
+                  "parameters": []
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Reports"
+    "/reports/employees":
+          "get":
+                  "operationId": "ReportsController_getEmployees"
+                  "summary": "Get Employees list for filters"
+                  "parameters": []
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Reports"
+    "/reports/espelho":
+          "get":
+                  "operationId": "ReportsController_getEspelhoPonto"
+                  "summary": "Get Espelho de Ponto detailed report"
+                  "parameters":         -           "name": "employeeId"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "month"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "year"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Reports"
+    "/reports/espelho/pdf":
+          "get":
+                  "operationId": "ReportsController_getEspelhoPdf"
+                  "summary": "Get Espelho de Ponto PDF"
+                  "parameters":         -           "name": "employeeId"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "month"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "year"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Reports"
+    "/reports/audit-logs":
+          "get":
+                  "operationId": "ReportsController_getAuditLogs"
+                  "summary": "Get Audit Logs"
+                  "parameters":         -           "name": "startDate"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "endDate"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "userId"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "action"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Reports"
+    "/reports/financial":
+          "get":
+                  "operationId": "ReportsController_getFinancialReport"
+                  "summary": "Get Financial SaaS Report"
+                  "parameters":         -           "name": "clientId"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Reports"
+    "/reports/saas-overview":
+          "get":
+                  "operationId": "ReportsController_getSaasOverview"
+                  "summary": "Get SaaS Owner Overview"
+                  "parameters": []
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Reports"
+    "/reports/schedules":
+          "get":
+                  "operationId": "ReportsController_getSchedulesReport"
+                  "summary": "Get Schedules Report"
+                  "parameters": []
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Reports"
+    "/reports/locations":
+          "get":
+                  "operationId": "ReportsController_getLocations"
+                  "parameters": []
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Reports"
+    "/reports/generate":
+          "post":
+                  "operationId": "ReportsController_logDownload"
+                  "summary": "Log Report Download"
+                  "parameters": []
+                  "responses":
+                            "201":
+                                        "description": ""
+                  "tags":         - "Reports"
+    "/ponto/hoje":
+          "get":
+                  "operationId": "TimeRecordsController_getDailyStatus"
+                  "summary": "Status do dia atual do colaborador"
+                  "parameters":         -           "name": "employeeId"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Ponto"
+    "/ponto/espelho":
+          "get":
+                  "operationId": "TimeRecordsController_getMirror"
+                  "summary": "Espelho de ponto mensal"
+                  "parameters":         -           "name": "employeeId"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "month"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "year"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Ponto"
+    "/ponto/historico/{employeeId}":
+          "get":
+                  "operationId": "TimeRecordsController_findAllByEmployee"
+                  "summary": "Histórico de batidas (Listagem simples)"
+                  "parameters":         -           "name": "employeeId"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "limit"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Ponto"
+    "/ponto/registrar":
+          "post":
+                  "operationId": "TimeRecordsController_registrar"
+                  "summary": "Registrar batida de ponto"
+                  "parameters": []
+                  "requestBody":
+                            "required": true
+                            "content":
+                                        "multipart/form-data":
+                                                      "schema":
+                                                                      "type": "object"
+                                                                      "properties":
+                                                                                        "employeeId":
+                                                                                                            "type": "string"
+                                                                                                            "description": "ID do colaborador"
+                                                                                        "type":
+                                                                                                            "type": "string"
+                                                                                                            "description": "Tipo de batida (ENTRADA, SAIDA, etc.)"
+                                                                                        "latitude":
+                                                                                                            "type": "number"
+                                                                                        "longitude":
+                                                                                                            "type": "number"
+                                                                                        "accuracy":
+                                                                                                            "type": "number"
+                                                                                                            "nullable": true
+                                                                                        "address":
+                                                                                                            "type": "string"
+                                                                                                            "nullable": true
+                                                                                        "deviceId":
+                                                                                                            "type": "string"
+                                                                                                            "nullable": true
+                                                                                        "file":
+                                                                                                            "type": "string"
+                                                                                                            "format": "binary"
+                                                                                                            "description": "Foto do colaborador"
+                                                                      "required":                 - "employeeId"
+                                                                        - "type"
+                  "responses":
+                            "200":
+                                        "description": "Batida registrada com sucesso."
+                  "tags":         - "Ponto"
+    "/escalas":
+          "post":
+                  "operationId": "WorkSchedulesController_create"
+                  "parameters": []
+                  "responses":
+                            "201":
+                                        "description": ""
+          "get":
+                  "operationId": "WorkSchedulesController_findAll"
+                  "parameters": []
+                  "responses":
+                            "200":
+                                        "description": ""
+    "/escalas/{id}":
+          "get":
+                  "operationId": "WorkSchedulesController_findOne"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+    "/postos":
+          "post":
+                  "operationId": "WorkLocationsController_create"
+                  "parameters": []
+                  "responses":
+                            "201":
+                                        "description": ""
+          "get":
+                  "operationId": "WorkLocationsController_findAll"
+                  "parameters":         -           "name": "contractId"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+    "/postos/{id}":
+          "get":
+                  "operationId": "WorkLocationsController_findOne"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+    "/clientes":
+          "post":
+                  "operationId": "ClientsController_create"
+                  "summary": "Criar novo cliente"
+                  "parameters": []
+                  "requestBody":
+                            "required": true
+                            "content":
+                                        "application/json":
+                                                      "schema":
+                                                                      "$ref": "#/components/schemas/CreateClientDto"
+                  "responses":
+                            "201":
+                                        "description": "Cliente criado com sucesso."
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+          "get":
+                  "operationId": "ClientsController_findAll"
+                  "summary": "Listar clientes"
+                  "parameters":         -           "name": "search"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "status"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "plan"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "inadimplente"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+    "/empresas":
+          "post":
+                  "operationId": "ClientsController_create"
+                  "summary": "Criar novo cliente"
+                  "parameters": []
+                  "requestBody":
+                            "required": true
+                            "content":
+                                        "application/json":
+                                                      "schema":
+                                                                      "$ref": "#/components/schemas/CreateClientDto"
+                  "responses":
+                            "201":
+                                        "description": "Cliente criado com sucesso."
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+          "get":
+                  "operationId": "ClientsController_findAll"
+                  "summary": "Listar clientes"
+                  "parameters":         -           "name": "search"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "status"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "plan"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                    -           "name": "inadimplente"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+    "/clientes/{id}":
+          "get":
+                  "operationId": "ClientsController_findOne"
+                  "summary": "Obter perfil completo do cliente"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+          "patch":
+                  "operationId": "ClientsController_update"
+                  "summary": "Atualizar dados básicos do cliente"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "requestBody":
+                            "required": true
+                            "content":
+                                        "application/json":
+                                                      "schema":
+                                                                      "$ref": "#/components/schemas/UpdateClientDto"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+          "delete":
+                  "operationId": "ClientsController_remove"
+                  "summary": "Remover cliente"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+    "/empresas/{id}":
+          "get":
+                  "operationId": "ClientsController_findOne"
+                  "summary": "Obter perfil completo do cliente"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+          "patch":
+                  "operationId": "ClientsController_update"
+                  "summary": "Atualizar dados básicos do cliente"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "requestBody":
+                            "required": true
+                            "content":
+                                        "application/json":
+                                                      "schema":
+                                                                      "$ref": "#/components/schemas/UpdateClientDto"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+          "delete":
+                  "operationId": "ClientsController_remove"
+                  "summary": "Remover cliente"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+    "/clientes/{id}/status":
+          "patch":
+                  "operationId": "ClientsController_updateStatus"
+                  "summary": "Atualizar status do cliente (Bloqueio/Desbloqueio)"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "requestBody":
+                            "required": true
+                            "content":
+                                        "application/json":
+                                                      "schema":
+                                                                      "$ref": "#/components/schemas/UpdateClientStatusDto"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+    "/empresas/{id}/status":
+          "patch":
+                  "operationId": "ClientsController_updateStatus"
+                  "summary": "Atualizar status do cliente (Bloqueio/Desbloqueio)"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "requestBody":
+                            "required": true
+                            "content":
+                                        "application/json":
+                                                      "schema":
+                                                                      "$ref": "#/components/schemas/UpdateClientStatusDto"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+    "/clientes/{id}/plano":
+          "patch":
+                  "operationId": "ClientsController_updatePlan"
+                  "summary": "Atualizar plano e cobrança"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "requestBody":
+                            "required": true
+                            "content":
+                                        "application/json":
+                                                      "schema":
+                                                                      "$ref": "#/components/schemas/UpdateClientPlanDto"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+    "/empresas/{id}/plano":
+          "patch":
+                  "operationId": "ClientsController_updatePlan"
+                  "summary": "Atualizar plano e cobrança"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "requestBody":
+                            "required": true
+                            "content":
+                                        "application/json":
+                                                      "schema":
+                                                                      "$ref": "#/components/schemas/UpdateClientPlanDto"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+    "/clientes/{id}/uso":
+          "get":
+                  "operationId": "ClientsController_getUsage"
+                  "summary": "Obter métricas de uso do sistema"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+    "/empresas/{id}/uso":
+          "get":
+                  "operationId": "ClientsController_getUsage"
+                  "summary": "Obter métricas de uso do sistema"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+    "/clientes/{id}/unidades":
+          "post":
+                  "operationId": "ClientsController_createUnit"
+                  "summary": "Criar unidade/posto para o cliente"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "requestBody":
+                            "required": true
+                            "content":
+                                        "application/json":
+                                                      "schema":
+                                                                      "$ref": "#/components/schemas/CreateUnitDto"
+                  "responses":
+                            "201":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+    "/empresas/{id}/unidades":
+          "post":
+                  "operationId": "ClientsController_createUnit"
+                  "summary": "Criar unidade/posto para o cliente"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "requestBody":
+                            "required": true
+                            "content":
+                                        "application/json":
+                                                      "schema":
+                                                                      "$ref": "#/components/schemas/CreateUnitDto"
+                  "responses":
+                            "201":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+    "/clientes/{id}/usuarios":
+          "post":
+                  "operationId": "ClientsController_createUser"
+                  "summary": "Criar usuário gestor para o cliente"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "requestBody":
+                            "required": true
+                            "content":
+                                        "application/json":
+                                                      "schema":
+                                                                      "$ref": "#/components/schemas/CreateClientUserDto"
+                  "responses":
+                            "201":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+    "/empresas/{id}/usuarios":
+          "post":
+                  "operationId": "ClientsController_createUser"
+                  "summary": "Criar usuário gestor para o cliente"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "requestBody":
+                            "required": true
+                            "content":
+                                        "application/json":
+                                                      "schema":
+                                                                      "$ref": "#/components/schemas/CreateClientUserDto"
+                  "responses":
+                            "201":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+    "/clientes/{id}/auditoria":
+          "get":
+                  "operationId": "ClientsController_getAuditLogs"
+                  "summary": "Listar logs de auditoria do cliente"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+    "/empresas/{id}/auditoria":
+          "get":
+                  "operationId": "ClientsController_getAuditLogs"
+                  "summary": "Listar logs de auditoria do cliente"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+    "/clientes/{id}/cobranca":
+          "post":
+                  "operationId": "ClientsController_createInvoice"
+                  "summary": "Gerar cobrança avulsa (Pix/Boleto)"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "201":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+    "/empresas/{id}/cobranca":
+          "post":
+                  "operationId": "ClientsController_createInvoice"
+                  "summary": "Gerar cobrança avulsa (Pix/Boleto)"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "201":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+    "/clientes/{id}/faturas":
+          "get":
+                  "operationId": "ClientsController_getInvoices"
+                  "summary": "Listar histórico de cobranças da empresa"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+    "/empresas/{id}/faturas":
+          "get":
+                  "operationId": "ClientsController_getInvoices"
+                  "summary": "Listar histórico de cobranças da empresa"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+    "/clientes/{id}/pagamentos":
+          "get":
+                  "operationId": "ClientsController_getPayments"
+                  "summary": "Listar pagamentos da empresa"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+    "/empresas/{id}/pagamentos":
+          "get":
+                  "operationId": "ClientsController_getPayments"
+                  "summary": "Listar pagamentos da empresa"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+    "/clientes/{id}/documentos":
+          "post":
+                  "operationId": "ClientsController_uploadDocument"
+                  "summary": "Upload de documento"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "201":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+          "get":
+                  "operationId": "ClientsController_getDocuments"
+                  "summary": "Listar documentos do cliente"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+    "/empresas/{id}/documentos":
+          "post":
+                  "operationId": "ClientsController_uploadDocument"
+                  "summary": "Upload de documento"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "201":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+          "get":
+                  "operationId": "ClientsController_getDocuments"
+                  "summary": "Listar documentos do cliente"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Empresas"
+                    - "Clientes"
+                  "security":         -           "bearer": []
+    "/webhooks/stripe":
+          "post":
+                  "operationId": "WebhooksController_handleStripe"
+                  "summary": "Receber notificação do Stripe"
+                  "parameters": []
+                  "responses":
+                            "201":
+                                        "description": ""
+                  "tags":         - "Webhooks"
+    "/webhooks/mercadopago":
+          "post":
+                  "operationId": "WebhooksController_handleMercadoPago"
+                  "summary": "Receber notificação do Mercado Pago"
+                  "parameters": []
+                  "responses":
+                            "200":
+                                        "description": ""
+                  "tags":         - "Webhooks"
+    "/demo-requests":
+          "post":
+                  "operationId": "DemoController_create"
+                  "parameters": []
+                  "requestBody":
+                            "required": true
+                            "content":
+                                        "application/json":
+                                                      "schema":
+                                                                      "$ref": "#/components/schemas/CreateDemoRequestDto"
+                  "responses":
+                            "201":
+                                        "description": ""
+          "get":
+                  "operationId": "DemoController_findAll"
+                  "parameters":         -           "name": "status"
+                                "required": true
+                                "in": "query"
+                                "schema":
+                                              "type": "string"
+                  "responses":
+                            "200":
+                                        "description": ""
+    "/demo-requests/{id}/status":
+          "patch":
+                  "operationId": "DemoController_updateStatus"
+                  "parameters":         -           "name": "id"
+                                "required": true
+                                "in": "path"
+                                "schema":
+                                              "type": "string"
+                  "requestBody":
+                            "required": true
+                            "content":
+                                        "application/json":
+                                                      "schema":
+                                                                      "$ref": "#/components/schemas/UpdateDemoStatusDto"
+                  "responses":
+                            "200":
+                                        "description": ""
+"info":
+    "title": "NO PONTO – API Clientes"
+    "description": "API SaaS multiempresa"
+    "version": "1.0.0"
+    "contact":
+      {}
+"tags": []
+"servers":   -     "url": "https://api.noponto.com/v1"
+        "description": undefined
+        "variables": undefined
+  -     "url": "http://localhost:4000"
+        "description": undefined
+        "variables": undefined
+"components":
+    "securitySchemes":
+          "bearer":
+                  "scheme": "bearer"
+                  "bearerFormat": "JWT"
+                  "type": "http"
+    "schemas":
+          "SignInDto":
+                  "type": "object"
+                  "properties":
+                    {}
+          "CreateEmployeeDto":
+                  "type": "object"
+                  "properties":
+                    {}
+          "UpdateEmployeeDto":
+                  "type": "object"
+                  "properties":
+                    {}
+          "TransferEmployeeDto":
+                  "type": "object"
+                  "properties":
+                    {}
+          "CreateClientDto":
+                  "type": "object"
+                  "properties":
+                    {}
+          "UpdateClientDto":
+                  "type": "object"
+                  "properties":
+                    {}
+          "UpdateClientStatusDto":
+                  "type": "object"
+                  "properties":
+                    {}
+          "UpdateClientPlanDto":
+                  "type": "object"
+                  "properties":
+                    {}
+          "CreateUnitDto":
+                  "type": "object"
+                  "properties":
+                    {}
+          "CreateClientUserDto":
+                  "type": "object"
+                  "properties":
+                    {}
+          "CreateDemoRequestDto":
+                  "type": "object"
+                  "properties":
+                    {}
+          "UpdateDemoStatusDto":
+                  "type": "object"
+                  "properties":
+                    {}

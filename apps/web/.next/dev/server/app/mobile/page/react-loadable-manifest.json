@@ -1,1 +1,19 @@
-{}
+{
+  "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/mobile/MobileMirror.tsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/mobile/MobileMirror.tsx [app-client] (ecmascript, next/dynamic entry)",
+    "files": [
+      "static/chunks/Documents_trae_projects_NO PONTO_apps_web_src_79cdf0aa._.js",
+      "static/chunks/45a75_aa172b1a._.js",
+      "static/chunks/80b94_trae_projects_NO PONTO_apps_web_src_app_mobile_MobileMirror_tsx_8ba74fe3._.js"
+    ]
+  },
+  "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/mobile/MobileGeofenceMap.tsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/mobile/MobileGeofenceMap.tsx [app-client] (ecmascript, next/dynamic entry)",
+    "files": [
+      "static/chunks/45a75_b4bfe786._.js",
+      "static/chunks/80b94_trae_projects_NO PONTO_apps_web_src_app_mobile_MobileGeofenceMap_tsx_07cb91c4._.js",
+      "static/chunks/45a75_leaflet_dist_leaflet_34fe2717.css",
+      "static/chunks/80b94_trae_projects_NO PONTO_apps_web_src_app_mobile_MobileGeofenceMap_tsx_8ba74fe3._.js"
+    ]
+  }
+}

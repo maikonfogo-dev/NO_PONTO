@@ -1,55 +1,70 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { MapPin, Camera, LogOut, Clock, FileText, Download, X, Calendar, Eye, ChevronLeft, CheckCircle, FileSpreadsheet } from "lucide-react";
+import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
+import { MapPin, Camera, LogOut, Clock, FileText, X, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
 import { api } from "@/lib/api";
+import { authService } from "@/lib/auth";
 
+const MobileMirror = dynamic(
+  () => import("./MobileMirror"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full py-8 flex items-center justify-center text-xs text-slate-500">
+        Carregando espelho...
+      </div>
+    ),
+  }
+);
+
+const MobileGeofenceMap = dynamic(
+  () => import("./MobileGeofenceMap"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-64 flex items-center justify-center text-xs text-slate-500">
+        Carregando mapa...
+      </div>
+    ),
+  }
+);
 interface HistoryItem {
   type: string;
   time: string;
   status: string;
   variant: "success" | "warning" | "destructive";
+  location?: string;
+  geofence?: boolean;
+  distanceFromLocationMeters?: number;
 }
 
 export default function MobilePontoPage() {
+  const router = useRouter();
   const [currentTime, setCurrentTime] = useState<Date | null>(null);
   const [location, setLocation] = useState("Localizando...");
   const [coords, setCoords] = useState<{lat: number, long: number, acc: number} | null>(null);
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [activeTab, setActiveTab] = useState('ponto');
   const [dailySummary, setDailySummary] = useState<any>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const [userName, setUserName] = useState<string | null>(null);
   
-  // Mirror State
+  // Shared State
   const [employeeId, setEmployeeId] = useState<string>('');
-  const [mirrorView, setMirrorView] = useState<'list' | 'detail'>('list');
-  const [mirrorsList, setMirrorsList] = useState<any[]>([]);
-  const [selectedMirror, setSelectedMirror] = useState<any>(null);
-  const [loadingMirror, setLoadingMirror] = useState(false);
-  const [showDownloadSheet, setShowDownloadSheet] = useState(false);
-  const [downloadType, setDownloadType] = useState<'pdf' | 'excel'>('pdf');
-  const [monthFilter, setMonthFilter] = useState<string>(new Date().toISOString().slice(0, 7));
+  const [showHistorySheet, setShowHistorySheet] = useState(false);
+  const [showMapSheet, setShowMapSheet] = useState(false);
+  const [historySheetFilter, setHistorySheetFilter] = useState<'all' | 'violations'>('all');
 
   // Camera State
   const [cameraOpen, setCameraOpen] = useState(false);
   const [pendingType, setPendingType] = useState<string | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  const fetchEmployee = useCallback(async () => {
-    try {
-      const res = await api.get('/colaboradores');
-      const data = res.data;
-      if (data.length > 0) {
-          setEmployeeId(data[0].id);
-      }
-    } catch (e) { console.error(e); }
-  }, []);
 
   const fetchDailyStatus = useCallback(async () => {
       if (!employeeId) return;
@@ -62,67 +77,73 @@ export default function MobilePontoPage() {
           
           // Update history from backend data
           if (data.punches) {
-              setHistory(data.punches.map((p: any) => ({
-                  type: p.type,
-                  time: new Date(p.timestamp).toLocaleTimeString("pt-BR", { hour: '2-digit', minute: '2-digit' }),
-                  status: 'Aprovado', // Assuming immediate approval for MVP or logic check
-                  variant: 'success'
-              })));
+              setHistory(data.punches.map((p: any) => {
+                  const timeLabel = new Date(p.timestamp).toLocaleTimeString("pt-BR", { hour: '2-digit', minute: '2-digit' });
+
+                  const locationParts: string[] = [];
+                  if (p.address) {
+                    locationParts.push(p.address);
+                  }
+                  if (typeof p.latitude === 'number' && typeof p.longitude === 'number') {
+                    locationParts.push(`${p.latitude.toFixed(5)}, ${p.longitude.toFixed(5)}`);
+                  }
+                  const locationLabel = locationParts.join(" • ");
+
+                  const geofence = !!p.isGeofenceViolation;
+                  let variant: HistoryItem["variant"] = 'success';
+                  let statusLabel = 'Aprovado';
+
+                  if (p.status === 'PENDENTE') {
+                    variant = 'warning';
+                    statusLabel = 'Pendente';
+                  }
+
+                  if (geofence) {
+                    variant = 'warning';
+                    statusLabel = 'Fora do posto';
+                  }
+
+                  if (p.status === 'REJEITADO') {
+                    variant = 'destructive';
+                    statusLabel = 'Rejeitado';
+                  }
+
+                  return {
+                    type: p.type,
+                    time: timeLabel,
+                    status: statusLabel,
+                    variant,
+                    location: locationLabel || undefined,
+                    geofence,
+                    distanceFromLocationMeters: typeof p.distanceFromLocationMeters === 'number' ? p.distanceFromLocationMeters : undefined,
+                  } as HistoryItem;
+              }));
           }
       } catch (e) { console.error(e); }
   }, [employeeId]);
 
-  const fetchMirrorForMonth = useCallback(async (monthStr: string) => {
-    if (!employeeId) return;
-    setLoadingMirror(true);
-    try {
-      const [year, month] = monthStr.split('-');
-      const res = await api.get('/ponto/espelho', {
-          params: { employeeId, month, year }
-      });
-      const data = res.data;
-      
-      // Adapt backend response to UI structure
-      // Backend returns: { employee, period: {month, year}, days: [] }
-      // UI expects a list of mirrors. We'll create a single item list.
-      
-      const totalWorked = data.days.reduce((acc: number, day: any) => acc + parseFloat(day.workedHours || 0), 0);
-      const totalBalance = data.days.reduce((acc: number, day: any) => acc + parseFloat(day.balance || 0), 0);
-      
-      const mirrorObj = {
-          id: `${year}-${month}`,
-          startDate: `${year}-${month}-01`,
-          endDate: `${year}-${month}-${new Date(Number(year), Number(month), 0).getDate()}`,
-          status: 'EM_CONFERENCIA', // Mock status for now
-          workedHours: totalWorked,
-          balance: totalBalance,
-          employee: data.employee,
-          dailyDetails: data.days.map((d: any) => ({
-              date: d.date,
-              entry: d.punches[0] ? new Date(d.punches[0].timestamp).toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'}) : '-',
-              exit: d.punches.length > 1 ? new Date(d.punches[d.punches.length-1].timestamp).toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'}) : '-',
-              total: d.workedHours + 'h',
-              status: d.status,
-              statusColor: d.status === 'OK' ? 'green' : 'red'
-          }))
-      };
-
-      setMirrorsList([mirrorObj]);
-    } catch (error) {
-      console.error('Failed to fetch mirrors list', error);
-      setMirrorsList([]);
-    } finally {
-      setLoadingMirror(false);
-    }
-  }, [employeeId]);
 
   const getLocation = (onSuccess: (pos: GeolocationPosition) => void, onError: (err: GeolocationPositionError) => void) => {
     const handleFallback = async (originalError: GeolocationPositionError) => {
       try {
-        const response = await fetch("https://ipapi.co/json/");
+        const supportsAbortController = typeof AbortController !== "undefined";
+        const controller = supportsAbortController ? new AbortController() : null;
+        const timeoutId = supportsAbortController
+          ? setTimeout(() => controller?.abort(), 7000)
+          : null;
+
+        const response = await fetch("https://ipapi.co/json/", {
+          signal: controller ? controller.signal : undefined,
+        });
+
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+        }
+
         if (!response.ok) {
           throw new Error("IP geolocation error");
         }
+
         const data = await response.json();
         if (data && typeof data.latitude === "number" && typeof data.longitude === "number") {
           const fakePos = {
@@ -159,7 +180,7 @@ export default function MobilePontoPage() {
     }
 
     const optionsHigh = { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 };
-    const optionsLow = { enableHighAccuracy: false, timeout: 15000, maximumAge: 0 };
+    const optionsLow = { enableHighAccuracy: false, timeout: 12000, maximumAge: 0 };
 
     navigator.geolocation.getCurrentPosition(
       onSuccess,
@@ -177,11 +198,39 @@ export default function MobilePontoPage() {
   };
 
   useEffect(() => {
-    // Evitar erro de hidratação setando a data apenas no cliente
+    if (typeof window === "undefined") return;
+    const token = localStorage.getItem("auth_token");
+    const userRaw = localStorage.getItem("user_data");
+
+    if (!token || !userRaw) {
+      setIsAuthenticated(false);
+      return;
+    }
+
+    try {
+      const user = JSON.parse(userRaw);
+      if (user.role !== "EMPLOYEE" && user.role !== "COLABORADOR") {
+        setIsAuthenticated(false);
+        return;
+      }
+      if (typeof user.name === "string" && user.name.trim().length > 0) {
+        setUserName(user.name);
+      } else {
+        setUserName(null);
+      }
+      if (typeof user.employeeId === "string" && user.employeeId.trim().length > 0) {
+        setEmployeeId(user.employeeId);
+      }
+      setIsAuthenticated(true);
+    } catch {
+      setIsAuthenticated(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!isAuthenticated || activeTab !== 'ponto') return;
+
     setCurrentTime(new Date());
-    
-    // Simula login pegando primeiro colaborador
-    fetchEmployee();
 
     const timer = setInterval(() => {
       setCurrentTime(new Date());
@@ -203,7 +252,7 @@ export default function MobilePontoPage() {
     );
 
     return () => clearInterval(timer);
-  }, [fetchEmployee]);
+  }, [isAuthenticated, activeTab]);
 
   useEffect(() => {
       if (employeeId) {
@@ -211,32 +260,7 @@ export default function MobilePontoPage() {
       }
   }, [employeeId, fetchDailyStatus]);
 
-  useEffect(() => {
-      if (activeTab === 'espelho' && employeeId) {
-          fetchMirrorForMonth(monthFilter);
-      }
-  }, [activeTab, employeeId, monthFilter, fetchMirrorForMonth]);
 
-  const fetchMirrorDetails = (id: string) => {
-      const mirror = mirrorsList.find(m => m.id === id);
-      if (mirror) {
-          setSelectedMirror(mirror);
-          setMirrorView('detail');
-      }
-  };
-
-  const handleConfirmMirror = async () => {
-      if (!selectedMirror) return;
-      alert('Funcionalidade de confirmação será implementada em breve.');
-  };
-  
-  const handleDownloadPdf = () => {
-      alert('Download PDF em breve');
-  };
-
-  const handleDownloadExcel = () => {
-      alert('Download Excel em breve');
-  };
 
   const handleRegister = async (type: string, photoBlob: Blob) => {
     if (!currentTime || !employeeId) return;
@@ -382,6 +406,24 @@ export default function MobilePontoPage() {
     }
   };
 
+  if (isAuthenticated === false) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+        <Card className="w-full max-w-sm shadow-lg">
+          <CardHeader>
+            <CardTitle className="text-xl text-center">App Mobile - Colaborador</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4 text-center text-sm text-muted-foreground">
+            <p>Faça login para acessar o seu espelho de ponto pelo app mobile.</p>
+            <Button className="w-full" onClick={() => router.push("/login")}>
+              Ir para tela de login
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
   if (!currentTime) return null;
 
   return (
@@ -395,17 +437,27 @@ export default function MobilePontoPage() {
         onChange={handleFileUpload}
       />
       
-      {/* Header Mobile - Only show on Ponto Tab or Mirror List View */}
-      {(activeTab !== 'espelho' || mirrorView === 'list') && (
+      {/* Header Mobile - Only show on Ponto Tab */}
+      {(activeTab !== 'espelho') && (
         <header className="bg-[#1E40AF] text-white p-6 rounded-b-[2rem] shadow-lg relative overflow-hidden transition-all duration-300">
             <div className="relative z-10 flex justify-between items-start">
             <div>
-                <p className="text-primary-foreground/80 text-sm">Olá, João Silva</p>
+                <p className="text-primary-foreground/80 text-sm">
+                  {userName ? `Olá, ${userName}` : "Olá"}
+                </p>
                 <h1 className="text-2xl font-bold mt-1">
                     {activeTab === 'ponto' ? 'Bom trabalho! 👋' : 'Meus Espelhos'}
                 </h1>
             </div>
-            <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-primary/20">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-primary-foreground hover:bg-primary/20"
+              onClick={() => {
+                authService.logout();
+                router.push("/login");
+              }}
+            >
                 <LogOut className="h-5 w-5" />
             </Button>
             </div>
@@ -434,12 +486,23 @@ export default function MobilePontoPage() {
             <>
                 <Card className="shadow-xl border-none">
                 <CardContent className="p-6 flex flex-col items-center gap-4">
-                    <div className="w-full h-32 bg-slate-100 rounded-lg flex items-center justify-center relative overflow-hidden group cursor-pointer border-2 border-dashed border-slate-300 hover:border-primary transition-colors">
-                    <div className="absolute inset-0 bg-slate-200/50 flex items-center justify-center">
+                    <button
+                      type="button"
+                      onClick={() => setShowMapSheet(true)}
+                      className="w-full h-32 bg-slate-100 rounded-lg flex items-center justify-center relative overflow-hidden group border-2 border-dashed border-slate-300 hover:border-primary transition-colors"
+                    >
+                      <div className="absolute inset-0 bg-slate-200/50 flex flex-col items-center justify-center gap-1">
                         <span className="text-xs text-slate-500 font-medium">Mapa / Geofence</span>
-                    </div>
-                    <div className="absolute inset-0 opacity-20 bg-slate-300" />
-                    </div>
+                        <span className="text-[10px] text-slate-400">Toque para visualizar</span>
+                      </div>
+                      <div className="absolute inset-0 opacity-20 bg-slate-300" />
+                      {dailySummary?.lastPunch?.isGeofenceViolation && (
+                        <div className="absolute top-2 right-2 flex items-center gap-1 rounded-full bg-red-600 text-white text-[10px] px-2 py-0.5 shadow">
+                          <AlertTriangle className="h-3 w-3" />
+                          <span>Fora do posto</span>
+                        </div>
+                      )}
+                    </button>
                     
                     <div className="w-full grid grid-cols-2 gap-3">
                     <Button size="lg" className="w-full h-14 text-lg bg-green-600 hover:bg-green-700 shadow-green-200 shadow-lg" onClick={() => startRegisterFlow('Entrada')}>
@@ -507,7 +570,14 @@ export default function MobilePontoPage() {
 
                 <div className="flex items-center justify-between mt-4 mb-2">
                     <h2 className="font-bold text-lg text-gray-800">Histórico de Hoje</h2>
-                    <Button variant="link" size="sm" className="text-[#1E40AF]">Ver completo</Button>
+                    <Button
+                      variant="link"
+                      size="sm"
+                      className="text-[#1E40AF]"
+                      onClick={() => setShowHistorySheet(true)}
+                    >
+                      Ver completo
+                    </Button>
                 </div>
                 
                 <div className="space-y-3">
@@ -521,10 +591,38 @@ export default function MobilePontoPage() {
                             <div>
                             <p className="font-bold text-gray-800">{item.type}</p>
                             <p className="text-xs text-gray-500">{item.time}</p>
+                            {item.location && (
+                              <p className="text-[11px] text-gray-400 flex items-center gap-1 mt-1">
+                                <MapPin className="h-3 w-3" />
+                                <span className="truncate max-w-[180px]">{item.location}</span>
+                              </p>
+                            )}
+                            {typeof item.distanceFromLocationMeters === 'number' && (
+                              <p
+                                className={`text-[11px] mt-1 ${
+                                  item.distanceFromLocationMeters < 10
+                                    ? 'text-green-600'
+                                    : item.distanceFromLocationMeters <= 50
+                                    ? 'text-yellow-600'
+                                    : 'text-red-600'
+                                }`}
+                              >
+                                {item.distanceFromLocationMeters} m do posto
+                              </p>
+                            )}
                             </div>
                         </div>
-                        <Badge variant={item.variant === 'success' ? 'default' : 'secondary'} className={item.variant === 'success' ? 'bg-green-100 text-green-700' : ''}>
-                            {item.status}
+                        <Badge
+                          variant="outline"
+                          className={
+                            item.variant === 'success'
+                              ? 'bg-green-100 text-green-700 border-green-200'
+                              : item.variant === 'warning'
+                              ? 'bg-yellow-100 text-yellow-700 border-yellow-200'
+                              : 'bg-red-100 text-red-700 border-red-200'
+                          }
+                        >
+                          {item.status}
                         </Badge>
                         </CardContent>
                     </Card>
@@ -533,209 +631,146 @@ export default function MobilePontoPage() {
             </>
         )}
 
-        {activeTab === 'espelho' && mirrorView === 'list' && (
-            <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                {/* Filter */}
-                <div className="flex items-center gap-2 bg-white p-2 rounded-lg shadow-sm border">
-                    <Calendar className="h-4 w-4 text-gray-500" />
-                    <input 
-                        type="month" 
-                        className="flex-1 bg-transparent text-sm outline-none"
-                        value={monthFilter}
-                        onChange={(e) => setMonthFilter(e.target.value)}
-                    />
-                </div>
-
-                {loadingMirror ? (
-                    <div className="text-center py-8">Carregando espelhos...</div>
-                ) : mirrorsList.length > 0 ? (
-                    mirrorsList.filter(m => m.startDate.startsWith(monthFilter)).map((mirror) => (
-                        <Card key={mirror.id} className="overflow-hidden hover:shadow-md transition-shadow">
-                            <CardContent className="p-4">
-                                <div className="flex justify-between items-start mb-2">
-                                    <div>
-                                        <h3 className="font-bold text-lg capitalize">
-                                            {format(new Date(mirror.startDate), 'MMMM / yyyy', { locale: ptBR })}
-                                        </h3>
-                                        <p className="text-xs text-muted-foreground">Período de {format(new Date(mirror.startDate), 'dd')} a {format(new Date(mirror.endDate), 'dd')}</p>
-                                    </div>
-                                    <Badge className={mirror.status === 'APROVADO' ? 'bg-[#16A34A]' : mirror.status === 'REPROVADO' ? 'bg-red-600' : 'bg-yellow-600'}>
-                                        {mirror.status === 'EM_CONFERENCIA' ? 'Em Conferência' : mirror.status}
-                                    </Badge>
-                                </div>
-                                
-                                <div className="flex items-center gap-2 mb-4 text-sm text-gray-600">
-                                    <Clock className="h-4 w-4" />
-                                    <span>Total horas: <strong>{Number(mirror.workedHours).toFixed(2)}h</strong></span>
-                                </div>
-
-                                <div className="grid grid-cols-2 gap-2">
-                                    <Button variant="outline" size="sm" className="w-full text-[#1E40AF] border-[#1E40AF] hover:bg-blue-50" onClick={() => fetchMirrorDetails(mirror.id)}>
-                                        <Eye className="mr-2 h-4 w-4" /> Visualizar
-                                    </Button>
-                                    {mirror.status === 'APROVADO' ? (
-                                        <Button size="sm" className="w-full bg-[#1E40AF] hover:bg-blue-900" onClick={() => { setSelectedMirror(mirror); setShowDownloadSheet(true); }}>
-                                            <Download className="mr-2 h-4 w-4" /> Baixar PDF
-                                        </Button>
-                                    ) : (
-                                        <Button size="sm" disabled className="w-full opacity-50 cursor-not-allowed">
-                                            <Download className="mr-2 h-4 w-4" /> Baixar PDF
-                                        </Button>
-                                    )}
-                                </div>
-                            </CardContent>
-                        </Card>
-                    ))
-                ) : (
-                    <div className="text-center py-12 text-muted-foreground">
-                        <FileText className="h-12 w-12 mx-auto mb-2 opacity-20" />
-                        <p>Nenhum espelho encontrado.</p>
-                    </div>
-                )}
-            </div>
+        {activeTab === 'espelho' && (
+          <MobileMirror employeeId={employeeId} />
         )}
 
-        {activeTab === 'espelho' && mirrorView === 'detail' && selectedMirror && (
-            <div className="space-y-4 animate-in slide-in-from-right-4 duration-300">
-                {/* Fixed Header Detail */}
-                <div className="flex items-center justify-between bg-white p-4 rounded-lg shadow-sm sticky top-0 z-30 border-b">
-                    <Button variant="ghost" size="icon" onClick={() => setMirrorView('list')}>
-                        <ChevronLeft className="h-6 w-6" />
-                    </Button>
-                    <span className="font-bold">Espelho de Ponto</span>
-                    <Button variant="ghost" size="icon" onClick={() => setShowDownloadSheet(true)} disabled={selectedMirror.status !== 'APROVADO'}>
-                        <Download className="h-5 w-5" />
-                    </Button>
-                </div>
 
-                {/* Employee Card */}
-                <Card>
-                    <CardContent className="p-4 space-y-2 text-sm">
-                        <div className="flex justify-between">
-                            <span className="text-muted-foreground">Colaborador</span>
-                            <span className="font-medium">{selectedMirror.employee.name}</span>
-                        </div>
-                        <div className="flex justify-between">
-                            <span className="text-muted-foreground">Matrícula</span>
-                            <span className="font-medium">{selectedMirror.employee.matricula || '-'}</span>
-                        </div>
-                        <div className="flex justify-between">
-                            <span className="text-muted-foreground">Cargo</span>
-                            <span className="font-medium">{selectedMirror.employee.position}</span>
-                        </div>
-                        <div className="flex justify-between">
-                            <span className="text-muted-foreground">Escala</span>
-                            <span className="font-medium">{selectedMirror.employee.schedule?.name || 'Padrão'}</span>
-                        </div>
-                    </CardContent>
-                </Card>
-
-                {/* Summary Cards */}
-                <div className="grid grid-cols-2 gap-3">
-                     <div className="bg-white p-3 rounded-lg border shadow-sm text-center">
-                        <p className="text-xs text-muted-foreground uppercase">Trabalhadas</p>
-                        <p className="text-xl font-bold text-green-700">{Number(selectedMirror.workedHours).toFixed(2)}</p>
-                    </div>
-                    <div className="bg-white p-3 rounded-lg border shadow-sm text-center">
-                        <p className="text-xs text-muted-foreground uppercase">Extras</p>
-                        <p className="text-xl font-bold text-orange-700">{Number(selectedMirror.overtimeHours).toFixed(2)}</p>
-                    </div>
-                    <div className="bg-white p-3 rounded-lg border shadow-sm text-center">
-                        <p className="text-xs text-muted-foreground uppercase">Faltas</p>
-                        <p className="text-xl font-bold text-red-700">{Number(selectedMirror.absenceHours).toFixed(2)}</p>
-                    </div>
-                    <div className="bg-white p-3 rounded-lg border shadow-sm text-center">
-                        <p className="text-xs text-muted-foreground uppercase">Atrasos</p>
-                        <p className="text-xl font-bold text-yellow-700">{Number(selectedMirror.lateHours).toFixed(2)}</p>
-                    </div>
-                </div>
-
-                {/* Horizontal Scroll Table */}
-                <Card>
-                    <CardHeader className="pb-2">
-                        <CardTitle className="text-sm font-medium">Jornada Detalhada</CardTitle>
-                    </CardHeader>
-                    <CardContent className="p-0 overflow-x-auto">
-                        <Table>
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHead className="w-[80px]">Data</TableHead>
-                                    <TableHead>Ent</TableHead>
-                                    <TableHead>Sai</TableHead>
-                                    <TableHead>Total</TableHead>
-                                    <TableHead>Status</TableHead>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                {selectedMirror.dailyDetails && selectedMirror.dailyDetails.map((day: any, i: number) => (
-                                    <TableRow key={i}>
-                                        <TableCell className="text-xs">{format(new Date(day.date), 'dd/MM')}</TableCell>
-                                        <TableCell className="text-xs">{day.entry}</TableCell>
-                                        <TableCell className="text-xs">{day.exit}</TableCell>
-                                        <TableCell className="text-xs font-bold">{day.total}</TableCell>
-                                        <TableCell className="text-xs">
-                                            <Badge variant="outline" className={`text-[10px] px-1 ${day.statusColor === 'red' ? 'text-red-600 border-red-200' : 'text-gray-600'}`}>
-                                                {day.status}
-                                            </Badge>
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </CardContent>
-                </Card>
-
-                {/* Action Buttons */}
-                <div className="pt-4 space-y-3">
-                    {selectedMirror.status === 'EM_CONFERENCIA' ? (
-                        <Button className="w-full bg-green-600 hover:bg-green-700 h-12 text-lg shadow-lg" onClick={handleConfirmMirror}>
-                            <CheckCircle className="mr-2 h-5 w-5" /> Confirmar Espelho
-                        </Button>
-                    ) : (
-                        <div className="bg-green-50 text-green-800 p-4 rounded-lg flex items-center justify-center gap-2 border border-green-200">
-                            <CheckCircle className="h-5 w-5" />
-                            <span className="font-bold">Espelho Aprovado</span>
-                        </div>
-                    )}
-                </div>
-            </div>
-        )}
       </main>
 
-      {/* Download Modal / Sheet Replacement */}
-      {showDownloadSheet && (
-          <div className="fixed inset-0 z-50 bg-black/50 flex items-end justify-center sm:items-center p-4">
-              <div className="bg-white w-full max-w-sm rounded-t-xl sm:rounded-xl p-6 space-y-4 animate-in slide-in-from-bottom-10">
-                  <div className="flex justify-between items-center">
-                      <h3 className="font-bold text-lg">Baixar Espelho</h3>
-                      <Button variant="ghost" size="sm" onClick={() => setShowDownloadSheet(false)}><X className="h-4 w-4" /></Button>
+      {/* Histórico do Dia - Sheet */}
+      {showHistorySheet && (
+        <div className="fixed inset-0 z-50 bg-black/50 flex items-end justify-center sm:items-center p-4">
+          <div className="bg-white w-full max-w-sm rounded-t-xl sm:rounded-xl p-6 space-y-4 animate-in slide-in-from-bottom-10 max-h-[80vh] overflow-y-auto">
+            <div className="flex justify-between items-center">
+              <h3 className="font-bold text-lg">Pontos de hoje</h3>
+              <Button variant="ghost" size="sm" onClick={() => setShowHistorySheet(false)}>
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+            <div className="flex gap-2 mt-2">
+              <Button
+                size="sm"
+                variant={historySheetFilter === 'all' ? 'default' : 'outline'}
+                onClick={() => setHistorySheetFilter('all')}
+              >
+                Todas
+              </Button>
+              <Button
+                size="sm"
+                variant={historySheetFilter === 'violations' ? 'default' : 'outline'}
+                onClick={() => setHistorySheetFilter('violations')}
+              >
+                Só violações
+              </Button>
+            </div>
+            {(() => {
+              const filteredHistory =
+                historySheetFilter === 'violations'
+                  ? history.filter((item) => item.geofence)
+                  : history;
+
+              if (filteredHistory.length === 0) {
+                return (
+                  <div className="text-center text-sm text-muted-foreground py-8">
+                    Nenhum ponto
+                    {historySheetFilter === 'violations' ? ' com violação' : ''} registrado hoje.
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
-                      <div 
-                          className={`p-4 border rounded-lg cursor-pointer flex flex-col items-center gap-2 hover:bg-slate-50 ${downloadType === 'pdf' ? 'border-blue-600 bg-blue-50' : ''}`}
-                          onClick={() => setDownloadType('pdf')}
-                      >
-                          <FileText className="h-8 w-8 text-red-500" />
-                          <span className="text-sm font-medium">PDF (Assinatura)</span>
-                      </div>
-                      <div 
-                          className={`p-4 border rounded-lg cursor-pointer flex flex-col items-center gap-2 hover:bg-slate-50 ${downloadType === 'excel' ? 'border-blue-600 bg-blue-50' : ''}`}
-                          onClick={() => setDownloadType('excel')}
-                      >
-                          <FileSpreadsheet className="h-8 w-8 text-green-600" />
-                          <span className="text-sm font-medium">Excel (Conferência)</span>
-                      </div>
-                  </div>
-                  <Button className="w-full h-12" onClick={() => {
-                      if (downloadType === 'pdf') handleDownloadPdf();
-                      else handleDownloadExcel();
-                      setShowDownloadSheet(false);
-                  }}>
-                      Baixar Arquivo
-                  </Button>
-              </div>
+                );
+              }
+
+              return (
+                <div className="space-y-3">
+                  {filteredHistory.map((item, index) => (
+                    <Card key={index} className="shadow-sm">
+                      <CardContent className="p-4 flex justify-between items-center">
+                        <div className="flex items-center gap-3">
+                          <div
+                            className={`p-2 rounded-full ${
+                              item.type === 'Entrada'
+                                ? 'bg-green-100 text-green-600'
+                                : 'bg-orange-100 text-orange-600'
+                            }`}
+                          >
+                            <Clock className="h-4 w-4" />
+                          </div>
+                          <div>
+                            <p className="font-bold text-gray-800">{item.type}</p>
+                            <p className="text-xs text-gray-500">{item.time}</p>
+                            {item.location && (
+                              <p className="text-[11px] text-gray-400 flex items-center gap-1 mt-1">
+                                <MapPin className="h-3 w-3" />
+                                <span className="truncate max-w-[190px]">{item.location}</span>
+                              </p>
+                            )}
+                            {typeof item.distanceFromLocationMeters === 'number' && (
+                              <p
+                                className={`text-[11px] mt-1 ${
+                                  item.geofence
+                                    ? 'text-red-600'
+                                    : item.distanceFromLocationMeters < 10
+                                    ? 'text-green-600'
+                                    : item.distanceFromLocationMeters <= 50
+                                    ? 'text-yellow-600'
+                                    : 'text-red-600'
+                                }`}
+                              >
+                                {item.distanceFromLocationMeters} m do posto
+                              </p>
+                            )}
+                            {item.geofence && (
+                              <p className="text-[11px] text-red-600 flex items-center gap-1 mt-1">
+                                <AlertTriangle className="h-3 w-3" />
+                                Fora do posto
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                        <Badge
+                          variant="outline"
+                          className={
+                            item.variant === 'success'
+                              ? 'bg-green-100 text-green-700 border-green-200'
+                              : item.variant === 'warning'
+                              ? 'bg-yellow-100 text-yellow-700 border-yellow-200'
+                              : 'bg-red-100 text-red-700 border-red-200'
+                          }
+                        >
+                          {item.status}
+                        </Badge>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              );
+            })()}
           </div>
+        </div>
       )}
+
+      {showMapSheet && (
+        <div className="fixed inset-0 z-50 bg-black/50 flex items-end justify-center sm:items-center p-4">
+          <div className="bg-white w-full max-w-sm rounded-t-xl sm:rounded-xl p-4 space-y-3 animate-in slide-in-from-bottom-10 max-h-[80vh] overflow-hidden">
+            <div className="flex justify-between items-center">
+              <h3 className="font-bold text-lg">Mapa do posto</h3>
+              <Button variant="ghost" size="sm" onClick={() => setShowMapSheet(false)}>
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+            <div className="w-full h-64 rounded-lg overflow-hidden">
+              <MobileGeofenceMap
+                employeeCoords={coords}
+                workLocation={dailySummary?.workLocation}
+              />
+            </div>
+            <p className="text-[11px] text-muted-foreground">
+              Círculo indica a área configurada do posto. Marcadores mostram posto e sua posição aproximada.
+            </p>
+          </div>
+        </div>
+      )}
+
+
 
       {/* Bottom Nav */}
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t py-2 px-6 flex justify-around items-center z-40 pb-6">

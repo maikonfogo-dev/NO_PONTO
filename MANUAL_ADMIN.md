@@ -6,6 +6,18 @@ Bem-vindo ao manual do administrador do **No Ponto**, a plataforma definitiva pa
 
 Ao fazer login como Administrador (`/admin`), você terá acesso imediato aos indicadores vitais da operação.
 
+### Perfis de Acesso: Gestão do SaaS x Gestão da Empresa
+
+Existem dois perfis principais dentro do painel:
+
+*   **Dono do SaaS (`SUPER_ADMIN`)**: Enxerga a plataforma como um todo. No menu lateral, tem acesso às áreas de **Clientes**, **Relatórios**, **Visão do SaaS**, **Financeiro (SaaS)** e **Demonstrações**. Não vê atalhos de operação interna da empresa contratante, como “Colaboradores” ou “Espelho de Ponto”.
+*   **Gestão da Empresa (`Gestor Cliente` e similares)**: Enxerga apenas a própria empresa. No menu lateral, foca em **Colaboradores**, **Espelho de Ponto**, **Relatórios** (limitados ao seu clientId) e **Configurações** da conta. Não vê a **Visão do SaaS** nem os relatórios financeiros globais.
+
+Essa separação garante que:
+
+*   O **Dono do SaaS** cuida da estratégia, planos, faturamento e saúde geral da base de clientes.
+*   Cada **Empresa Contratante** cuida apenas da sua operação (ponto, contratos e colaboradores), sem enxergar dados de outras empresas.
+
 ### Indicadores (KPIs)
 *   **Total de Colaboradores:** Número total de funcionários ativos na plataforma.
 *   **Pontos Hoje:** Contagem em tempo real de registros efetuados no dia.
@@ -48,6 +60,14 @@ Gere o espelho de ponto individual ou em lote (por contrato). O documento já ve
 
 ### Visão do Cliente
 Seu cliente pode ter um acesso restrito (`Gestor Cliente`) para visualizar apenas os colaboradores alocados no contrato dele, garantindo transparência sem expor dados de outros clientes.
+
+### Visão SaaS: GLOBAL vs por Cliente (somente Dono do SaaS)
+Quando você acessa os relatórios como **Dono do SaaS** (perfil `SUPER_ADMIN`), as telas de relatórios oferecem dois modos de visão:
+
+*   **GLOBAL – Todas as empresas:** ao deixar selecionada a opção “Todas as empresas”, o sistema consolida os indicadores de **todos os clientes** da base, tanto no dashboard operacional quanto no relatório financeiro (MRR, inadimplência etc.).
+*   **Filtrada por Cliente:** ao selecionar uma empresa específica no seletor de clientes, todos os gráficos, KPIs e tabelas passam a refletir **apenas os dados daquela empresa**, permitindo uma análise individual (ex.: performance, horas, inadimplência de um único cliente).
+
+Gestores de cliente (perfil `Gestor Cliente`) **não enxergam esse seletor**: eles sempre visualizam apenas os dados da própria empresa, garantindo o isolamento multi-tenant de forma automática.
 
 ## 4. Casos de Uso Comuns
 

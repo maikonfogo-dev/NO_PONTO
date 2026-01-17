@@ -22,9 +22,9 @@ export declare class EmployeesController {
             createdAt: Date;
             updatedAt: Date;
             clientId: string;
+            code: string | null;
             startDate: Date;
             endDate: Date | null;
-            code: string | null;
             active: boolean;
         };
     } & {
@@ -37,11 +37,6 @@ export declare class EmployeesController {
         contractType: string;
         admissionDate: Date;
         status: string;
-        userId: string | null;
-        contractId: string | null;
-        workLocationId: string | null;
-        scheduleId: string | null;
-        supervisorId: string | null;
         photoUrl: string | null;
         rg: string | null;
         birthDate: Date | null;
@@ -54,6 +49,11 @@ export declare class EmployeesController {
         allowManualEntry: boolean;
         createdAt: Date;
         updatedAt: Date;
+        userId: string | null;
+        contractId: string | null;
+        workLocationId: string | null;
+        scheduleId: string | null;
+        supervisorId: string | null;
     }>;
     importEmployees(file: Express.Multer.File): Promise<{
         success: boolean;
@@ -61,7 +61,7 @@ export declare class EmployeesController {
         failed: number;
         errors: any[];
     }>;
-    findAll(contractId?: string, clientId?: string, status?: string, search?: string, position?: string, workLocationId?: string, scheduleId?: string, missingPoint?: string): Promise<({
+    findAll(req: any, contractId?: string, clientId?: string, status?: string, search?: string, position?: string, workLocationId?: string, scheduleId?: string, missingPoint?: string): Promise<({
         user: {
             id: string;
             name: string;
@@ -92,21 +92,21 @@ export declare class EmployeesController {
             createdAt: Date;
             updatedAt: Date;
             clientId: string;
+            code: string | null;
             startDate: Date;
             endDate: Date | null;
-            code: string | null;
             active: boolean;
         };
         workLocation: {
             id: string;
             name: string;
-            contractId: string;
             address: string;
             createdAt: Date;
             updatedAt: Date;
+            contractId: string;
+            clientId: string | null;
             latitude: number;
             longitude: number;
-            clientId: string | null;
             radius: number;
         };
         schedule: {
@@ -132,11 +132,6 @@ export declare class EmployeesController {
         contractType: string;
         admissionDate: Date;
         status: string;
-        userId: string | null;
-        contractId: string | null;
-        workLocationId: string | null;
-        scheduleId: string | null;
-        supervisorId: string | null;
         photoUrl: string | null;
         rg: string | null;
         birthDate: Date | null;
@@ -149,6 +144,11 @@ export declare class EmployeesController {
         allowManualEntry: boolean;
         createdAt: Date;
         updatedAt: Date;
+        userId: string | null;
+        contractId: string | null;
+        workLocationId: string | null;
+        scheduleId: string | null;
+        supervisorId: string | null;
     })[]>;
     getSchedules(): Promise<{
         id: string;
@@ -163,7 +163,7 @@ export declare class EmployeesController {
         tolerance: number;
         allowOvertime: boolean;
     }[]>;
-    findOne(id: string): Promise<{
+    findOne(req: any, id: string): Promise<{
         user: {
             id: string;
             name: string;
@@ -194,9 +194,9 @@ export declare class EmployeesController {
             createdAt: Date;
             updatedAt: Date;
             clientId: string;
+            code: string | null;
             startDate: Date;
             endDate: Date | null;
-            code: string | null;
             active: boolean;
         };
         schedule: {
@@ -231,11 +231,6 @@ export declare class EmployeesController {
         contractType: string;
         admissionDate: Date;
         status: string;
-        userId: string | null;
-        contractId: string | null;
-        workLocationId: string | null;
-        scheduleId: string | null;
-        supervisorId: string | null;
         photoUrl: string | null;
         rg: string | null;
         birthDate: Date | null;
@@ -248,6 +243,11 @@ export declare class EmployeesController {
         allowManualEntry: boolean;
         createdAt: Date;
         updatedAt: Date;
+        userId: string | null;
+        contractId: string | null;
+        workLocationId: string | null;
+        scheduleId: string | null;
+        supervisorId: string | null;
     }>;
     update(id: string, updateEmployeeDto: UpdateEmployeeDto): Promise<{
         function: string | null;
@@ -259,11 +259,6 @@ export declare class EmployeesController {
         contractType: string;
         admissionDate: Date;
         status: string;
-        userId: string | null;
-        contractId: string | null;
-        workLocationId: string | null;
-        scheduleId: string | null;
-        supervisorId: string | null;
         photoUrl: string | null;
         rg: string | null;
         birthDate: Date | null;
@@ -276,6 +271,11 @@ export declare class EmployeesController {
         allowManualEntry: boolean;
         createdAt: Date;
         updatedAt: Date;
+        userId: string | null;
+        contractId: string | null;
+        workLocationId: string | null;
+        scheduleId: string | null;
+        supervisorId: string | null;
     }>;
     remove(id: string): Promise<{
         function: string | null;
@@ -287,11 +287,6 @@ export declare class EmployeesController {
         contractType: string;
         admissionDate: Date;
         status: string;
-        userId: string | null;
-        contractId: string | null;
-        workLocationId: string | null;
-        scheduleId: string | null;
-        supervisorId: string | null;
         photoUrl: string | null;
         rg: string | null;
         birthDate: Date | null;
@@ -304,6 +299,11 @@ export declare class EmployeesController {
         allowManualEntry: boolean;
         createdAt: Date;
         updatedAt: Date;
+        userId: string | null;
+        contractId: string | null;
+        workLocationId: string | null;
+        scheduleId: string | null;
+        supervisorId: string | null;
     }>;
     transfer(id: string, transferDto: TransferEmployeeDto): Promise<{
         function: string | null;
@@ -315,11 +315,6 @@ export declare class EmployeesController {
         contractType: string;
         admissionDate: Date;
         status: string;
-        userId: string | null;
-        contractId: string | null;
-        workLocationId: string | null;
-        scheduleId: string | null;
-        supervisorId: string | null;
         photoUrl: string | null;
         rg: string | null;
         birthDate: Date | null;
@@ -332,6 +327,11 @@ export declare class EmployeesController {
         allowManualEntry: boolean;
         createdAt: Date;
         updatedAt: Date;
+        userId: string | null;
+        contractId: string | null;
+        workLocationId: string | null;
+        scheduleId: string | null;
+        supervisorId: string | null;
     }>;
     getDashboard(id: string): Promise<{
         employee: {
@@ -365,9 +365,9 @@ export declare class EmployeesController {
                 createdAt: Date;
                 updatedAt: Date;
                 clientId: string;
+                code: string | null;
                 startDate: Date;
                 endDate: Date | null;
-                code: string | null;
                 active: boolean;
             };
             schedule: {
@@ -402,11 +402,6 @@ export declare class EmployeesController {
             contractType: string;
             admissionDate: Date;
             status: string;
-            userId: string | null;
-            contractId: string | null;
-            workLocationId: string | null;
-            scheduleId: string | null;
-            supervisorId: string | null;
             photoUrl: string | null;
             rg: string | null;
             birthDate: Date | null;
@@ -419,6 +414,11 @@ export declare class EmployeesController {
             allowManualEntry: boolean;
             createdAt: Date;
             updatedAt: Date;
+            userId: string | null;
+            contractId: string | null;
+            workLocationId: string | null;
+            scheduleId: string | null;
+            supervisorId: string | null;
         };
         stats: {
             workedHours: number;
@@ -439,11 +439,6 @@ export declare class EmployeesController {
         contractType: string;
         admissionDate: Date;
         status: string;
-        userId: string | null;
-        contractId: string | null;
-        workLocationId: string | null;
-        scheduleId: string | null;
-        supervisorId: string | null;
         photoUrl: string | null;
         rg: string | null;
         birthDate: Date | null;
@@ -456,6 +451,11 @@ export declare class EmployeesController {
         allowManualEntry: boolean;
         createdAt: Date;
         updatedAt: Date;
+        userId: string | null;
+        contractId: string | null;
+        workLocationId: string | null;
+        scheduleId: string | null;
+        supervisorId: string | null;
     }>;
     linkSchedule(id: string, body: {
         jornada_id: string;
@@ -471,11 +471,6 @@ export declare class EmployeesController {
         contractType: string;
         admissionDate: Date;
         status: string;
-        userId: string | null;
-        contractId: string | null;
-        workLocationId: string | null;
-        scheduleId: string | null;
-        supervisorId: string | null;
         photoUrl: string | null;
         rg: string | null;
         birthDate: Date | null;
@@ -488,6 +483,11 @@ export declare class EmployeesController {
         allowManualEntry: boolean;
         createdAt: Date;
         updatedAt: Date;
+        userId: string | null;
+        contractId: string | null;
+        workLocationId: string | null;
+        scheduleId: string | null;
+        supervisorId: string | null;
     }>;
     getCltSummary(id: string): Promise<{
         horas_trabalhadas: number;
@@ -504,10 +504,11 @@ export declare class EmployeesController {
         address: string | null;
         createdAt: Date;
         updatedAt: Date;
-        timestamp: Date;
-        type: string;
         latitude: number | null;
         longitude: number | null;
+        type: string;
+        employeeId: string;
+        timestamp: Date;
         accuracy: number | null;
         deviceId: string | null;
         ip: string | null;
@@ -517,7 +518,6 @@ export declare class EmployeesController {
         justification: string | null;
         originalTimestamp: Date | null;
         editedById: string | null;
-        employeeId: string;
     }[]>;
     uploadDocument(id: string, body: any): Promise<{
         id: string;
@@ -534,8 +534,8 @@ export declare class EmployeesController {
         };
     } & {
         id: string;
-        userId: string | null;
         createdAt: Date;
+        userId: string | null;
         ip: string | null;
         entity: string;
         entityId: string | null;

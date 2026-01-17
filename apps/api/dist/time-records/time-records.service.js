@@ -66,11 +66,22 @@ let TimeRecordsService = TimeRecordsService_1 = class TimeRecordsService {
     async create(data) {
         const employee = await this.prisma.employee.findUnique({
             where: { id: data.employeeId },
-            include: { workLocation: true }
+            include: {
+                workLocation: true,
+                contract: {
+                    include: {
+                        client: true
+                    }
+                }
+            }
         });
         if (!employee)
             throw new common_1.NotFoundException('Colaborador não encontrado');
+        if (employee.contract && employee.contract.client && employee.contract.client.status !== 'ATIVO') {
+            throw new Error('Empresa bloqueada ou inadimplente. Registro de ponto não permitido.');
+        }
         const status = 'PENDENTE';
+        let isGeofenceViolation = false;
         if (employee.workLocation && employee.workLocation.latitude && employee.workLocation.longitude) {
             if (employee.requireGPS && (!data.latitude || !data.longitude)) {
                 throw new Error('Localização obrigatória para este colaborador');
@@ -78,6 +89,7 @@ let TimeRecordsService = TimeRecordsService_1 = class TimeRecordsService {
             const distance = this.calculateDistance(data.latitude, data.longitude, employee.workLocation.latitude, employee.workLocation.longitude);
             const radius = employee.workLocation.radius || 50;
             if (distance > radius) {
+                isGeofenceViolation = true;
                 this.logger.warn(`[GEOFENCE ALERT] Employee ${employee.name} is ${distance}m away (Limit: ${radius}m)`);
             }
         }
@@ -100,7 +112,8 @@ let TimeRecordsService = TimeRecordsService_1 = class TimeRecordsService {
                 deviceId: data.deviceId,
                 ip: data.ip,
                 integrityHash: integrityHash,
-                status: status
+                status: status,
+                isGeofenceViolation: isGeofenceViolation
             }
         });
     }
@@ -131,7 +144,7 @@ let TimeRecordsService = TimeRecordsService_1 = class TimeRecordsService {
     async getDailySummary(employeeId) {
         const employee = await this.prisma.employee.findUnique({
             where: { id: employeeId },
-            include: { schedule: true }
+            include: { schedule: true, workLocation: true }
         });
         const today = new Date();
         const start = new Date(today.setHours(0, 0, 0, 0));
@@ -164,13 +177,31 @@ let TimeRecordsService = TimeRecordsService_1 = class TimeRecordsService {
         }
         const expectedMinutes = this.calculateExpectedMinutes(employee === null || employee === void 0 ? void 0 : employee.schedule);
         const balance = workedMinutes - expectedMinutes;
+        const punchesWithDistance = punches.map((punch) => {
+            let distanceFromLocationMeters = null;
+            if ((employee === null || employee === void 0 ? void 0 : employee.workLocation) &&
+                typeof employee.workLocation.latitude === 'number' &&
+                typeof employee.workLocation.longitude === 'number' &&
+                typeof punch.latitude === 'number' &&
+                typeof punch.longitude === 'number') {
+                distanceFromLocationMeters = Math.round(this.calculateDistance(punch.latitude, punch.longitude, employee.workLocation.latitude, employee.workLocation.longitude));
+            }
+            return Object.assign(Object.assign({}, punch), { distanceFromLocationMeters });
+        });
         return {
             date: (0, date_fns_1.format)(new Date(), 'yyyy-MM-dd'),
-            punches,
+            punches: punchesWithDistance,
             lastPunch,
             isWorking,
             workedHours: (workedMinutes / 60).toFixed(2),
-            balance: (balance / 60).toFixed(2)
+            balance: (balance / 60).toFixed(2),
+            workLocation: (employee === null || employee === void 0 ? void 0 : employee.workLocation)
+                ? {
+                    latitude: employee.workLocation.latitude,
+                    longitude: employee.workLocation.longitude,
+                    radius: employee.workLocation.radius || 50,
+                }
+                : null,
         };
     }
     async getMirror(employeeId, month, year) {

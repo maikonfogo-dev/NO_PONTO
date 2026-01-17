@@ -8,161 +8,164 @@ export declare class ClientsController {
     create(createClientDto: CreateClientDto): Promise<{
         id: string;
         name: string;
-        status: string;
-        address: string | null;
-        createdAt: Date;
-        updatedAt: Date;
         tradeName: string | null;
         cnpj: string;
+        address: string | null;
+        status: string;
         stateRegistration: string | null;
         financialContact: string | null;
         operationalContact: string | null;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
-    findAll(search?: string, status?: string, plan?: string, inadimplente?: string): Promise<{
+    findAll(req: any, search?: string, status?: string, plan?: string, inadimplente?: string): Promise<{
         activeEmployees: number;
+        subscription: {
+            plan: string;
+            id: string;
+            status: string;
+            createdAt: Date;
+            updatedAt: Date;
+            startDate: Date;
+            endDate: Date | null;
+            clientId: string;
+            planId: string | null;
+            price: import("@prisma/client/runtime/library").Decimal;
+            quantity: number;
+            billingCycle: string;
+        };
         _count: {
             contracts: number;
             users: number;
             workLocations: number;
         };
-        subscription: {
-            id: string;
-            status: string;
-            createdAt: Date;
-            updatedAt: Date;
-            clientId: string;
-            plan: string;
-            price: import("@prisma/client/runtime/library").Decimal;
-            quantity: number;
-            billingCycle: string;
-            startDate: Date;
-            endDate: Date | null;
-        };
         id: string;
         name: string;
-        status: string;
-        address: string | null;
-        createdAt: Date;
-        updatedAt: Date;
         tradeName: string | null;
         cnpj: string;
+        address: string | null;
+        status: string;
         stateRegistration: string | null;
         financialContact: string | null;
         operationalContact: string | null;
+        createdAt: Date;
+        updatedAt: Date;
     }[]>;
-    findOne(id: string): Promise<{
+    findOne(req: any, id: string): Promise<{
         contracts: {
             id: string;
             name: string;
             createdAt: Date;
             updatedAt: Date;
-            clientId: string;
+            code: string | null;
             startDate: Date;
             endDate: Date | null;
-            code: string | null;
             active: boolean;
+            clientId: string;
         }[];
         users: {
             id: string;
             name: string;
-            email: string;
             createdAt: Date;
             updatedAt: Date;
+            clientId: string | null;
+            email: string;
             password: string;
             role: string;
-            clientId: string | null;
         }[];
         workLocations: {
             id: string;
             name: string;
-            contractId: string;
             address: string;
             createdAt: Date;
             updatedAt: Date;
+            clientId: string | null;
             latitude: number;
             longitude: number;
-            clientId: string | null;
             radius: number;
+            contractId: string;
         }[];
         subscription: {
+            plan: string;
             id: string;
             status: string;
             createdAt: Date;
             updatedAt: Date;
+            startDate: Date;
+            endDate: Date | null;
             clientId: string;
-            plan: string;
+            planId: string | null;
             price: import("@prisma/client/runtime/library").Decimal;
             quantity: number;
             billingCycle: string;
-            startDate: Date;
-            endDate: Date | null;
         };
     } & {
         id: string;
         name: string;
-        status: string;
-        address: string | null;
-        createdAt: Date;
-        updatedAt: Date;
         tradeName: string | null;
         cnpj: string;
+        address: string | null;
+        status: string;
         stateRegistration: string | null;
         financialContact: string | null;
         operationalContact: string | null;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
-    update(id: string, updateClientDto: UpdateClientDto): Promise<{
+    update(req: any, id: string, updateClientDto: UpdateClientDto): Promise<{
         id: string;
         name: string;
-        status: string;
-        address: string | null;
-        createdAt: Date;
-        updatedAt: Date;
         tradeName: string | null;
         cnpj: string;
+        address: string | null;
+        status: string;
         stateRegistration: string | null;
         financialContact: string | null;
         operationalContact: string | null;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
-    remove(id: string): Promise<{
+    remove(req: any, id: string): Promise<{
         id: string;
         name: string;
-        status: string;
-        address: string | null;
-        createdAt: Date;
-        updatedAt: Date;
         tradeName: string | null;
         cnpj: string;
+        address: string | null;
+        status: string;
         stateRegistration: string | null;
         financialContact: string | null;
         operationalContact: string | null;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
-    updateStatus(id: string, dto: UpdateClientStatusDto): Promise<{
+    updateStatus(req: any, id: string, dto: UpdateClientStatusDto): Promise<{
         id: string;
         name: string;
-        status: string;
-        address: string | null;
-        createdAt: Date;
-        updatedAt: Date;
         tradeName: string | null;
         cnpj: string;
+        address: string | null;
+        status: string;
         stateRegistration: string | null;
         financialContact: string | null;
         operationalContact: string | null;
-    }>;
-    updatePlan(id: string, dto: UpdateClientPlanDto): Promise<{
-        id: string;
-        status: string;
         createdAt: Date;
         updatedAt: Date;
-        clientId: string;
+    }>;
+    updatePlan(req: any, id: string, dto: UpdateClientPlanDto): Promise<{
         plan: string;
+        id: string;
+        status: string;
+        createdAt: Date;
+        updatedAt: Date;
+        startDate: Date;
+        endDate: Date | null;
+        clientId: string;
+        planId: string | null;
         price: import("@prisma/client/runtime/library").Decimal;
         quantity: number;
         billingCycle: string;
-        startDate: Date;
-        endDate: Date | null;
     }>;
-    getUsage(id: string): Promise<{
+    getUsage(req: any, id: string): Promise<{
         activeEmployees: number;
         limitEmployees: number;
         usagePercent: number;
@@ -173,34 +176,34 @@ export declare class ClientsController {
     createUnit(id: string, dto: CreateUnitDto): Promise<{
         id: string;
         name: string;
-        contractId: string;
         address: string;
         createdAt: Date;
         updatedAt: Date;
+        clientId: string | null;
         latitude: number;
         longitude: number;
-        clientId: string | null;
         radius: number;
+        contractId: string;
     }>;
     createUser(id: string, dto: CreateClientUserDto): Promise<{
         id: string;
         name: string;
-        email: string;
         createdAt: Date;
         updatedAt: Date;
+        clientId: string | null;
+        email: string;
         password: string;
         role: string;
-        clientId: string | null;
     }>;
     getAuditLogs(id: string): Promise<{
         id: string;
-        userId: string | null;
         createdAt: Date;
-        ip: string | null;
+        userId: string | null;
         entity: string;
         entityId: string | null;
         action: string;
         details: string | null;
+        ip: string | null;
         userAgent: string | null;
     }[]>;
     createInvoice(id: string, dto: {
@@ -256,12 +259,28 @@ export declare class ClientsController {
         qrCode: string | null;
         qrCodeBase64: string | null;
     }[]>;
+    getPayments(id: string): Promise<{
+        id: string;
+        status: string;
+        createdAt: Date;
+        updatedAt: Date;
+        clientId: string;
+        amount: import("@prisma/client/runtime/library").Decimal;
+        dueDate: Date;
+        paidAt: Date | null;
+        method: string | null;
+        reference: string | null;
+        transactionId: string | null;
+        url: string | null;
+        qrCode: string | null;
+        qrCodeBase64: string | null;
+    }[]>;
     uploadDocument(id: string, file: Express.Multer.File, type: string): Promise<{
         id: string;
         name: string;
         createdAt: Date;
-        type: string;
         clientId: string;
+        type: string;
         url: string;
         fileKey: string | null;
     }>;
@@ -269,8 +288,8 @@ export declare class ClientsController {
         id: string;
         name: string;
         createdAt: Date;
-        type: string;
         clientId: string;
+        type: string;
         url: string;
         fileKey: string | null;
     }[]>;

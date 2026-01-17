@@ -5,6 +5,7 @@ export declare class TimeRecordsController {
     getDailyStatus(employeeId: string): Promise<{
         date: string;
         punches: {
+            distanceFromLocationMeters: number;
             id: string;
             timestamp: Date;
             type: string;
@@ -22,9 +23,9 @@ export declare class TimeRecordsController {
             originalTimestamp: Date | null;
             editedById: string | null;
             status: string;
+            employeeId: string;
             createdAt: Date;
             updatedAt: Date;
-            employeeId: string;
         }[];
         lastPunch: {
             id: string;
@@ -44,13 +45,18 @@ export declare class TimeRecordsController {
             originalTimestamp: Date | null;
             editedById: string | null;
             status: string;
+            employeeId: string;
             createdAt: Date;
             updatedAt: Date;
-            employeeId: string;
         };
         isWorking: boolean;
         workedHours: string;
         balance: string;
+        workLocation: {
+            latitude: number;
+            longitude: number;
+            radius: number;
+        };
     }>;
     getMirror(employeeId: string, month: string, year: string): Promise<{
         employee: {
@@ -119,9 +125,9 @@ export declare class TimeRecordsController {
                 originalTimestamp: Date | null;
                 editedById: string | null;
                 status: string;
+                employeeId: string;
                 createdAt: Date;
                 updatedAt: Date;
-                employeeId: string;
             }[];
             workedHours: string;
             expectedHours: string;
@@ -147,9 +153,9 @@ export declare class TimeRecordsController {
         originalTimestamp: Date | null;
         editedById: string | null;
         status: string;
+        employeeId: string;
         createdAt: Date;
         updatedAt: Date;
-        employeeId: string;
     }[]>;
     registrar(body: any, file: Express.Multer.File, req: any): Promise<{
         id: string;
@@ -169,8 +175,8 @@ export declare class TimeRecordsController {
         originalTimestamp: Date | null;
         editedById: string | null;
         status: string;
+        employeeId: string;
         createdAt: Date;
         updatedAt: Date;
-        employeeId: string;
     }>;
 }

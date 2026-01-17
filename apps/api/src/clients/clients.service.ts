@@ -126,7 +126,7 @@ export class ClientsService {
     return client;
   }
 
-  async findAll(params?: { search?: string; status?: string; plan?: string; inadimplente?: string }) {
+  async findAll(params?: { search?: string; status?: string; plan?: string; inadimplente?: string; clientId?: string }) {
     const where: any = {};
     if (params?.search) {
       where.OR = [
@@ -149,6 +149,10 @@ export class ClientsService {
     // Filter by inadimplente (special status or flag)
     if (params?.inadimplente === 'true') {
         where.status = 'INADIMPLENTE';
+    }
+
+    if (params?.clientId) {
+      where.id = params.clientId;
     }
 
     const clients = await this.prisma.client.findMany({

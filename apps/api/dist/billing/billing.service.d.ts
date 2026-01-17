@@ -12,11 +12,8 @@ export declare class BillingService {
     emitNfeForMirrorClosure(mirrorId: string): Promise<void>;
     generateMonthlyInvoice(clientId: string): Promise<{
         id: string;
-        status: string;
-        createdAt: Date;
-        updatedAt: Date;
-        clientId: string;
         amount: import("@prisma/client/runtime/library").Decimal;
+        status: string;
         dueDate: Date;
         paidAt: Date | null;
         method: string | null;
@@ -25,16 +22,16 @@ export declare class BillingService {
         url: string | null;
         qrCode: string | null;
         qrCodeBase64: string | null;
+        createdAt: Date;
+        updatedAt: Date;
+        clientId: string;
     }>;
     processInvoicePayment(invoiceId: string, method: string): Promise<import("../payments/interfaces/payment-gateway.interface").PaymentResult>;
     confirmPayment(invoiceId: string, transactionId: string): Promise<void>;
     findInvoiceByTransactionId(transactionId: string): Promise<{
         id: string;
-        status: string;
-        createdAt: Date;
-        updatedAt: Date;
-        clientId: string;
         amount: import("@prisma/client/runtime/library").Decimal;
+        status: string;
         dueDate: Date;
         paidAt: Date | null;
         method: string | null;
@@ -43,6 +40,9 @@ export declare class BillingService {
         url: string | null;
         qrCode: string | null;
         qrCodeBase64: string | null;
+        createdAt: Date;
+        updatedAt: Date;
+        clientId: string;
     }>;
     checkAndConfirmPayment(method: string, externalId: string): Promise<void>;
 }

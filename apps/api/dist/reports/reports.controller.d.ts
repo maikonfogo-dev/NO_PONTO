@@ -3,7 +3,7 @@ import { ReportsService } from './reports.service';
 export declare class ReportsController {
     private readonly reportsService;
     constructor(reportsService: ReportsService);
-    getDashboardData(month?: string, year?: string): Promise<{
+    getDashboardData(req: any, month?: string, year?: string, clientId?: string): Promise<{
         kpis: {
             activeEmployees: number;
             totalEmployees: number;
@@ -26,6 +26,20 @@ export declare class ReportsController {
                 value: number;
             }[];
         };
+    }>;
+    getSaaSDashboard(): Promise<{
+        kpis: {
+            totalCompanies: number;
+            activeCompanies: number;
+            blockedCompanies: number;
+            totalEmployees: number;
+            monthlyRevenue: number;
+            newCompaniesThisMonth: number;
+        };
+        companiesByStatus: {
+            name: string;
+            value: number;
+        }[];
     }>;
     getEmployees(): Promise<{
         id: string;
@@ -120,7 +134,7 @@ export declare class ReportsController {
         ip: string;
         type: string;
     }[]>;
-    getFinancialReport(): Promise<{
+    getFinancialReport(req: any, clientId?: string): Promise<{
         kpis: {
             activeClients: number;
             billableEmployees: number;
@@ -134,6 +148,22 @@ export declare class ReportsController {
             plan: string;
             value: number;
             status: string;
+            overdueInvoices: number;
+        }[];
+    }>;
+    getSaasOverview(req: any): Promise<{
+        kpis: {
+            totalClients: number;
+            activeClients: number;
+            blockedClients: number;
+            totalEmployees: number;
+        };
+        companies: {
+            id: string;
+            name: string;
+            status: string;
+            plan: string;
+            employees: number;
             overdueInvoices: number;
         }[];
     }>;
@@ -166,6 +196,7 @@ export declare class ReportsController {
         longitude: number;
         timestamp: string;
         type: string;
+        distanceFromLocationMeters: number;
         employee: {
             name: string;
             cpf: string;

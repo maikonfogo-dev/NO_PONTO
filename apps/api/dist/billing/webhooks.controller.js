@@ -39,11 +39,9 @@ let WebhooksController = WebhooksController_1 = class WebhooksController {
         }
         return { received: true };
     }
-    async handleMercadoPago(body, query) {
+    async handleMercadoPago(body) {
         var _a;
         this.logger.log('Received Mercado Pago Webhook');
-        console.log('Body:', body);
-        console.log('Query:', query);
         const topic = body.topic || body.type;
         const id = ((_a = body.data) === null || _a === void 0 ? void 0 : _a.id) || body.id;
         if (topic === 'payment' && id) {
@@ -66,9 +64,8 @@ __decorate([
     (0, common_1.HttpCode)(200),
     (0, swagger_1.ApiOperation)({ summary: 'Receber notificação do Mercado Pago' }),
     __param(0, (0, common_1.Body)()),
-    __param(1, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], WebhooksController.prototype, "handleMercadoPago", null);
 exports.WebhooksController = WebhooksController = WebhooksController_1 = __decorate([

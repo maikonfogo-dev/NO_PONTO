@@ -4,13 +4,14 @@ import { useState, useEffect, useCallback } from "react";
 import { api } from "@/lib/api";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { 
-  BarChart, 
-  Bar, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
+import { Users, Clock, MapPin, FileWarning } from "lucide-react";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
   ResponsiveContainer,
   LineChart,
   Line,
@@ -19,7 +20,6 @@ import {
   Cell,
   Legend
 } from "recharts";
-import { Users, Clock, AlertTriangle, MapPin, CalendarDays, FileWarning } from "lucide-react";
 
 interface DashboardData {
   kpis: {
@@ -39,29 +39,75 @@ interface DashboardData {
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
 
+interface ClientOption {
+  id: string;
+  name: string;
+}
+
 export default function ReportsDashboard() {
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [month, setMonth] = useState<string>(String(new Date().getMonth() + 1));
   const [year, setYear] = useState<string>(String(new Date().getFullYear()));
+  const [clients, setClients] = useState<ClientOption[]>([]);
+  const [selectedClient, setSelectedClient] = useState<string>("GLOBAL");
+  const [isSuperAdmin, setIsSuperAdmin] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const raw = localStorage.getItem("user_data");
+        if (raw) {
+          const user = JSON.parse(raw);
+          setIsSuperAdmin(user.role === "SUPER_ADMIN");
+        }
+      } catch (err) {
+        console.error("Failed to parse user_data", err);
+      }
+    }
+  }, []);
 
   const fetchDashboardData = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await api.get('/reports/dashboard', {
-          params: { month, year }
-      });
+      const params: any = { month, year };
+      if (isSuperAdmin && selectedClient !== "GLOBAL") {
+        params.clientId = selectedClient;
+      }
+
+      const res = await api.get('/reports/dashboard', { params });
       setData(res.data);
     } catch (error) {
       console.error("Failed to fetch dashboard data", error);
     } finally {
       setLoading(false);
     }
-  }, [month, year]);
+  }, [month, year, isSuperAdmin, selectedClient]);
+
+  const fetchClients = useCallback(async () => {
+    if (!isSuperAdmin) return;
+    try {
+      const res = await api.get('/clientes', {
+        params: {
+          status: 'ATIVO',
+        },
+      });
+      const list = Array.isArray(res.data)
+        ? res.data.map((c: any) => ({ id: c.id, name: c.name }))
+        : [];
+      setClients(list);
+    } catch (error) {
+      console.error("Failed to fetch clients for selector", error);
+    }
+  }, [isSuperAdmin]);
 
   useEffect(() => {
     fetchDashboardData();
   }, [fetchDashboardData]);
+
+  useEffect(() => {
+    fetchClients();
+  }, [fetchClients]);
 
   if (loading && !data) {
     return <div className="p-8 text-center text-slate-500">Carregando dados do dashboard...</div>;
@@ -72,31 +118,52 @@ export default function ReportsDashboard() {
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
       {/* Filtros */}
-      <div className="flex items-center space-x-4 bg-white p-4 rounded-lg border shadow-sm">
-        <span className="text-sm font-medium text-slate-600">Período de Análise:</span>
-        <Select value={month} onValueChange={setMonth}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Mês" />
-          </SelectTrigger>
-          <SelectContent>
-            {Array.from({ length: 12 }, (_, i) => (
-              <SelectItem key={i + 1} value={String(i + 1)}>
-                {new Date(0, i).toLocaleString('pt-BR', { month: 'long' })}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-white p-4 rounded-lg border shadow-sm">
+        <div className="flex items-center space-x-4">
+          <span className="text-sm font-medium text-slate-600">Período de Análise:</span>
+          <Select value={month} onValueChange={setMonth}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Mês" />
+            </SelectTrigger>
+            <SelectContent>
+              {Array.from({ length: 12 }, (_, i) => (
+                <SelectItem key={i + 1} value={String(i + 1)}>
+                  {new Date(0, i).toLocaleString('pt-BR', { month: 'long' })}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
 
-        <Select value={year} onValueChange={setYear}>
-          <SelectTrigger className="w-[120px]">
-            <SelectValue placeholder="Ano" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="2024">2024</SelectItem>
-            <SelectItem value="2025">2025</SelectItem>
-            <SelectItem value="2026">2026</SelectItem>
-          </SelectContent>
-        </Select>
+          <Select value={year} onValueChange={setYear}>
+            <SelectTrigger className="w-[120px]">
+              <SelectValue placeholder="Ano" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="2024">2024</SelectItem>
+              <SelectItem value="2025">2025</SelectItem>
+              <SelectItem value="2026">2026</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        {isSuperAdmin && (
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-medium text-slate-600">Empresa:</span>
+            <Select value={selectedClient} onValueChange={setSelectedClient}>
+              <SelectTrigger className="w-[260px]">
+                <SelectValue placeholder="Todas as empresas" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="GLOBAL">Todas as empresas</SelectItem>
+                {clients.map((client) => (
+                  <SelectItem key={client.id} value={client.id}>
+                    {client.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        )}
       </div>
 
       {/* KPIs */}

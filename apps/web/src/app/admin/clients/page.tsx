@@ -17,6 +17,7 @@ import {
   Building2
 } from "lucide-react";
 import Link from "next/link";
+import { api } from "@/lib/api";
 
 interface Client {
   id: string;
@@ -43,15 +44,13 @@ export default function ClientsPage() {
   const fetchClients = useCallback(async () => {
     setLoading(true);
     try {
-      const params = new URLSearchParams();
-      if (search) params.append("search", search);
-      if (statusFilter !== "TODOS") params.append("status", statusFilter);
-      if (planFilter !== "TODOS") params.append("plan", planFilter);
-      
-      const res = await fetch(`http://localhost:4000/clientes?${params.toString()}`);
-      if (!res.ok) throw new Error("Falha ao buscar clientes");
-      const data = await res.json();
-      setClients(data);
+      const params: any = {};
+      if (search) params.search = search;
+      if (statusFilter !== "TODOS") params.status = statusFilter;
+      if (planFilter !== "TODOS") params.plan = planFilter;
+
+      const res = await api.get("/clientes", { params });
+      setClients(res.data);
     } catch (error) {
       console.error("Failed to fetch clients", error);
     } finally {

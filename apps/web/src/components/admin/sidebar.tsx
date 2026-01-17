@@ -1,12 +1,16 @@
-import { 
-  LayoutDashboard, 
-  Users, 
-  Building2, 
-  FileText, 
-  Settings, 
+"use client";
+
+import { useEffect, useState } from "react";
+import {
+  LayoutDashboard,
+  Users,
+  Building2,
+  FileText,
+  Settings,
   LogOut,
   Check,
-  ClipboardCheck
+  ClipboardCheck,
+  BarChart3,
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -17,6 +21,7 @@ const menuItems = [
   { icon: Users, label: "Colaboradores", href: "/admin/colaboradores" },
   { icon: ClipboardCheck, label: "Espelho de Ponto", href: "/admin/espelho-ponto" },
   { icon: FileText, label: "Relatórios", href: "/admin/reports" },
+  { icon: BarChart3, label: "Visão do SaaS", href: "/admin/visao-saas" },
   { icon: FileText, label: "Demonstrações", href: "/admin/demo-requests" },
   { icon: Settings, label: "Configurações", href: "/admin/settings" },
 ];
@@ -28,6 +33,44 @@ const quickLinks = [
 ];
 
 export function Sidebar() {
+  const [role, setRole] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    try {
+      const raw = window.localStorage.getItem("user_data");
+      if (raw) {
+        const user = JSON.parse(raw);
+        setRole(user.role || null);
+      }
+    } catch {
+      setRole(null);
+    }
+  }, []);
+
+  const isSuperAdmin = role === "SUPER_ADMIN";
+
+  const visibleMenuItems = menuItems.filter((item) => {
+    if (isSuperAdmin) {
+      if (item.href === "/admin/colaboradores") return false;
+      if (item.href === "/admin/espelho-ponto") return false;
+    } else {
+      if (item.href === "/admin/visao-saas") return false;
+      if (item.href === "/admin/demo-requests") return false;
+    }
+    return true;
+  });
+
+  const visibleQuickLinks = quickLinks.filter((item) => {
+    if (isSuperAdmin) {
+      if (item.href === "/admin/colaboradores/importar") return false;
+    } else {
+      if (item.href === "/admin/reports/financeiro") return false;
+    }
+    return true;
+  });
+
   return (
     <aside className="w-64 bg-slate-900 text-white min-h-screen p-4 flex flex-col fixed left-0 top-0">
       <div className="mb-8 px-2 flex items-center gap-3">
@@ -43,7 +86,7 @@ export function Sidebar() {
             Navegação
           </div>
           <nav className="space-y-2">
-            {menuItems.map((item) => (
+            {visibleMenuItems.map((item) => (
               <Link 
                 key={item.href} 
                 href={item.href}
@@ -61,7 +104,7 @@ export function Sidebar() {
             Atalhos rápidos
           </div>
           <nav className="space-y-1">
-            {quickLinks.map((item) => (
+            {visibleQuickLinks.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}

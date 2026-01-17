@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { api } from "@/lib/api";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { DollarSign, Users, Briefcase, AlertTriangle } from "lucide-react";
 
 interface FinancialData {
@@ -25,24 +26,72 @@ interface FinancialData {
     }[];
 }
 
+interface ClientOption {
+    id: string;
+    name: string;
+}
+
 export default function FinanceiroPage() {
     const [data, setData] = useState<FinancialData | null>(null);
     const [loading, setLoading] = useState(true);
+    const [clients, setClients] = useState<ClientOption[]>([]);
+    const [selectedClient, setSelectedClient] = useState<string>("GLOBAL");
+    const [isSuperAdmin, setIsSuperAdmin] = useState<boolean>(false);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await api.get('/reports/financial');
-                setData(res.data);
-            } catch (error) {
-                console.error(error);
-            } finally {
-                setLoading(false);
+        if (typeof window !== "undefined") {
+          try {
+            const raw = localStorage.getItem("user_data");
+            if (raw) {
+              const user = JSON.parse(raw);
+              setIsSuperAdmin(user.role === "SUPER_ADMIN");
             }
-        };
-
-        fetchData();
+          } catch (err) {
+            console.error("Failed to parse user_data", err);
+          }
+        }
     }, []);
+
+    const fetchData = useCallback(async () => {
+        setLoading(true);
+        try {
+            const params: any = {};
+            if (isSuperAdmin && selectedClient !== "GLOBAL") {
+                params.clientId = selectedClient;
+            }
+            const res = await api.get('/reports/financial', { params });
+            setData(res.data);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    }, [isSuperAdmin, selectedClient]);
+
+    const fetchClients = useCallback(async () => {
+        if (!isSuperAdmin) return;
+        try {
+          const res = await api.get('/clientes', {
+            params: {
+              status: 'ATIVO',
+            },
+          });
+          const list = Array.isArray(res.data)
+            ? res.data.map((c: any) => ({ id: c.id, name: c.name }))
+            : [];
+          setClients(list);
+        } catch (error) {
+          console.error("Failed to fetch clients for selector", error);
+        }
+    }, [isSuperAdmin]);
+
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
+
+    useEffect(() => {
+        fetchClients();
+    }, [fetchClients]);
 
     if (loading) {
         return <div className="p-8 text-center">Carregando dados financeiros...</div>;
@@ -54,8 +103,31 @@ export default function FinanceiroPage() {
 
     return (
         <div className="space-y-6">
-            <h1 className="text-3xl font-bold tracking-tight">Financeiro (SaaS)</h1>
-            <p className="text-muted-foreground">Visão geral de faturamento, receita recorrente e inadimplência.</p>
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <h1 className="text-3xl font-bold tracking-tight">Financeiro (SaaS)</h1>
+                    <p className="text-muted-foreground">Visão geral de faturamento, receita recorrente e inadimplência.</p>
+                </div>
+
+                {isSuperAdmin && (
+                    <div className="flex items-center gap-2 bg-white p-3 rounded-lg border shadow-sm">
+                        <span className="text-sm font-medium text-slate-600">Empresa:</span>
+                        <Select value={selectedClient} onValueChange={setSelectedClient}>
+                            <SelectTrigger className="w-[260px]">
+                                <SelectValue placeholder="Todas as empresas" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="GLOBAL">Todas as empresas</SelectItem>
+                                {clients.map((client) => (
+                                    <SelectItem key={client.id} value={client.id}>
+                                        {client.name}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </div>
+                )}
+            </div>
 
             {/* KPIs */}
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

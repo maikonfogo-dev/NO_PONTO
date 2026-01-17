@@ -442,10 +442,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2
 ;
 ;
 ;
-function PriceSimulator({ onRequestDemo }) {
+function PriceSimulator({ onRequestDemo, planPrice, onPlanPriceChange }) {
     const [employees, setEmployees] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(50);
-    const [planPrice, setPlanPrice] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(3.90) // Default to Basic
-    ;
     const calculatePrice = (count, price)=>{
         return count * price;
     };
@@ -460,7 +458,7 @@ function PriceSimulator({ onRequestDemo }) {
                         children: "Simule seu Preço"
                     }, void 0, false, {
                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/price-simulator.tsx",
-                        lineNumber: 27,
+                        lineNumber: 28,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$apps$2f$web$2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardDescription"], {
@@ -468,13 +466,13 @@ function PriceSimulator({ onRequestDemo }) {
                         children: "Valor Mensal = Nº de Colaboradores × Plano"
                     }, void 0, false, {
                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/price-simulator.tsx",
-                        lineNumber: 28,
+                        lineNumber: 29,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/price-simulator.tsx",
-                lineNumber: 26,
+                lineNumber: 27,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$apps$2f$web$2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -491,7 +489,7 @@ function PriceSimulator({ onRequestDemo }) {
                                         children: "Quantidade de Colaboradores"
                                     }, void 0, false, {
                                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/price-simulator.tsx",
-                                        lineNumber: 35,
+                                        lineNumber: 36,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$apps$2f$web$2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
@@ -504,13 +502,13 @@ function PriceSimulator({ onRequestDemo }) {
                                         placeholder: "Nº de colaboradores"
                                     }, void 0, false, {
                                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/price-simulator.tsx",
-                                        lineNumber: 36,
+                                        lineNumber: 37,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/price-simulator.tsx",
-                                lineNumber: 34,
+                                lineNumber: 35,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -521,12 +519,12 @@ function PriceSimulator({ onRequestDemo }) {
                                         children: "Escolha o Plano"
                                     }, void 0, false, {
                                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/price-simulator.tsx",
-                                        lineNumber: 48,
+                                        lineNumber: 49,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$apps$2f$web$2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Select"], {
                                         value: planPrice.toString(),
-                                        onValueChange: (value)=>setPlanPrice(Number(value)),
+                                        onValueChange: (value)=>onPlanPriceChange(Number(value)),
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$apps$2f$web$2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectTrigger"], {
                                                 id: "plan",
@@ -535,54 +533,54 @@ function PriceSimulator({ onRequestDemo }) {
                                                     placeholder: "Selecione o plano"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/price-simulator.tsx",
-                                                    lineNumber: 54,
+                                                    lineNumber: 55,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/price-simulator.tsx",
-                                                lineNumber: 53,
+                                                lineNumber: 54,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$apps$2f$web$2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectContent"], {
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$apps$2f$web$2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectItem"], {
-                                                        value: "3.90",
+                                                        value: "3.9",
                                                         children: "Básico (R$ 3,90/colab)"
                                                     }, void 0, false, {
                                                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/price-simulator.tsx",
-                                                        lineNumber: 57,
+                                                        lineNumber: 58,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$apps$2f$web$2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectItem"], {
-                                                        value: "6.90",
+                                                        value: "6.9",
                                                         children: "Profissional (R$ 6,90/colab)"
                                                     }, void 0, false, {
                                                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/price-simulator.tsx",
-                                                        lineNumber: 58,
+                                                        lineNumber: 59,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/price-simulator.tsx",
-                                                lineNumber: 56,
+                                                lineNumber: 57,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/price-simulator.tsx",
-                                        lineNumber: 49,
+                                        lineNumber: 50,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/price-simulator.tsx",
-                                lineNumber: 47,
+                                lineNumber: 48,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/price-simulator.tsx",
-                        lineNumber: 33,
+                        lineNumber: 34,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -593,7 +591,7 @@ function PriceSimulator({ onRequestDemo }) {
                                 children: "Valor Mensal Estimado"
                             }, void 0, false, {
                                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/price-simulator.tsx",
-                                lineNumber: 65,
+                                lineNumber: 66,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -604,7 +602,7 @@ function PriceSimulator({ onRequestDemo }) {
                                         children: "R$"
                                     }, void 0, false, {
                                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/price-simulator.tsx",
-                                        lineNumber: 67,
+                                        lineNumber: 68,
                                         columnNumber: 13
                                     }, this),
                                     total.toLocaleString('pt-BR', {
@@ -614,13 +612,13 @@ function PriceSimulator({ onRequestDemo }) {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/price-simulator.tsx",
-                                lineNumber: 66,
+                                lineNumber: 67,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/price-simulator.tsx",
-                        lineNumber: 64,
+                        lineNumber: 65,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -628,13 +626,13 @@ function PriceSimulator({ onRequestDemo }) {
                         children: '"Você paga apenas pelos colaboradores ativos no sistema."'
                     }, void 0, false, {
                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/price-simulator.tsx",
-                        lineNumber: 72,
+                        lineNumber: 73,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/price-simulator.tsx",
-                lineNumber: 32,
+                lineNumber: 33,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$apps$2f$web$2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardFooter"], {
@@ -645,18 +643,18 @@ function PriceSimulator({ onRequestDemo }) {
                     children: "Solicitar Demonstração"
                 }, void 0, false, {
                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/price-simulator.tsx",
-                    lineNumber: 77,
+                    lineNumber: 78,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/price-simulator.tsx",
-                lineNumber: 76,
+                lineNumber: 77,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/price-simulator.tsx",
-        lineNumber: 25,
+        lineNumber: 26,
         columnNumber: 5
     }, this);
 }
@@ -800,6 +798,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2
 ;
 const api = __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].create({
     baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'
+});
+api.interceptors.request.use((config)=>{
+    if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
+    ;
+    return config;
 });
 }),
 "[project]/Documents/trae_projects/NO PONTO/apps/web/src/components/landing/demo-request-modal.tsx [app-ssr] (ecmascript)", ((__turbopack_context__) => {
@@ -1223,6 +1226,25 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2
 ;
 function Home() {
     const [isDemoModalOpen, setIsDemoModalOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [planPrice, setPlanPrice] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(3.9);
+    const scrollToPlans = ()=>{
+        if (typeof document === "undefined") return;
+        const section = document.getElementById("planos");
+        if (section) {
+            section.scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+    };
+    const scrollToSimulator = ()=>{
+        if (typeof document === "undefined") return;
+        const section = document.getElementById("simulador-preco");
+        if (section) {
+            section.scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+    };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "flex flex-col min-h-screen bg-slate-50 font-sans",
         children: [
@@ -1231,7 +1253,7 @@ function Home() {
                 onClose: ()=>setIsDemoModalOpen(false)
             }, void 0, false, {
                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                lineNumber: 16,
+                lineNumber: 33,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("header", {
@@ -1248,12 +1270,12 @@ function Home() {
                                         className: "h-5 w-5 text-white"
                                     }, void 0, false, {
                                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                        lineNumber: 22,
+                                        lineNumber: 39,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                    lineNumber: 21,
+                                    lineNumber: 38,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1261,13 +1283,13 @@ function Home() {
                                     children: "NO PONTO"
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                    lineNumber: 24,
+                                    lineNumber: 41,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                            lineNumber: 20,
+                            lineNumber: 37,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
@@ -1279,7 +1301,7 @@ function Home() {
                                     children: "O Desafio"
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                    lineNumber: 27,
+                                    lineNumber: 44,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1288,7 +1310,7 @@ function Home() {
                                     children: "A Solução"
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                    lineNumber: 28,
+                                    lineNumber: 45,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1297,7 +1319,7 @@ function Home() {
                                     children: "Diferenciais"
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                    lineNumber: 29,
+                                    lineNumber: 46,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1306,13 +1328,13 @@ function Home() {
                                     children: "Planos"
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                    lineNumber: 30,
+                                    lineNumber: 47,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                            lineNumber: 26,
+                            lineNumber: 43,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1327,12 +1349,12 @@ function Home() {
                                         children: "Entrar"
                                     }, void 0, false, {
                                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                        lineNumber: 34,
+                                        lineNumber: 51,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                    lineNumber: 33,
+                                    lineNumber: 50,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$apps$2f$web$2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -1342,24 +1364,24 @@ function Home() {
                                     children: "Solicitar Demonstração"
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                    lineNumber: 36,
+                                    lineNumber: 53,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                            lineNumber: 32,
+                            lineNumber: 49,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                    lineNumber: 19,
+                    lineNumber: 36,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                lineNumber: 18,
+                lineNumber: 35,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -1378,7 +1400,7 @@ function Home() {
                                             children: "🚀 Gestão de ponto inteligente"
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                            lineNumber: 46,
+                                            lineNumber: 63,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -1387,7 +1409,7 @@ function Home() {
                                                 "Controle a jornada dos seus colaboradores.",
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 50,
+                                                    lineNumber: 67,
                                                     columnNumber: 59
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1395,14 +1417,14 @@ function Home() {
                                                     children: "Contrato por contrato."
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 51,
+                                                    lineNumber: 68,
                                                     columnNumber: 17
                                                 }, this),
                                                 " No ponto."
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                            lineNumber: 49,
+                                            lineNumber: 66,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1410,7 +1432,7 @@ function Home() {
                                             children: "O NO PONTO é um sistema de ponto eletrônico feito para empresas terceirizadas que precisam de controle, transparência e segurança jurídica."
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                            lineNumber: 53,
+                                            lineNumber: 70,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1423,7 +1445,7 @@ function Home() {
                                                     children: "👉 Solicitar Demonstração"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 57,
+                                                    lineNumber: 74,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1435,42 +1457,42 @@ function Home() {
                                                         children: "Falar com Especialista"
                                                     }, void 0, false, {
                                                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                        lineNumber: 65,
+                                                        lineNumber: 82,
                                                         columnNumber: 19
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 64,
+                                                    lineNumber: 81,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                            lineNumber: 56,
+                                            lineNumber: 73,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                    lineNumber: 45,
+                                    lineNumber: 62,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                lineNumber: 44,
+                                lineNumber: 61,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-100/40 rounded-full blur-3xl -z-10 opacity-60"
                             }, void 0, false, {
                                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                lineNumber: 73,
+                                lineNumber: 90,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                        lineNumber: 43,
+                        lineNumber: 60,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -1487,7 +1509,7 @@ function Home() {
                                             children: "O Desafio"
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                            lineNumber: 80,
+                                            lineNumber: 97,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1495,13 +1517,13 @@ function Home() {
                                             children: "Por que gerenciar terceirizados é tão difícil?"
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                            lineNumber: 81,
+                                            lineNumber: 98,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                    lineNumber: 79,
+                                    lineNumber: 96,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1536,12 +1558,12 @@ function Home() {
                                                         className: "h-7 w-7 text-red-600"
                                                     }, void 0, false, {
                                                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                        lineNumber: 92,
+                                                        lineNumber: 109,
                                                         columnNumber: 21
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 91,
+                                                    lineNumber: 108,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -1549,7 +1571,7 @@ function Home() {
                                                     children: item.title
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 94,
+                                                    lineNumber: 111,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1557,29 +1579,29 @@ function Home() {
                                                     children: item.desc
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 95,
+                                                    lineNumber: 112,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, i, true, {
                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                            lineNumber: 90,
+                                            lineNumber: 107,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                    lineNumber: 83,
+                                    lineNumber: 100,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                            lineNumber: 78,
+                            lineNumber: 95,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                        lineNumber: 77,
+                        lineNumber: 94,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -1597,7 +1619,7 @@ function Home() {
                                             children: "Solução"
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                            lineNumber: 106,
+                                            lineNumber: 123,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -1605,7 +1627,7 @@ function Home() {
                                             children: "A Solução NO PONTO"
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                            lineNumber: 107,
+                                            lineNumber: 124,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1613,13 +1635,13 @@ function Home() {
                                             children: "Tecnologia para garantir que sua operação aconteça conforme o contrato."
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                            lineNumber: 108,
+                                            lineNumber: 125,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                    lineNumber: 105,
+                                    lineNumber: 122,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1632,7 +1654,7 @@ function Home() {
                                                     className: "h-10 w-10 text-primary mb-4"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 113,
+                                                    lineNumber: 130,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -1640,7 +1662,7 @@ function Home() {
                                                     children: "Ponto via Celular"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 114,
+                                                    lineNumber: 131,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1648,13 +1670,13 @@ function Home() {
                                                     children: "App simples para o colaborador registrar o ponto com foto e hora certa."
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 115,
+                                                    lineNumber: 132,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                            lineNumber: 112,
+                                            lineNumber: 129,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1664,7 +1686,7 @@ function Home() {
                                                     className: "h-10 w-10 text-primary mb-4"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 118,
+                                                    lineNumber: 135,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -1672,7 +1694,7 @@ function Home() {
                                                     children: "Geolocalização"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 119,
+                                                    lineNumber: 136,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1680,13 +1702,13 @@ function Home() {
                                                     children: "Garantia de que o colaborador está no local correto de trabalho."
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 120,
+                                                    lineNumber: 137,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                            lineNumber: 117,
+                                            lineNumber: 134,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1696,7 +1718,7 @@ function Home() {
                                                     className: "h-10 w-10 text-primary mb-4"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 123,
+                                                    lineNumber: 140,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -1704,7 +1726,7 @@ function Home() {
                                                     children: "Aprovação de Jornada"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 124,
+                                                    lineNumber: 141,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1712,13 +1734,13 @@ function Home() {
                                                     children: "Supervisores validam os pontos diariamente, evitando surpresas no fim do mês."
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 125,
+                                                    lineNumber: 142,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                            lineNumber: 122,
+                                            lineNumber: 139,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1728,7 +1750,7 @@ function Home() {
                                                     className: "h-10 w-10 text-primary mb-4"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 128,
+                                                    lineNumber: 145,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -1736,7 +1758,7 @@ function Home() {
                                                     children: "Auditoria Completa"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 129,
+                                                    lineNumber: 146,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1744,13 +1766,13 @@ function Home() {
                                                     children: "Histórico imutável de todas as ações para segurança jurídica total."
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 130,
+                                                    lineNumber: 147,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                            lineNumber: 127,
+                                            lineNumber: 144,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1760,7 +1782,7 @@ function Home() {
                                                     className: "h-10 w-10 text-primary mb-4"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 133,
+                                                    lineNumber: 150,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -1768,7 +1790,7 @@ function Home() {
                                                     children: "Relatórios por Contrato"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 134,
+                                                    lineNumber: 151,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1776,30 +1798,30 @@ function Home() {
                                                     children: "Entregue transparência ao seu cliente com relatórios segmentados."
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 135,
+                                                    lineNumber: 152,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                            lineNumber: 132,
+                                            lineNumber: 149,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                    lineNumber: 111,
+                                    lineNumber: 128,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                            lineNumber: 104,
+                            lineNumber: 121,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                        lineNumber: 103,
+                        lineNumber: 120,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -1817,7 +1839,7 @@ function Home() {
                                                 children: "Diferenciais"
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                lineNumber: 146,
+                                                lineNumber: 163,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1836,12 +1858,12 @@ function Home() {
                                                                     className: "h-5 w-5 text-white"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                                    lineNumber: 156,
+                                                                    lineNumber: 173,
                                                                     columnNumber: 25
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                                lineNumber: 155,
+                                                                lineNumber: 172,
                                                                 columnNumber: 23
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1849,46 +1871,40 @@ function Home() {
                                                                 children: diff
                                                             }, void 0, false, {
                                                                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                                lineNumber: 158,
+                                                                lineNumber: 175,
                                                                 columnNumber: 23
                                                             }, this)
                                                         ]
                                                     }, i, true, {
                                                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                        lineNumber: 154,
+                                                        lineNumber: 171,
                                                         columnNumber: 21
                                                     }, this))
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                lineNumber: 147,
+                                                lineNumber: 164,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 className: "mt-10",
-                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                                    href: "#planos",
-                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$apps$2f$web$2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
-                                                        className: "bg-green-600 hover:bg-green-700 text-white font-bold py-6 px-8 text-lg rounded-xl shadow-lg shadow-green-900/20",
-                                                        children: "👉 Simular Preço Agora"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                        lineNumber: 164,
-                                                        columnNumber: 25
-                                                    }, this)
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$apps$2f$web$2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
+                                                    onClick: scrollToSimulator,
+                                                    className: "bg-green-600 hover:bg-green-700 text-white font-bold py-6 px-8 text-lg rounded-xl shadow-lg shadow-green-900/20",
+                                                    children: "👉 Simular Preço Agora"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 163,
+                                                    lineNumber: 180,
                                                     columnNumber: 21
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                lineNumber: 162,
+                                                lineNumber: 179,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                        lineNumber: 145,
+                                        lineNumber: 162,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1900,7 +1916,7 @@ function Home() {
                                                     '"Menos risco, mais controle.',
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                        lineNumber: 172,
+                                                        lineNumber: 190,
                                                         columnNumber: 52
                                                     }, this),
                                                     "Sua operação ",
@@ -1909,14 +1925,14 @@ function Home() {
                                                         children: "NO PONTO"
                                                     }, void 0, false, {
                                                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                        lineNumber: 172,
+                                                        lineNumber: 190,
                                                         columnNumber: 70
                                                     }, this),
                                                     '."'
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                lineNumber: 171,
+                                                lineNumber: 189,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1930,12 +1946,12 @@ function Home() {
                                                                 className: "h-6 w-6 text-white"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                                lineNumber: 177,
+                                                                lineNumber: 195,
                                                                 columnNumber: 25
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                            lineNumber: 176,
+                                                            lineNumber: 194,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1945,7 +1961,7 @@ function Home() {
                                                                     children: "NO PONTO"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                                    lineNumber: 180,
+                                                                    lineNumber: 198,
                                                                     columnNumber: 25
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1953,46 +1969,46 @@ function Home() {
                                                                     children: "Gestão Inteligente"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                                    lineNumber: 181,
+                                                                    lineNumber: 199,
                                                                     columnNumber: 25
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                            lineNumber: 179,
+                                                            lineNumber: 197,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 175,
+                                                    lineNumber: 193,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                lineNumber: 174,
+                                                lineNumber: 192,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                        lineNumber: 170,
+                                        lineNumber: 188,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                lineNumber: 144,
+                                lineNumber: 161,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                            lineNumber: 143,
+                            lineNumber: 160,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                        lineNumber: 142,
+                        lineNumber: 159,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -2009,7 +2025,7 @@ function Home() {
                                             children: "Planos Flexíveis"
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                            lineNumber: 194,
+                                            lineNumber: 212,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2017,13 +2033,13 @@ function Home() {
                                             children: "Investimento que se paga ao evitar o primeiro processo trabalhista."
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                            lineNumber: 195,
+                                            lineNumber: 213,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                    lineNumber: 193,
+                                    lineNumber: 211,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2033,7 +2049,11 @@ function Home() {
                                             className: "space-y-6",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:border-primary/50 transition-colors",
+                                                    className: `bg-white p-6 rounded-xl border shadow-sm transition-colors cursor-pointer ${planPrice === 3.9 ? "border-primary shadow-md" : "border-slate-200 hover:border-primary/50"}`,
+                                                    onClick: ()=>{
+                                                        setPlanPrice(3.9);
+                                                        scrollToSimulator();
+                                                    },
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                             className: "flex justify-between items-center mb-2",
@@ -2043,7 +2063,7 @@ function Home() {
                                                                     children: "Básico"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                                    lineNumber: 205,
+                                                                    lineNumber: 231,
                                                                     columnNumber: 21
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2055,19 +2075,19 @@ function Home() {
                                                                             children: "/ colab"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                                            lineNumber: 206,
+                                                                            lineNumber: 232,
                                                                             columnNumber: 81
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                                    lineNumber: 206,
+                                                                    lineNumber: 232,
                                                                     columnNumber: 21
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                            lineNumber: 204,
+                                                            lineNumber: 230,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2075,24 +2095,28 @@ function Home() {
                                                             children: "Controle essencial para pequenas operações."
                                                         }, void 0, false, {
                                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                            lineNumber: 208,
+                                                            lineNumber: 234,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 203,
+                                                    lineNumber: 221,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "bg-white p-6 rounded-xl border-2 border-primary shadow-md relative",
+                                                    className: `bg-white p-6 rounded-xl relative cursor-pointer ${planPrice === 6.9 ? "border-2 border-primary shadow-md" : "border border-slate-200 shadow-sm hover:border-primary/50"}`,
+                                                    onClick: ()=>{
+                                                        setPlanPrice(6.9);
+                                                        scrollToSimulator();
+                                                    },
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                             className: "absolute -top-3 left-6 bg-primary text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm",
                                                             children: "RECOMENDADO"
                                                         }, void 0, false, {
                                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                            lineNumber: 212,
+                                                            lineNumber: 246,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2103,7 +2127,7 @@ function Home() {
                                                                     children: "Profissional"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                                    lineNumber: 216,
+                                                                    lineNumber: 250,
                                                                     columnNumber: 21
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2115,19 +2139,19 @@ function Home() {
                                                                             children: "/ colab"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                                            lineNumber: 217,
+                                                                            lineNumber: 251,
                                                                             columnNumber: 81
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                                    lineNumber: 217,
+                                                                    lineNumber: 251,
                                                                     columnNumber: 21
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                            lineNumber: 215,
+                                                            lineNumber: 249,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2135,17 +2159,18 @@ function Home() {
                                                             children: "Gestão completa, geolocalização e relatórios avançados."
                                                         }, void 0, false, {
                                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                            lineNumber: 219,
+                                                            lineNumber: 253,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 211,
+                                                    lineNumber: 237,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:border-primary/50 transition-colors",
+                                                    className: "bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:border-primary/50 transition-colors cursor-pointer",
+                                                    onClick: ()=>setIsDemoModalOpen(true),
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                             className: "flex justify-between items-center mb-2",
@@ -2155,7 +2180,7 @@ function Home() {
                                                                     children: "Enterprise"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                                    lineNumber: 224,
+                                                                    lineNumber: 261,
                                                                     columnNumber: 21
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2163,13 +2188,13 @@ function Home() {
                                                                     children: "Sob consulta"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                                    lineNumber: 225,
+                                                                    lineNumber: 262,
                                                                     columnNumber: 21
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                            lineNumber: 223,
+                                                            lineNumber: 260,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2177,13 +2202,13 @@ function Home() {
                                                             children: "Para grandes volumes e integrações personalizadas."
                                                         }, void 0, false, {
                                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                            lineNumber: 227,
+                                                            lineNumber: 264,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 222,
+                                                    lineNumber: 256,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2195,54 +2220,57 @@ function Home() {
                                                             children: '"Quanto custa hoje uma ação trabalhista? No NO PONTO, por menos de R$ 7 por colaborador, você elimina esse risco."'
                                                         }, void 0, false, {
                                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                            lineNumber: 232,
+                                                            lineNumber: 269,
                                                             columnNumber: 21
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                        lineNumber: 231,
+                                                        lineNumber: 268,
                                                         columnNumber: 19
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 230,
+                                                    lineNumber: 267,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                            lineNumber: 202,
+                                            lineNumber: 220,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "lg:pl-8",
+                                            id: "simulador-preco",
                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$apps$2f$web$2f$src$2f$components$2f$landing$2f$price$2d$simulator$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["PriceSimulator"], {
-                                                onRequestDemo: ()=>setIsDemoModalOpen(true)
+                                                onRequestDemo: ()=>setIsDemoModalOpen(true),
+                                                planPrice: planPrice,
+                                                onPlanPriceChange: setPlanPrice
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                lineNumber: 241,
+                                                lineNumber: 278,
                                                 columnNumber: 17
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                            lineNumber: 240,
+                                            lineNumber: 277,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                    lineNumber: 200,
+                                    lineNumber: 218,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                            lineNumber: 192,
+                            lineNumber: 210,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                        lineNumber: 191,
+                        lineNumber: 209,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("footer", {
@@ -2261,12 +2289,12 @@ function Home() {
                                                     className: "h-4 w-4 text-white"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                    lineNumber: 253,
+                                                    lineNumber: 294,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                lineNumber: 252,
+                                                lineNumber: 293,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2274,13 +2302,13 @@ function Home() {
                                                 children: "NO PONTO"
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                lineNumber: 255,
+                                                lineNumber: 296,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                        lineNumber: 251,
+                                        lineNumber: 292,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2292,7 +2320,7 @@ function Home() {
                                                 children: "Termos de Uso"
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                lineNumber: 258,
+                                                lineNumber: 299,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -2301,7 +2329,7 @@ function Home() {
                                                 children: "Política de Privacidade"
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                lineNumber: 259,
+                                                lineNumber: 300,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -2310,48 +2338,48 @@ function Home() {
                                                 children: "Contato"
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                                lineNumber: 260,
+                                                lineNumber: 301,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                        lineNumber: 257,
+                                        lineNumber: 298,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         children: "© 2026 No Ponto SaaS. Todos os direitos reservados."
                                     }, void 0, false, {
                                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                        lineNumber: 262,
+                                        lineNumber: 303,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                                lineNumber: 250,
+                                lineNumber: 291,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                            lineNumber: 249,
+                            lineNumber: 290,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                        lineNumber: 248,
+                        lineNumber: 289,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-                lineNumber: 41,
+                lineNumber: 58,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/page.tsx",
-        lineNumber: 15,
+        lineNumber: 32,
         columnNumber: 5
     }, this);
 }

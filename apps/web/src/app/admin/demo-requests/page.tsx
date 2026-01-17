@@ -13,6 +13,8 @@ import { Download, Users, Clock, MessageSquare, CheckCircle } from "lucide-react
 
 type DemoStatus = "PENDENTE" | "CONTATADO" | "CONVERTIDO"
 
+type StatusFilter = "ALL" | DemoStatus
+
 interface DemoRequest {
   id: string
   name: string
@@ -28,7 +30,7 @@ export default function DemoRequestsPage() {
   const [requests, setRequests] = useState<DemoRequest[]>([])
   const [filteredRequests, setFilteredRequests] = useState<DemoRequest[]>([])
   const [loading, setLoading] = useState(false)
-  const [statusFilter, setStatusFilter] = useState<"" | DemoStatus>("")
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>("ALL")
   const [search, setSearch] = useState("")
 
   const fetchRequests = useCallback(async () => {
@@ -44,9 +46,9 @@ export default function DemoRequestsPage() {
     }
   }, [])
 
-  const applyFilters = (data: DemoRequest[], searchTerm: string, status: "" | DemoStatus) => {
+  const applyFilters = (data: DemoRequest[], searchTerm: string, status: StatusFilter) => {
     let result = data
-    if (status) {
+    if (status !== "ALL") {
       result = result.filter((r) => r.status === status)
     }
     if (searchTerm.trim()) {
@@ -208,13 +210,13 @@ export default function DemoRequestsPage() {
             <div className="flex gap-3 items-center">
               <Select
                 value={statusFilter}
-                onValueChange={(val) => setStatusFilter(val as "" | DemoStatus)}
+                onValueChange={(val) => setStatusFilter(val as StatusFilter)}
               >
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Filtrar por status" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">Todos</SelectItem>
+                  <SelectItem value="ALL">Todos</SelectItem>
                   <SelectItem value="PENDENTE">Pendente</SelectItem>
                   <SelectItem value="CONTATADO">Contatado</SelectItem>
                   <SelectItem value="CONVERTIDO">Convertido</SelectItem>

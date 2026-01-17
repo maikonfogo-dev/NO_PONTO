@@ -17,6 +17,8 @@ const common_1 = require("@nestjs/common");
 const platform_express_1 = require("@nestjs/platform-express");
 const swagger_1 = require("@nestjs/swagger");
 const time_records_service_1 = require("./time-records.service");
+const auth_guard_1 = require("../auth/auth.guard");
+const company_active_guard_1 = require("../auth/company-active.guard");
 let TimeRecordsController = class TimeRecordsController {
     constructor(timeRecordsService) {
         this.timeRecordsService = timeRecordsService;
@@ -88,6 +90,23 @@ __decorate([
     (0, common_1.Post)('registrar'),
     (0, swagger_1.ApiOperation)({ summary: 'Registrar batida de ponto' }),
     (0, swagger_1.ApiConsumes)('multipart/form-data'),
+    (0, swagger_1.ApiBody)({
+        schema: {
+            type: 'object',
+            properties: {
+                employeeId: { type: 'string', description: 'ID do colaborador' },
+                type: { type: 'string', description: 'Tipo de batida (ENTRADA, SAIDA, etc.)' },
+                latitude: { type: 'number' },
+                longitude: { type: 'number' },
+                accuracy: { type: 'number', nullable: true },
+                address: { type: 'string', nullable: true },
+                deviceId: { type: 'string', nullable: true },
+                file: { type: 'string', format: 'binary', description: 'Foto do colaborador' },
+            },
+            required: ['employeeId', 'type'],
+        },
+    }),
+    (0, swagger_1.ApiOkResponse)({ description: 'Batida registrada com sucesso.' }),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file')),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.UploadedFile)()),
@@ -98,6 +117,7 @@ __decorate([
 ], TimeRecordsController.prototype, "registrar", null);
 exports.TimeRecordsController = TimeRecordsController = __decorate([
     (0, swagger_1.ApiTags)('Ponto'),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard, company_active_guard_1.CompanyActiveGuard),
     (0, common_1.Controller)('ponto'),
     __metadata("design:paramtypes", [time_records_service_1.TimeRecordsService])
 ], TimeRecordsController);

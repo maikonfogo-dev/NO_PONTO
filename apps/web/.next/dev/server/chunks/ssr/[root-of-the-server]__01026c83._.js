@@ -395,6 +395,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2
 const api = __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$trae_projects$2f$NO__PONTO$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].create({
     baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'
 });
+api.interceptors.request.use((config)=>{
+    if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
+    ;
+    return config;
+});
 }),
 "[project]/Documents/trae_projects/NO PONTO/apps/web/src/app/mobile/page.tsx [app-ssr] (ecmascript)", ((__turbopack_context__) => {
 "use strict";

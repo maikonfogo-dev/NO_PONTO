@@ -129,6 +129,9 @@ let ClientsService = class ClientsService {
         if ((params === null || params === void 0 ? void 0 : params.inadimplente) === 'true') {
             where.status = 'INADIMPLENTE';
         }
+        if (params === null || params === void 0 ? void 0 : params.clientId) {
+            where.id = params.clientId;
+        }
         const clients = await this.prisma.client.findMany({
             where,
             include: {

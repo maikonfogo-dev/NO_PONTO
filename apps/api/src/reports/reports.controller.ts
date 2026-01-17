@@ -1,21 +1,42 @@
-import { Controller, Post, Body, Get, Res, Query } from '@nestjs/common';
+import { Controller, Post, Body, Get, Res, Query, UseGuards, Req, ForbiddenException } from '@nestjs/common';
 import { Response } from 'express';
 import { ReportsService } from './reports.service';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { AuthGuard } from '../auth/auth.guard';
+import { CompanyActiveGuard } from '../auth/company-active.guard';
 
 @ApiTags('Reports')
+@UseGuards(AuthGuard, CompanyActiveGuard)
 @Controller('reports')
 export class ReportsController {
   constructor(private readonly reportsService: ReportsService) {}
 
   @Get('dashboard')
   @ApiOperation({ summary: 'Get Dashboard KPIs and Chart Data' })
-  async getDashboardData(@Query('month') month?: string, @Query('year') year?: string) {
+  async getDashboardData(
+    @Req() req: any,
+    @Query('month') month?: string,
+    @Query('year') year?: string,
+    @Query('clientId') clientId?: string,
+  ) {
     const date = new Date();
     const currentMonth = month ? parseInt(month) : date.getMonth() + 1;
     const currentYear = year ? parseInt(year) : date.getFullYear();
+    const user = req.user;
+    const effectiveClientId =
+      user && user.role !== 'SUPER_ADMIN' ? user.clientId : clientId;
     
-    return this.reportsService.getDashboardData(currentMonth, currentYear);
+    return this.reportsService.getDashboardData(
+      currentMonth,
+      currentYear,
+      effectiveClientId,
+    );
+  }
+
+  @Get('saas-dashboard')
+  @ApiOperation({ summary: 'Get SaaS Dashboard KPIs (Super Admin)' })
+  async getSaaSDashboard() {
+    return this.reportsService.getSaaSDashboard();
   }
 
   @Get('employees')
@@ -78,8 +99,22 @@ export class ReportsController {
 
   @Get('financial')
   @ApiOperation({ summary: 'Get Financial SaaS Report' })
-  async getFinancialReport() {
-    return this.reportsService.getFinancialReport();
+  async getFinancialReport(@Req() req: any, @Query('clientId') clientId?: string) {
+    const user = req.user;
+    const effectiveClientId =
+      user && user.role !== 'SUPER_ADMIN' ? user.clientId : clientId;
+
+    return this.reportsService.getFinancialReport(effectiveClientId);
+  }
+
+  @Get('saas-overview')
+  @ApiOperation({ summary: 'Get SaaS Owner Overview' })
+  async getSaasOverview(@Req() req: any) {
+    if (!req.user || req.user.role !== 'SUPER_ADMIN') {
+      throw new ForbiddenException('Apenas o dono do SaaS pode acessar esta visão');
+    }
+
+    return this.reportsService.getSaasOverview();
   }
 
   @Get('schedules')

@@ -10,6 +10,23 @@ import { DemoRequestModal } from "@/components/landing/demo-request-modal"
 
 export default function Home() {
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
+  const [planPrice, setPlanPrice] = useState(3.9);
+
+  const scrollToPlans = () => {
+    if (typeof document === "undefined") return;
+    const section = document.getElementById("planos");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const scrollToSimulator = () => {
+    if (typeof document === "undefined") return;
+    const section = document.getElementById("simulador-preco");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="flex flex-col min-h-screen bg-slate-50 font-sans">
@@ -160,11 +177,12 @@ export default function Home() {
                   ))}
                 </div>
                 <div className="mt-10">
-                    <Link href="#planos">
-                        <Button className="bg-green-600 hover:bg-green-700 text-white font-bold py-6 px-8 text-lg rounded-xl shadow-lg shadow-green-900/20">
-                            👉 Simular Preço Agora
-                        </Button>
-                    </Link>
+                    <Button
+                      onClick={scrollToSimulator}
+                      className="bg-green-600 hover:bg-green-700 text-white font-bold py-6 px-8 text-lg rounded-xl shadow-lg shadow-green-900/20"
+                    >
+                      👉 Simular Preço Agora
+                    </Button>
                 </div>
               </div>
               <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700 shadow-2xl relative overflow-hidden">
@@ -200,7 +218,15 @@ export default function Home() {
             <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
               {/* Lista de Planos */}
               <div className="space-y-6">
-                <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:border-primary/50 transition-colors">
+                <div
+                  className={`bg-white p-6 rounded-xl border shadow-sm transition-colors cursor-pointer ${
+                    planPrice === 3.9 ? "border-primary shadow-md" : "border-slate-200 hover:border-primary/50"
+                  }`}
+                  onClick={() => {
+                    setPlanPrice(3.9);
+                    scrollToSimulator();
+                  }}
+                >
                   <div className="flex justify-between items-center mb-2">
                     <h3 className="text-xl font-bold text-slate-900">Básico</h3>
                     <span className="text-2xl font-bold text-green-600">R$ 3,90 <span className="text-sm font-normal text-slate-500">/ colab</span></span>
@@ -208,7 +234,15 @@ export default function Home() {
                   <p className="text-slate-500 text-sm">Controle essencial para pequenas operações.</p>
                 </div>
 
-                <div className="bg-white p-6 rounded-xl border-2 border-primary shadow-md relative">
+                <div
+                  className={`bg-white p-6 rounded-xl relative cursor-pointer ${
+                    planPrice === 6.9 ? "border-2 border-primary shadow-md" : "border border-slate-200 shadow-sm hover:border-primary/50"
+                  }`}
+                  onClick={() => {
+                    setPlanPrice(6.9);
+                    scrollToSimulator();
+                  }}
+                >
                   <div className="absolute -top-3 left-6 bg-primary text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm">
                     RECOMENDADO
                   </div>
@@ -219,7 +253,10 @@ export default function Home() {
                   <p className="text-slate-500 text-sm">Gestão completa, geolocalização e relatórios avançados.</p>
                 </div>
 
-                <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:border-primary/50 transition-colors">
+                <div
+                  className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:border-primary/50 transition-colors cursor-pointer"
+                  onClick={() => setIsDemoModalOpen(true)}
+                >
                   <div className="flex justify-between items-center mb-2">
                     <h3 className="text-xl font-bold text-slate-900">Enterprise</h3>
                     <span className="text-xl font-bold text-slate-900">Sob consulta</span>
@@ -237,8 +274,12 @@ export default function Home() {
               </div>
 
               {/* Simulador */}
-              <div className="lg:pl-8">
-                <PriceSimulator onRequestDemo={() => setIsDemoModalOpen(true)} />
+              <div className="lg:pl-8" id="simulador-preco">
+                <PriceSimulator
+                  onRequestDemo={() => setIsDemoModalOpen(true)}
+                  planPrice={planPrice}
+                  onPlanPriceChange={setPlanPrice}
+                />
               </div>
             </div>
           </div>

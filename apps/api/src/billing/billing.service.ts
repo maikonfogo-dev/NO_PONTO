@@ -212,7 +212,13 @@ export class BillingService {
   async confirmPayment(invoiceId: string, transactionId: string) {
     const invoice = await this.prisma.invoice.findUnique({
         where: { id: invoiceId },
-        include: { client: true }
+        include: {
+          client: {
+            include: {
+              subscription: true
+            }
+          }
+        }
     });
 
     if (!invoice || invoice.status === 'PAGO') {
@@ -233,13 +239,20 @@ export class BillingService {
             }
         });
 
-        // 2. Unlock client if needed
         if (['BLOQUEADO', 'INADIMPLENTE', 'SUSPENSO'].includes(invoice.client.status)) {
-            await tx.client.update({
-                where: { id: invoice.clientId },
-                data: { status: 'ATIVO' }
-            });
-            this.logger.log(`Client ${invoice.clientId} reactivated.`);
+          await tx.client.update({
+              where: { id: invoice.clientId },
+              data: { status: 'ATIVO' }
+          });
+          this.logger.log(`Client ${invoice.clientId} reactivated.`);
+        }
+
+        if (invoice.client.subscription && invoice.client.subscription.status !== 'ATIVO') {
+          await tx.saaSContract.update({
+            where: { id: invoice.client.subscription.id },
+            data: { status: 'ATIVO' }
+          });
+          this.logger.log(`Subscription ${invoice.client.subscription.id} reactivated.`);
         }
     });
 

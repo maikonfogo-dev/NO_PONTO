@@ -16,15 +16,22 @@ exports.ReportsController = void 0;
 const common_1 = require("@nestjs/common");
 const reports_service_1 = require("./reports.service");
 const swagger_1 = require("@nestjs/swagger");
+const auth_guard_1 = require("../auth/auth.guard");
+const company_active_guard_1 = require("../auth/company-active.guard");
 let ReportsController = class ReportsController {
     constructor(reportsService) {
         this.reportsService = reportsService;
     }
-    async getDashboardData(month, year) {
+    async getDashboardData(req, month, year, clientId) {
         const date = new Date();
         const currentMonth = month ? parseInt(month) : date.getMonth() + 1;
         const currentYear = year ? parseInt(year) : date.getFullYear();
-        return this.reportsService.getDashboardData(currentMonth, currentYear);
+        const user = req.user;
+        const effectiveClientId = user && user.role !== 'SUPER_ADMIN' ? user.clientId : clientId;
+        return this.reportsService.getDashboardData(currentMonth, currentYear, effectiveClientId);
+    }
+    async getSaaSDashboard() {
+        return this.reportsService.getSaaSDashboard();
     }
     async getEmployees() {
         return this.reportsService.getEmployees();
@@ -50,8 +57,16 @@ let ReportsController = class ReportsController {
     async getAuditLogs(startDate, endDate, userId, action) {
         return this.reportsService.getAuditLogs({ startDate, endDate, userId, action });
     }
-    async getFinancialReport() {
-        return this.reportsService.getFinancialReport();
+    async getFinancialReport(req, clientId) {
+        const user = req.user;
+        const effectiveClientId = user && user.role !== 'SUPER_ADMIN' ? user.clientId : clientId;
+        return this.reportsService.getFinancialReport(effectiveClientId);
+    }
+    async getSaasOverview(req) {
+        if (!req.user || req.user.role !== 'SUPER_ADMIN') {
+            throw new common_1.ForbiddenException('Apenas o dono do SaaS pode acessar esta visão');
+        }
+        return this.reportsService.getSaasOverview();
     }
     async getSchedulesReport() {
         return this.reportsService.getSchedulesReport();
@@ -67,12 +82,21 @@ exports.ReportsController = ReportsController;
 __decorate([
     (0, common_1.Get)('dashboard'),
     (0, swagger_1.ApiOperation)({ summary: 'Get Dashboard KPIs and Chart Data' }),
-    __param(0, (0, common_1.Query)('month')),
-    __param(1, (0, common_1.Query)('year')),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Query)('month')),
+    __param(2, (0, common_1.Query)('year')),
+    __param(3, (0, common_1.Query)('clientId')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:paramtypes", [Object, String, String, String]),
     __metadata("design:returntype", Promise)
 ], ReportsController.prototype, "getDashboardData", null);
+__decorate([
+    (0, common_1.Get)('saas-dashboard'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get SaaS Dashboard KPIs (Super Admin)' }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], ReportsController.prototype, "getSaaSDashboard", null);
 __decorate([
     (0, common_1.Get)('employees'),
     (0, swagger_1.ApiOperation)({ summary: 'Get Employees list for filters' }),
@@ -115,10 +139,20 @@ __decorate([
 __decorate([
     (0, common_1.Get)('financial'),
     (0, swagger_1.ApiOperation)({ summary: 'Get Financial SaaS Report' }),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Query)('clientId')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", Promise)
 ], ReportsController.prototype, "getFinancialReport", null);
+__decorate([
+    (0, common_1.Get)('saas-overview'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get SaaS Owner Overview' }),
+    __param(0, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], ReportsController.prototype, "getSaasOverview", null);
 __decorate([
     (0, common_1.Get)('schedules'),
     (0, swagger_1.ApiOperation)({ summary: 'Get Schedules Report' }),
@@ -144,6 +178,7 @@ __decorate([
 ], ReportsController.prototype, "logDownload", null);
 exports.ReportsController = ReportsController = __decorate([
     (0, swagger_1.ApiTags)('Reports'),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard, company_active_guard_1.CompanyActiveGuard),
     (0, common_1.Controller)('reports'),
     __metadata("design:paramtypes", [reports_service_1.ReportsService])
 ], ReportsController);

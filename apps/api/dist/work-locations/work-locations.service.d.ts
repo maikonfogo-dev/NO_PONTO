@@ -5,13 +5,13 @@ export declare class WorkLocationsService {
     create(data: any): import(".prisma/client").Prisma.Prisma__WorkLocationClient<{
         id: string;
         name: string;
-        contractId: string;
-        address: string;
         createdAt: Date;
         updatedAt: Date;
+        clientId: string | null;
+        address: string;
+        contractId: string;
         latitude: number;
         longitude: number;
-        clientId: string | null;
         radius: number;
     }, never, import("@prisma/client/runtime/library").DefaultArgs>;
     findAll(contractId?: string): import(".prisma/client").Prisma.PrismaPromise<({
@@ -21,21 +21,21 @@ export declare class WorkLocationsService {
             createdAt: Date;
             updatedAt: Date;
             clientId: string;
+            code: string | null;
             startDate: Date;
             endDate: Date | null;
-            code: string | null;
             active: boolean;
         };
     } & {
         id: string;
         name: string;
-        contractId: string;
-        address: string;
         createdAt: Date;
         updatedAt: Date;
+        clientId: string | null;
+        address: string;
+        contractId: string;
         latitude: number;
         longitude: number;
-        clientId: string | null;
         radius: number;
     })[]>;
     findOne(id: string): import(".prisma/client").Prisma.Prisma__WorkLocationClient<{
@@ -45,21 +45,21 @@ export declare class WorkLocationsService {
             createdAt: Date;
             updatedAt: Date;
             clientId: string;
+            code: string | null;
             startDate: Date;
             endDate: Date | null;
-            code: string | null;
             active: boolean;
         };
     } & {
         id: string;
         name: string;
-        contractId: string;
-        address: string;
         createdAt: Date;
         updatedAt: Date;
+        clientId: string | null;
+        address: string;
+        contractId: string;
         latitude: number;
         longitude: number;
-        clientId: string | null;
         radius: number;
     }, null, import("@prisma/client/runtime/library").DefaultArgs>;
 }

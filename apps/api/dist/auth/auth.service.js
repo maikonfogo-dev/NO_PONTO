@@ -23,25 +23,39 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const users_service_1 = require("../users/users.service");
+const prisma_service_1 = require("../prisma/prisma.service");
 let AuthService = class AuthService {
-    constructor(usersService) {
+    constructor(usersService, prisma) {
         this.usersService = usersService;
+        this.prisma = prisma;
     }
     async signIn(email, pass) {
         const user = await this.usersService.findByEmail(email);
-        if ((user === null || user === void 0 ? void 0 : user.password) !== pass) {
+        if (!user || user.password !== pass) {
             throw new common_1.UnauthorizedException();
         }
+        if (user.role !== 'SUPER_ADMIN' && user.clientId) {
+            const client = await this.prisma.client.findUnique({
+                where: { id: user.clientId },
+            });
+            if (!client || client.status !== 'ATIVO') {
+                throw new common_1.UnauthorizedException('Empresa bloqueada ou inadimplente. Entre em contato com o financeiro.');
+            }
+        }
+        const employee = await this.prisma.employee.findUnique({
+            where: { userId: user.id },
+        });
         const { password: _password } = user, result = __rest(user, ["password"]);
         return {
-            access_token: 'mock_jwt_token_' + Date.now(),
-            user: result,
+            access_token: 'mock_' + user.id,
+            user: Object.assign(Object.assign({}, result), { employeeId: employee ? employee.id : null }),
         };
     }
 };
 exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [users_service_1.UsersService])
+    __metadata("design:paramtypes", [users_service_1.UsersService,
+        prisma_service_1.PrismaService])
 ], AuthService);
 //# sourceMappingURL=auth.service.js.map

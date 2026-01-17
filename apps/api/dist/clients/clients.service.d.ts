@@ -17,13 +17,13 @@ export declare class ClientsService {
         ip?: string;
     }): Promise<{
         id: string;
-        name: string;
         status: string;
-        address: string | null;
         createdAt: Date;
         updatedAt: Date;
-        tradeName: string | null;
         cnpj: string;
+        name: string;
+        tradeName: string | null;
+        address: string | null;
         stateRegistration: string | null;
         financialContact: string | null;
         operationalContact: string | null;
@@ -33,19 +33,16 @@ export declare class ClientsService {
         status?: string;
         plan?: string;
         inadimplente?: string;
+        clientId?: string;
     }): Promise<{
         activeEmployees: number;
-        _count: {
-            contracts: number;
-            users: number;
-            workLocations: number;
-        };
         subscription: {
             id: string;
             status: string;
             createdAt: Date;
             updatedAt: Date;
             clientId: string;
+            planId: string | null;
             plan: string;
             price: import("@prisma/client/runtime/library").Decimal;
             quantity: number;
@@ -53,14 +50,19 @@ export declare class ClientsService {
             startDate: Date;
             endDate: Date | null;
         };
+        _count: {
+            contracts: number;
+            users: number;
+            workLocations: number;
+        };
         id: string;
-        name: string;
         status: string;
-        address: string | null;
         createdAt: Date;
         updatedAt: Date;
-        tradeName: string | null;
         cnpj: string;
+        name: string;
+        tradeName: string | null;
+        address: string | null;
         stateRegistration: string | null;
         financialContact: string | null;
         operationalContact: string | null;
@@ -68,10 +70,10 @@ export declare class ClientsService {
     findOne(id: string): Promise<{
         contracts: {
             id: string;
-            name: string;
             createdAt: Date;
             updatedAt: Date;
             clientId: string;
+            name: string;
             startDate: Date;
             endDate: Date | null;
             code: string | null;
@@ -79,25 +81,25 @@ export declare class ClientsService {
         }[];
         users: {
             id: string;
-            name: string;
-            email: string;
             createdAt: Date;
             updatedAt: Date;
+            clientId: string | null;
+            name: string;
+            email: string;
             password: string;
             role: string;
-            clientId: string | null;
         }[];
         workLocations: {
             id: string;
-            name: string;
-            contractId: string;
-            address: string;
             createdAt: Date;
             updatedAt: Date;
+            clientId: string | null;
+            name: string;
+            address: string;
             latitude: number;
             longitude: number;
-            clientId: string | null;
             radius: number;
+            contractId: string;
         }[];
         subscription: {
             id: string;
@@ -105,6 +107,7 @@ export declare class ClientsService {
             createdAt: Date;
             updatedAt: Date;
             clientId: string;
+            planId: string | null;
             plan: string;
             price: import("@prisma/client/runtime/library").Decimal;
             quantity: number;
@@ -114,13 +117,13 @@ export declare class ClientsService {
         };
     } & {
         id: string;
-        name: string;
         status: string;
-        address: string | null;
         createdAt: Date;
         updatedAt: Date;
-        tradeName: string | null;
         cnpj: string;
+        name: string;
+        tradeName: string | null;
+        address: string | null;
         stateRegistration: string | null;
         financialContact: string | null;
         operationalContact: string | null;
@@ -130,13 +133,13 @@ export declare class ClientsService {
         ip?: string;
     }): Promise<{
         id: string;
-        name: string;
         status: string;
-        address: string | null;
         createdAt: Date;
         updatedAt: Date;
-        tradeName: string | null;
         cnpj: string;
+        name: string;
+        tradeName: string | null;
+        address: string | null;
         stateRegistration: string | null;
         financialContact: string | null;
         operationalContact: string | null;
@@ -146,13 +149,13 @@ export declare class ClientsService {
         ip?: string;
     }): Promise<{
         id: string;
-        name: string;
         status: string;
-        address: string | null;
         createdAt: Date;
         updatedAt: Date;
-        tradeName: string | null;
         cnpj: string;
+        name: string;
+        tradeName: string | null;
+        address: string | null;
         stateRegistration: string | null;
         financialContact: string | null;
         operationalContact: string | null;
@@ -162,13 +165,13 @@ export declare class ClientsService {
         ip?: string;
     }): Promise<{
         id: string;
-        name: string;
         status: string;
-        address: string | null;
         createdAt: Date;
         updatedAt: Date;
-        tradeName: string | null;
         cnpj: string;
+        name: string;
+        tradeName: string | null;
+        address: string | null;
         stateRegistration: string | null;
         financialContact: string | null;
         operationalContact: string | null;
@@ -182,6 +185,7 @@ export declare class ClientsService {
         createdAt: Date;
         updatedAt: Date;
         clientId: string;
+        planId: string | null;
         plan: string;
         price: import("@prisma/client/runtime/library").Decimal;
         quantity: number;
@@ -202,47 +206,44 @@ export declare class ClientsService {
         ip?: string;
     }): Promise<{
         id: string;
-        name: string;
-        contractId: string;
-        address: string;
         createdAt: Date;
         updatedAt: Date;
+        clientId: string | null;
+        name: string;
+        address: string;
         latitude: number;
         longitude: number;
-        clientId: string | null;
         radius: number;
+        contractId: string;
     }>;
     createUser(id: string, dto: CreateClientUserDto, context?: {
         userId?: string;
         ip?: string;
     }): Promise<{
         id: string;
-        name: string;
-        email: string;
         createdAt: Date;
         updatedAt: Date;
+        clientId: string | null;
+        name: string;
+        email: string;
         password: string;
         role: string;
-        clientId: string | null;
     }>;
     getAuditLogs(id: string): Promise<{
         id: string;
-        userId: string | null;
         createdAt: Date;
-        ip: string | null;
+        userId: string | null;
         entity: string;
         entityId: string | null;
         action: string;
         details: string | null;
+        ip: string | null;
         userAgent: string | null;
     }[]>;
     getInvoices(id: string): Promise<{
         id: string;
-        status: string;
-        createdAt: Date;
-        updatedAt: Date;
-        clientId: string;
         amount: import("@prisma/client/runtime/library").Decimal;
+        status: string;
         dueDate: Date;
         paidAt: Date | null;
         method: string | null;
@@ -251,6 +252,9 @@ export declare class ClientsService {
         url: string | null;
         qrCode: string | null;
         qrCodeBase64: string | null;
+        createdAt: Date;
+        updatedAt: Date;
+        clientId: string;
     }[]>;
     createInvoice(id: string, dto: {
         amount: number;
@@ -262,11 +266,8 @@ export declare class ClientsService {
     }): Promise<{
         paymentInfo: import("../payments/interfaces/payment-gateway.interface").PaymentResult;
         id: string;
-        status: string;
-        createdAt: Date;
-        updatedAt: Date;
-        clientId: string;
         amount: import("@prisma/client/runtime/library").Decimal;
+        status: string;
         dueDate: Date;
         paidAt: Date | null;
         method: string | null;
@@ -275,14 +276,14 @@ export declare class ClientsService {
         url: string | null;
         qrCode: string | null;
         qrCodeBase64: string | null;
+        createdAt: Date;
+        updatedAt: Date;
+        clientId: string;
     } | {
         paymentError: any;
         id: string;
-        status: string;
-        createdAt: Date;
-        updatedAt: Date;
-        clientId: string;
         amount: import("@prisma/client/runtime/library").Decimal;
+        status: string;
         dueDate: Date;
         paidAt: Date | null;
         method: string | null;
@@ -291,14 +292,17 @@ export declare class ClientsService {
         url: string | null;
         qrCode: string | null;
         qrCodeBase64: string | null;
+        createdAt: Date;
+        updatedAt: Date;
+        clientId: string;
     }>;
     getDocuments(id: string): Promise<{
         id: string;
-        name: string;
-        createdAt: Date;
-        type: string;
-        clientId: string;
         url: string;
+        createdAt: Date;
+        clientId: string;
+        name: string;
+        type: string;
         fileKey: string | null;
     }[]>;
     uploadDocument(id: string, file: Express.Multer.File, type: string, context?: {
@@ -306,11 +310,11 @@ export declare class ClientsService {
         ip?: string;
     }): Promise<{
         id: string;
-        name: string;
-        createdAt: Date;
-        type: string;
-        clientId: string;
         url: string;
+        createdAt: Date;
+        clientId: string;
+        name: string;
+        type: string;
         fileKey: string | null;
     }>;
 }

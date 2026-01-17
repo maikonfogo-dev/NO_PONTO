@@ -79,13 +79,25 @@ export class TimeRecordsService {
   }) {
     const employee = await this.prisma.employee.findUnique({
       where: { id: data.employeeId },
-      include: { workLocation: true }
+      include: { 
+        workLocation: true,
+        contract: {
+          include: {
+            client: true
+          }
+        }
+      }
     });
 
     if (!employee) throw new NotFoundException('Colaborador não encontrado');
 
+    if (employee.contract && employee.contract.client && employee.contract.client.status !== 'ATIVO') {
+      throw new Error('Empresa bloqueada ou inadimplente. Registro de ponto não permitido.');
+    }
+
     // Geofencing Check
     const status = 'PENDENTE';
+    let isGeofenceViolation = false;
     
     // Check if within radius
     if (employee.workLocation && employee.workLocation.latitude && employee.workLocation.longitude) {
@@ -103,8 +115,8 @@ export class TimeRecordsService {
         const radius = employee.workLocation.radius || 50; // Default 50m
 
         if (distance > radius) {
+            isGeofenceViolation = true;
             this.logger.warn(`[GEOFENCE ALERT] Employee ${employee.name} is ${distance}m away (Limit: ${radius}m)`);
-            // We could reject or mark as 'FORA_DA_AREA'. For now, we allow but log.
         }
     }
 
@@ -131,7 +143,8 @@ export class TimeRecordsService {
         deviceId: data.deviceId,
         ip: data.ip,
         integrityHash: integrityHash,
-        status: status
+        status: status,
+        isGeofenceViolation: isGeofenceViolation
       }
     });
   }
@@ -168,7 +181,7 @@ export class TimeRecordsService {
   async getDailySummary(employeeId: string) {
       const employee = await this.prisma.employee.findUnique({
         where: { id: employeeId },
-        include: { schedule: true }
+        include: { schedule: true, workLocation: true }
       });
 
       const today = new Date();
@@ -210,13 +223,46 @@ export class TimeRecordsService {
       const expectedMinutes = this.calculateExpectedMinutes(employee?.schedule);
       const balance = workedMinutes - expectedMinutes;
 
+      const punchesWithDistance = punches.map((punch) => {
+          let distanceFromLocationMeters: number | null = null;
+
+          if (
+            employee?.workLocation &&
+            typeof employee.workLocation.latitude === 'number' &&
+            typeof employee.workLocation.longitude === 'number' &&
+            typeof punch.latitude === 'number' &&
+            typeof punch.longitude === 'number'
+          ) {
+            distanceFromLocationMeters = Math.round(
+              this.calculateDistance(
+                punch.latitude,
+                punch.longitude,
+                employee.workLocation.latitude,
+                employee.workLocation.longitude
+              )
+            );
+          }
+
+          return {
+            ...punch,
+            distanceFromLocationMeters,
+          };
+      });
+
       return {
           date: format(new Date(), 'yyyy-MM-dd'),
-          punches,
+          punches: punchesWithDistance,
           lastPunch,
           isWorking,
           workedHours: (workedMinutes / 60).toFixed(2),
-          balance: (balance / 60).toFixed(2)
+          balance: (balance / 60).toFixed(2),
+          workLocation: employee?.workLocation
+            ? {
+                latitude: employee.workLocation.latitude,
+                longitude: employee.workLocation.longitude,
+                radius: employee.workLocation.radius || 50,
+              }
+            : null,
       };
   }
 

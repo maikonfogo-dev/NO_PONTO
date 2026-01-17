@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Query, Logger, HttpCode } from '@nestjs/common';
+import { Controller, Post, Body, Logger, HttpCode } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { BillingService } from './billing.service';
 
@@ -37,10 +37,8 @@ export class WebhooksController {
   @Post('mercadopago')
   @HttpCode(200) // MP expects 200 or 201
   @ApiOperation({ summary: 'Receber notificação do Mercado Pago' })
-  async handleMercadoPago(@Body() body: any, @Query() query: any) {
+  async handleMercadoPago(@Body() body: any) {
     this.logger.log('Received Mercado Pago Webhook');
-    console.log('Body:', body);
-    console.log('Query:', query);
 
     const topic = body.topic || body.type; // payment
     const id = body.data?.id || body.id;

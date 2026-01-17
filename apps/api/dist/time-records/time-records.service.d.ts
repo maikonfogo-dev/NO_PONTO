@@ -45,6 +45,7 @@ export declare class TimeRecordsService {
     getDailySummary(employeeId: string): Promise<{
         date: string;
         punches: {
+            distanceFromLocationMeters: number;
             id: string;
             timestamp: Date;
             type: string;
@@ -91,6 +92,11 @@ export declare class TimeRecordsService {
         isWorking: boolean;
         workedHours: string;
         balance: string;
+        workLocation: {
+            latitude: number;
+            longitude: number;
+            radius: number;
+        };
     }>;
     getMirror(employeeId: string, month: number, year: number): Promise<{
         employee: {

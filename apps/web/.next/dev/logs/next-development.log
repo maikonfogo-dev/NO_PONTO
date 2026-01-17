@@ -1,51 +1,272 @@
-[00:00:01.557] Server  WARN    ⚠ "Found lockfile missing swc dependencies," "patching..."
-[00:00:02.425] Server  WARN    ⚠ Lockfile was successfully patched, please run "npm install" to ensure @next/swc dependencies are downloaded
-[00:00:02.844] Server  LOG     ✓ Ready in 2.2s
-[00:00:49.616] Server  LOG     ○ Compiling / ...
-[00:00:57.616] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:01:23.230] Browser ERROR   Erro de autenticação: {}
-[00:02:20.883] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:02:54.383] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:06:44.496] Server  LOG     ✓ Compiled in 269ms
-[00:06:55.668] Server  LOG     ✓ Compiled in 67ms
-[00:08:32.911] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:08:43.026] Browser WARN    High accuracy GPS failed, trying low accuracy... Timeout expired
-[00:08:44.942] Browser WARN    High accuracy GPS failed, trying low accuracy... Timeout expired
-[00:08:58.027] Browser WARN    Erro ao obter localização inicial: Timeout expired
-[00:10:31.207] Browser WARN    High accuracy GPS failed, trying low accuracy... Timeout expired
-[00:30:17.836] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:30:27.956] Browser WARN    High accuracy GPS failed, trying low accuracy... Timeout expired
-[00:30:40.836] Browser WARN    High accuracy GPS failed, trying low accuracy... Timeout expired
-[00:30:42.957] Browser WARN    Erro ao obter localização inicial: Timeout expired
-[00:32:09.999] Server  LOG     ✓ Compiled in 72ms
-[00:32:53.510] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:33:03.617] Browser WARN    High accuracy GPS failed, trying low accuracy... Timeout expired
-[00:33:09.855] Browser WARN    High accuracy GPS failed, trying low accuracy... Timeout expired
-[00:33:18.618] Browser WARN    Erro ao obter localização inicial: Timeout expired
-[00:36:09.196] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:36:09.940] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:36:10.214] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:36:10.411] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:36:20.517] Browser WARN    High accuracy GPS failed, trying low accuracy... Timeout expired
-[00:36:22.628] Browser WARN    High accuracy GPS failed, trying low accuracy... Timeout expired
-[00:36:35.599] Browser WARN    Erro ao obter localização inicial: Timeout expired
-[01:18:07.282] Server  LOG     ✓ Compiled in 130ms
-[01:19:27.306] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:22:03.119] Browser WARN    Erro ao acessar câmera frontal, tentando câmera padrão... {}
-[01:22:03.119] Browser ERROR   Erro ao acessar câmera (fallback): {}
-[01:22:50.073] Server  LOG     ✓ Compiled in 64ms
-[01:23:19.365] Server  LOG     ✓ Compiled in 80ms
-[01:23:42.777] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:24:16.092] Browser WARN    Erro ao acessar câmera frontal, tentando câmera padrão... {}
-[01:26:12.641] Browser ERROR   {"code":"ERR_BAD_RESPONSE","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://localhost:4000","data":{},"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/x-www-form-urlencoded"},"maxBodyLength":-1,"maxContentLength":-1,"method":"post","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/ponto/registrar","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 500","name":"AxiosError","stack":"AxiosError: Request failed with status code 500\n    at settle (http://localhost:3000/_next/static/chunks/45a75_15b511cd._.js:12247:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/45a75_15b511cd._.js:12762:217)\n    at Axios.request (http://localhost:3000/_next/static/chunks/45a75_15b511cd._.js:13566:49)\n    at async handleRegister (http://localhost:3000/_next/static/chunks/Documents_trae_projects_NO%20PONTO_apps_web_src_52f64967._.js:683:25)","status":500}
-[01:26:14.260] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:26:16.017] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:26:43.155] Browser WARN    Erro ao acessar câmera frontal, tentando câmera padrão... {}
-[01:28:01.051] Browser WARN    Erro ao acessar câmera frontal, tentando câmera padrão... {}
-[02:46:14.809] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[02:46:46.597] Browser WARN    Erro ao acessar câmera frontal, tentando câmera padrão... {}
-[02:47:22.392] Browser WARN    Erro ao acessar câmera frontal, tentando câmera padrão... {}
-[02:48:23.159] Browser WARN    Erro ao acessar câmera frontal, tentando câmera padrão... {}
-[02:49:13.531] Browser WARN    Erro ao acessar câmera frontal, tentando câmera padrão... {}
-[02:51:00.833] Browser WARN    Erro ao acessar câmera frontal, tentando câmera padrão... {}
-[03:23:03.620] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:01.218] Server  LOG     ✓ Ready in 827ms
+[00:00:12.332] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:49.734] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:36.760] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:04:15.768] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:04:45.097] Server  LOG     ○ Compiling /_not-found/page ...
+[00:04:46.844] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:04:49.467] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:04:51.493] Browser ERROR   uncaughtError: Error: A <Select.Item /> must have a value prop that is not an empty string. This is because the Select value can be set to an empty string to clear the selection and show the placeholder.
+[00:04:51.677] Server  LOG     ✓ Finished filesystem cache database compaction in 14.8s
+[00:05:51.961] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:05:52.259] Server  LOG     ✓ Compiled in 66ms
+[00:05:52.351] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:01.101] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:07:01.101] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:07:01.101] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:07:01.101] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:07:01.101] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:07:01.101] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:07:14.981] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:15.876] Server  LOG     ✓ Finished writing to filesystem cache in 11.4s
+[00:07:25.506] Server  LOG     ○ Compiling /admin/reports/escalas ...
+[00:07:36.816] Server  LOG     ✓ Finished filesystem cache database compaction in 20.9s
+[00:07:36.846] Server  LOG     ✓ Finished writing to filesystem cache in 19.0s
+[00:07:55.498] Server  LOG     ✓ Finished writing to filesystem cache in 15.2s
+[00:11:24.936] Server  LOG     ✓ Compiled in 301ms
+[00:12:16.284] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:12:16.797] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:12:16.797] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:12:16.797] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:12:16.797] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:12:16.797] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:12:16.797] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:12:37.004] Server  LOG     ✓ Finished filesystem cache database compaction in 15.2s
+[00:27:24.701] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:27:28.298] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:27:52.362] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:27:52.362] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:27:52.362] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:27:52.362] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:27:52.362] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:27:52.362] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:31:18.212] Server  LOG     ✓ Compiled in 2.6s
+[00:37:29.510] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:37:37.953] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:37:40.997] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:38:58.012] Server  LOG     ✓ Compiled in 1487ms
+[00:49:21.137] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:49:26.633] Browser ERROR   Failed to fetch dashboard data {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://localhost:4000","env":{},"headers":{"Accept":"application/json, text/plain, */*","Authorization":"Bearer mock_jwt_token_1768525979405"},"maxBodyLength":-1,"maxContentLength":-1,"method":"get","params":{"month":"1","year":"2026"},"timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/reports/dashboard","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 401","name":"AxiosError","stack":"AxiosError: Request failed with status code 401\n    at settle (http://localhost:3000/_next/static/chunks/45a75_axios_lib_047e93f9._.js:1954:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/45a75_axios_lib_047e93f9._.js:2469:217)\n    at Axios.request (http://localhost:3000/_next/static/chunks/45a75_axios_lib_047e93f9._.js:3273:49)\n    at async ReportsDashboard.useCallback[fetchDashboardData] (http://localhost:3000/_next/static/chunks/Documents_trae_projects_NO%20PONTO_apps_web_src_47f54be4._.js:412:29)","status":401}
+[00:49:26.633] Browser ERROR   Failed to fetch dashboard data {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://localhost:4000","env":{},"headers":{"Accept":"application/json, text/plain, */*","Authorization":"Bearer mock_jwt_token_1768525979405"},"maxBodyLength":-1,"maxContentLength":-1,"method":"get","params":{"month":"1","year":"2026"},"timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/reports/dashboard","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 401","name":"AxiosError","stack":"AxiosError: Request failed with status code 401\n    at settle (http://localhost:3000/_next/static/chunks/45a75_axios_lib_047e93f9._.js:1954:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/45a75_axios_lib_047e93f9._.js:2469:217)\n    at Axios.request (http://localhost:3000/_next/static/chunks/45a75_axios_lib_047e93f9._.js:3273:49)\n    at async ReportsDashboard.useCallback[fetchDashboardData] (http://localhost:3000/_next/static/chunks/Documents_trae_projects_NO%20PONTO_apps_web_src_47f54be4._.js:412:29)","status":401}
+[00:49:31.438] Browser ERROR   Failed to fetch employees {}
+[00:49:32.001] Browser ERROR   Failed to fetch clients {}
+[00:49:34.194] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:49:34.382] Browser ERROR   Failed to fetch dashboard data {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://localhost:4000","env":{},"headers":{"Accept":"application/json, text/plain, */*","Authorization":"Bearer mock_jwt_token_1768525979405"},"maxBodyLength":-1,"maxContentLength":-1,"method":"get","params":{"month":"1","year":"2026"},"timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/reports/dashboard","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 401","name":"AxiosError","stack":"AxiosError: Request failed with status code 401\n    at settle (http://localhost:3000/_next/static/chunks/45a75_axios_lib_047e93f9._.js:1954:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/45a75_axios_lib_047e93f9._.js:2469:217)\n    at Axios.request (http://localhost:3000/_next/static/chunks/45a75_axios_lib_047e93f9._.js:3273:49)\n    at async ReportsDashboard.useCallback[fetchDashboardData] (http://localhost:3000/_next/static/chunks/Documents_trae_projects_NO%20PONTO_apps_web_src_47f54be4._.js:412:29)","status":401}
+[00:49:35.145] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:49:36.273] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:49:36.965] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:49:37.579] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:49:38.383] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:49:39.448] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:49:40.967] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:49:42.275] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:49:43.157] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:49:43.278] Browser ERROR   {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://localhost:4000","env":{},"headers":{"Accept":"application/json, text/plain, */*","Authorization":"Bearer mock_jwt_token_1768525979405"},"maxBodyLength":-1,"maxContentLength":-1,"method":"get","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/reports/financial","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 401","name":"AxiosError","stack":"AxiosError: Request failed with status code 401\n    at settle (http://localhost:3000/_next/static/chunks/45a75_4d71fc3a._.js:3479:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/45a75_4d71fc3a._.js:3994:217)\n    at Axios.request (http://localhost:3000/_next/static/chunks/45a75_4d71fc3a._.js:4798:49)\n    at async FinanceiroPage.useEffect.fetchData (http://localhost:3000/_next/static/chunks/Documents_trae_projects_NO%20PONTO_apps_web_src_67b48c26._.js:333:37)","status":401}
+[00:49:43.995] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:49:44.902] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:50:06.012] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:50:14.732] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:50:17.280] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:58:54.859] Server  LOG     ✓ Compiled in 716ms
+[01:06:17.896] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:06:27.925] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[01:06:27.925] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[01:06:30.814] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:06:30.950] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[01:06:30.950] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[01:06:35.916] Browser ERROR   Failed to fetch clients {}
+[01:06:36.784] Browser ERROR   Failed to fetch employees {}
+[01:08:11.657] Server  LOG     ✓ Compiled in 91ms
+[01:08:25.461] Server  LOG     ✓ Compiled in 74ms
+[01:10:10.551] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[01:10:10.551] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[01:12:36.052] Server  LOG     ✓ Compiled in 559ms
+[01:12:36.626] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:17:04.002] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:18:52.829] Server  LOG     ✓ Compiled in 44ms
+[01:19:31.218] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:23:56.120] Server  LOG     ✓ Compiled in 35ms
+[01:23:56.913] Browser ERROR   uncaughtError: TypeError: Cannot read properties of undefined (reading 'toString')
+[01:24:14.667] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:24:14.950] Server  LOG     ✓ Compiled in 49ms
+[01:24:15.039] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:26:33.372] Server  LOG     ✓ Compiled in 48ms
+[01:27:36.833] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:30:37.564] Server  LOG     ✓ Compiled in 183ms
+[01:32:39.176] Server  LOG     ✓ Compiled in 59ms
+[01:33:56.230] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:34:21.262] Browser ERROR   {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://localhost:4000","env":{},"headers":{"Accept":"application/json, text/plain, */*","Authorization":"Bearer mock_a9107a2b-1631-4a8d-a28b-6383e6537e82"},"maxBodyLength":-1,"maxContentLength":-1,"method":"get","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/colaboradores","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 403","name":"AxiosError","stack":"AxiosError: Request failed with status code 403\n    at settle (http://localhost:3000/_next/static/chunks/45a75_7194873f._.js:12251:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/45a75_7194873f._.js:12766:217)\n    at Axios.request (http://localhost:3000/_next/static/chunks/45a75_7194873f._.js:13570:49)\n    at async MobilePontoPage.useCallback[fetchEmployee] (http://localhost:3000/_next/static/chunks/Documents_trae_projects_NO%20PONTO_apps_web_src_b8cad951._.js:506:29)","status":403}
+[01:34:28.628] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:34:28.748] Browser ERROR   {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://localhost:4000","env":{},"headers":{"Accept":"application/json, text/plain, */*","Authorization":"Bearer mock_a9107a2b-1631-4a8d-a28b-6383e6537e82"},"maxBodyLength":-1,"maxContentLength":-1,"method":"get","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/colaboradores","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 403","name":"AxiosError","stack":"AxiosError: Request failed with status code 403\n    at settle (http://localhost:3000/_next/static/chunks/45a75_7194873f._.js:12251:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/45a75_7194873f._.js:12766:217)\n    at Axios.request (http://localhost:3000/_next/static/chunks/45a75_7194873f._.js:13570:49)\n    at async MobilePontoPage.useCallback[fetchEmployee] (http://localhost:3000/_next/static/chunks/Documents_trae_projects_NO%20PONTO_apps_web_src_b8cad951._.js:506:29)","status":403}
+[01:35:05.411] Browser ERROR   {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://localhost:4000","env":{},"headers":{"Accept":"application/json, text/plain, */*","Authorization":"Bearer mock_a9107a2b-1631-4a8d-a28b-6383e6537e82"},"maxBodyLength":-1,"maxContentLength":-1,"method":"get","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/colaboradores","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 403","name":"AxiosError","stack":"AxiosError: Request failed with status code 403\n    at settle (http://localhost:3000/_next/static/chunks/45a75_axios_lib_047e93f9._.js:1954:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/45a75_axios_lib_047e93f9._.js:2469:217)\n    at Axios.request (http://localhost:3000/_next/static/chunks/45a75_axios_lib_047e93f9._.js:3273:49)\n    at async MobilePontoPage.useCallback[fetchEmployee] (http://localhost:3000/_next/static/chunks/Documents_trae_projects_NO%20PONTO_apps_web_src_b8cad951._.js:506:29)","status":403}
+[01:38:12.491] Server  LOG     ✓ Compiled in 56ms
+[01:41:11.753] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:41:54.490] Browser WARN    Erro ao acessar câmera frontal, tentando câmera padrão... {}
+[01:43:58.930] Server  LOG     ✓ Compiled in 332ms
+[01:44:15.227] Server  LOG     ✓ Compiled in 142ms
+[01:47:18.015] Server  LOG     ✓ Compiled in 74ms
+[01:47:34.285] Server  LOG     ✓ Compiled in 76ms
+[01:47:58.255] Server  LOG     ✓ Compiled in 102ms
+[01:51:02.265] Server  LOG     ✓ Compiled in 273ms
+[01:52:59.945] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:53:49.106] Server  LOG     ✓ Compiled in 55ms
+[01:54:37.305] Server  LOG     ✓ Compiled in 62ms
+[01:59:02.921] Server  LOG     ✓ Compiled in 280ms
+[01:59:15.277] Server  LOG     ✓ Compiled in 74ms
+[01:59:28.593] Server  LOG     ✓ Compiled in 80ms
+[02:03:44.780] Server  LOG     ✓ Compiled in 92ms
+[02:03:56.341] Server  LOG     ✓ Compiled in 61ms
+[02:04:08.615] Server  LOG     ✓ Compiled in 57ms
+[02:05:47.417] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:05:50.565] Browser ERROR   uncaughtError: Error: Map container is already initialized.
+[02:07:25.455] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[02:07:25.639] Server  LOG     ✓ Compiled in 57ms
+[02:07:25.704] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:09:01.847] Server  LOG     ✓ Compiled in 47ms
+[02:12:18.435] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:12:19.872] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:12:21.494] Browser ERROR   uncaughtError: Error: Map container is already initialized.
+[02:12:27.050] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:25:25.874] Server  LOG     ✓ Compiled in 60ms
+[02:25:28.007] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:26:01.713] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:36:54.857] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:37:22.781] Browser ERROR   uncaughtError: Error: Map container is already initialized.
+[02:37:27.678] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:38:12.800] Browser ERROR   uncaughtError: Error: Map container is already initialized.
+[02:43:25.977] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:43:32.908] Browser ERROR   Erro de autenticação: {}
+[02:43:51.696] Browser ERROR   Erro de autenticação: {}
+[02:49:41.913] Browser ERROR   ./Documents/trae_projects/NO PONTO/apps/web/src/components/reports/LocationMap.tsx:97:1
+Parsing ecmascript source code failed
+  95 |         </MapContainer>
+  96 |     );
+> 97 | }
+     | ^
+  98 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+Import trace:
+  Client Component Browser:
+    ./Documents/trae_projects/NO PONTO/apps/web/src/components/reports/LocationMap.tsx [Client Component Browser]
+    ./Documents/trae_projects/NO PONTO/apps/web/src/app/admin/reports/localizacao/page.tsx [Client Component Browser]
+    ./Documents/trae_projects/NO PONTO/apps/web/src/app/admin/reports/localizacao/page.tsx [Server Component]
+[02:49:51.585] Server  LOG     ✓ Compiled in 33ms
+[02:52:17.364] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:59:32.713] Server  LOG     ✓ Compiled in 383ms
+[02:59:47.310] Server  LOG     ✓ Finished filesystem cache database compaction in 12.0s
+[02:59:52.299] Server  LOG     ✓ Compiled in 87ms
+[03:06:57.065] Server  LOG     ✓ Compiled in 58ms
+[03:10:00.294] Server  LOG     ✓ Compiled in 59ms
+[03:16:20.326] Server  LOG     ✓ Compiled in 42ms
+[03:18:45.481] Server  LOG     ✓ Compiled in 114ms
+[03:18:45.598] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[03:18:45.914] Browser ERROR   uncaughtError: ReferenceError: FileText is not defined
+[03:18:59.427] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[03:18:59.632] Server  ERROR   ⨯ ReferenceError: monthFilter is not defined
+[03:18:59.651] Server  LOG     ✓ Compiled in 66ms
+[03:18:59.805] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[03:19:00.913] Browser ERROR   uncaughtError: ReferenceError: monthFilter is not defined
+[03:19:16.588] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[03:19:16.796] Server  ERROR   ⨯ ReferenceError: monthFilter is not defined
+[03:19:16.807] Server  LOG     ✓ Compiled in 60ms
+[03:19:16.879] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[03:19:17.913] Browser ERROR   uncaughtError: ReferenceError: monthFilter is not defined
+[03:19:27.582] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[03:19:27.763] Server  LOG     ✓ Compiled in 77ms
+[03:19:27.834] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[03:19:28.912] Browser ERROR   uncaughtError: ReferenceError: showDownloadSheet is not defined
+[03:19:37.326] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[03:19:37.497] Server  LOG     ✓ Compiled in 54ms
+[03:19:37.591] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[03:19:37.913] Browser ERROR   uncaughtError: ReferenceError: showDownloadSheet is not defined
+[03:20:08.874] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[03:20:09.050] Server  LOG     ✓ Compiled in 51ms
+[03:20:09.121] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[03:20:09.913] Browser ERROR   uncaughtError: ReferenceError: showDownloadSheet is not defined
+[03:20:30.634] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[03:20:30.790] Server  LOG     ✓ Compiled in 49ms
+[03:20:30.883] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[03:20:31.913] Browser ERROR   uncaughtError: ReferenceError: showDownloadSheet is not defined
+[03:20:47.618] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[03:20:47.814] Server  LOG     ✓ Compiled in 48ms
+[03:20:47.887] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[03:20:48.913] Browser ERROR   uncaughtError: ReferenceError: FileText is not defined
+[03:22:11.857] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[03:22:12.048] Server  LOG     ✓ Compiled in 87ms
+[03:22:12.116] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[03:22:44.609] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[03:23:17.066] Browser WARN    Erro ao acessar câmera frontal, tentando câmera padrão... {}

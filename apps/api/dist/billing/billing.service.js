@@ -170,7 +170,13 @@ let BillingService = BillingService_1 = class BillingService {
     async confirmPayment(invoiceId, transactionId) {
         const invoice = await this.prisma.invoice.findUnique({
             where: { id: invoiceId },
-            include: { client: true }
+            include: {
+                client: {
+                    include: {
+                        subscription: true
+                    }
+                }
+            }
         });
         if (!invoice || invoice.status === 'PAGO') {
             this.logger.warn(`Invoice ${invoiceId} not found or already paid.`);
@@ -192,6 +198,13 @@ let BillingService = BillingService_1 = class BillingService {
                     data: { status: 'ATIVO' }
                 });
                 this.logger.log(`Client ${invoice.clientId} reactivated.`);
+            }
+            if (invoice.client.subscription && invoice.client.subscription.status !== 'ATIVO') {
+                await tx.saaSContract.update({
+                    where: { id: invoice.client.subscription.id },
+                    data: { status: 'ATIVO' }
+                });
+                this.logger.log(`Subscription ${invoice.client.subscription.id} reactivated.`);
             }
         });
         try {
